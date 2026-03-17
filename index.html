@@ -338,7 +338,22 @@
     color: rgba(155,149,144,0.55);
   }
 
-  @media (max-width: 640px) {
+  /* ── HERO ANIMATION ── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  #hero-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero > *:not(#hero-canvas) {
+    position: relative;
+    z-index: 1;
+  }
     nav { padding: 18px 24px; }
     .hero { padding: 60px 24px 80px; }
     .program-section { padding: 72px 24px; }
@@ -362,6 +377,7 @@
 
 <!-- HERO -->
 <section class="hero">
+  <canvas id="hero-canvas"></canvas>
   <div class="event-pill">
     Exclusieve Masterclass · <span>16 juni 2026</span> · 4 uur
   </div>
@@ -433,6 +449,98 @@
   <span class="footer-text">© 2026 Nxt Phase AI</span>
   <span class="footer-text">sanne@nxtphase.ai</span>
 </footer>
+
+<script>
+  // ── HERO CANVAS ANIMATION ──
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+
+  const PINK     = '#E8174A';
+  const ESPRESSO = '#3D2B1F';
+  const STONE    = '#9B9590';
+  const CREAM    = '#F5F0E8';
+
+  // Finance/AI words that stream across
+  const words = [
+    'analyse', 'forecast', 'rapport', 'data', 'AI', 'claude',
+    'budget', 'cashflow', 'margin', 'insights', 'automation',
+    'finance', '↗', '→', '∑', '€', '%', '0.98', 'FTE',
+    'GL-code', 'ERP', 'query', 'model', 'predict', 'optimize'
+  ];
+
+  let W, H, particles;
+
+  function resize() {
+    const hero = canvas.parentElement;
+    W = canvas.width  = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+
+  function randomWord() {
+    return words[Math.floor(Math.random() * words.length)];
+  }
+
+  function makeParticle() {
+    const isWord = Math.random() > 0.3;
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: -Math.random() * 0.7 - 0.2,
+      alpha: Math.random() * 0.35 + 0.15,
+      size: isWord ? Math.random() * 10 + 12 : Math.random() * 3 + 2,
+      text: isWord ? randomWord() : null,
+      color: [PINK, ESPRESSO, STONE][Math.floor(Math.random() * 3)],
+      life: Math.random() * 300 + 100,
+      age: 0,
+    };
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: 90 }, makeParticle);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    particles.forEach((p, i) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.age++;
+
+      // Fade in/out
+      const fadeIn  = Math.min(1, p.age / 40);
+      const fadeOut = Math.min(1, (p.life - p.age) / 40);
+      const alpha   = p.alpha * fadeIn * fadeOut;
+
+      ctx.globalAlpha = alpha;
+
+      if (p.text) {
+        ctx.font = `300 ${p.size}px 'DM Mono', monospace`;
+        ctx.fillStyle = p.color;
+        ctx.fillText(p.text, p.x, p.y);
+      } else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      }
+
+      // Respawn when done
+      if (p.age >= p.life || p.y < -20 || p.x < -100 || p.x > W + 100) {
+        particles[i] = { ...makeParticle(), x: Math.random() * W, y: H + 10, age: 0 };
+      }
+    });
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); });
+  init();
+  draw();
+</script>
 
 <script>
   const form = document.getElementById('regForm');
