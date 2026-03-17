@@ -460,12 +460,12 @@
   const STONE    = '#9B9590';
   const CREAM    = '#F5F0E8';
 
-  // Finance/AI words that stream across
+  // Finance symbols — no emoji, these respect canvas fillStyle color
   const words = [
-    'analyse', 'forecast', 'rapport', 'data', 'AI', 'claude',
-    'budget', 'cashflow', 'margin', 'insights', 'automation',
-    'finance', '↗', '→', '∑', '€', '%', '0.98', 'FTE',
-    'GL-code', 'ERP', 'query', 'model', 'predict', 'optimize'
+    '∑', '€', '%', '↗', '→', '≈', '▲', '◆', '✦',
+    '÷', '×', '∞', '⌀', '±', '∂', '#', '$', '¥',
+    '///', '___', '[ ]', '{ }', '< >', '>>',
+    '0.98', '2.4×', '+12%', 'Δ', 'μ', 'σ'
   ];
 
   let W, H, particles;
@@ -481,24 +481,24 @@
   }
 
   function makeParticle() {
-    const isWord = Math.random() > 0.3;
+    const isIcon = Math.random() > 0.4;
     return {
       x: Math.random() * W,
       y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: -Math.random() * 0.7 - 0.2,
-      alpha: Math.random() * 0.35 + 0.15,
-      size: isWord ? Math.random() * 10 + 12 : Math.random() * 3 + 2,
-      text: isWord ? randomWord() : null,
-      color: [PINK, ESPRESSO, STONE][Math.floor(Math.random() * 3)],
-      life: Math.random() * 300 + 100,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: -Math.random() * 0.5 - 0.1,
+      alpha: Math.random() * 0.22 + 0.12,
+      size: isIcon ? Math.random() * 8 + 10 : Math.random() * 2 + 1,
+      text: isIcon ? randomWord() : null,
+      color: [PINK, STONE, ESPRESSO][Math.floor(Math.random() * 3)],
+      life: Math.random() * 350 + 150,
       age: 0,
     };
   }
 
   function init() {
     resize();
-    particles = Array.from({ length: 90 }, makeParticle);
+    particles = Array.from({ length: 70 }, makeParticle);
   }
 
   function draw() {
