@@ -32,18 +32,21 @@
   .panel-finance .panel-tag { color:var(--pink); }
   .panel-general .panel-tag { color:var(--stone); }
 
-  .panel-title { font-family:'Playfair Display',serif; font-size:clamp(28px,3vw,48px); font-weight:700; line-height:1.06; margin-bottom:16px; }
+  .panel-title { font-family:'Playfair Display',serif; font-size:clamp(28px,3vw,48px); font-weight:700; line-height:1.06; margin-bottom:16px; min-height:170px; }
   .panel-finance .panel-title { color:var(--espresso); }
   .panel-general .panel-title { color:var(--cream); }
   .panel-general .panel-title em { font-style:italic; color:var(--pink); }
 
-  .panel-desc { font-size:14px; font-weight:300; line-height:1.75; max-width:380px; margin-bottom:28px; opacity:0.7; }
+  .panel-desc { font-size:14px; font-weight:300; line-height:1.75; max-width:380px; margin-bottom:28px; opacity:0.7; min-height:75px; }
   .panel-finance .panel-desc { color:var(--espresso); }
   .panel-general .panel-desc { color:var(--cream); }
 
+  /* Vaste hoogte zodat meta op beide kanten gelijk loopt */
+  .panel-header { min-height:260px; display:flex; flex-direction:column; }
+
   .meta { display:flex; flex-direction:column; gap:10px; margin-bottom:32px; }
-  .meta-row { display:flex; align-items:flex-start; gap:14px; }
-  .meta-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.16em; text-transform:uppercase; width:56px; flex-shrink:0; padding-top:2px; }
+  .meta-row { display:grid; grid-template-columns:64px 1fr; align-items:flex-start; gap:0; }
+  .meta-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.16em; text-transform:uppercase; padding-top:2px; }
   .panel-finance .meta-label { color:var(--stone); }
   .panel-general .meta-label { color:rgba(155,149,144,0.7); }
   .meta-value { font-size:14px; font-weight:500; line-height:1.4; }
@@ -150,9 +153,11 @@
   <div class="panel panel-finance">
     <canvas id="canvas-finance"></canvas>
     <div>
-      <p class="panel-tag">Masterclass · 16 juni 2026</p>
-      <h2 class="panel-title">Claude for<br>Finance<br>Professionals</h2>
-      <p class="panel-desc">Een praktische masterclass over Claude AI voor financiële analyse, rapportage en besluitvorming. Geen technische achtergrond vereist.</p>
+      <div class="panel-header">
+        <p class="panel-tag">Masterclass · 16 juni 2026</p>
+        <h2 class="panel-title">Claude for<br>Finance<br>Professionals</h2>
+        <p class="panel-desc">Een praktische masterclass over Claude AI voor financiële analyse, rapportage en besluitvorming. Geen technische achtergrond vereist.</p>
+      </div>
       <div class="meta">
         <div class="meta-row"><span class="meta-label">Datum</span><span class="meta-value">16 juni 2026</span></div>
         <div class="meta-row"><span class="meta-label">Tijd</span><span class="meta-value">13:00 – 17:00 uur</span></div>
@@ -173,9 +178,11 @@
   <div class="panel panel-general">
     <canvas id="canvas-general"></canvas>
     <div>
-      <p class="panel-tag">Masterclass · 23 juni 2026</p>
-      <h2 class="panel-title">Werken met<br><em>Claude AI</em><br>— van A tot Z</h2>
-      <p class="panel-desc">Voor iedereen die efficiënter wil werken met AI. Praktisch, hands-on en direct toepasbaar in je dagelijks werk.</p>
+      <div class="panel-header">
+        <p class="panel-tag">Masterclass · 23 juni 2026</p>
+        <h2 class="panel-title">Werken met<br><em>Claude AI</em><br>— van A tot Z</h2>
+        <p class="panel-desc">Voor iedereen die efficiënter wil werken met AI. Praktisch, hands-on en direct toepasbaar in je dagelijks werk.</p>
+      </div>
       <div class="meta">
         <div class="meta-row"><span class="meta-label">Datum</span><span class="meta-value">23 juni 2026</span></div>
         <div class="meta-row"><span class="meta-label">Tijd</span><span class="meta-value">13:00 – 17:00 uur</span></div>
