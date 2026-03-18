@@ -247,7 +247,11 @@
   <span class="footer-text">sanne@nxtphase.ai</span>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  emailjs.init('M3enm1KLe2e_wPpEN');
+
   // ── STIPJES ANIMATIE FINANCE ──
   function makeDotAnim(canvasId, color1, color2) {
     const canvas = document.getElementById(canvasId);
@@ -295,7 +299,7 @@
     document.getElementById('training-hidden').value = vals.join(' + ') || '';
   }
 
-  // ── FORMULIER ──
+  // ── FORMULIER via EmailJS ──
   const form = document.getElementById('reg-form');
   const btn  = document.getElementById('submit-btn');
   form.addEventListener('submit', async function(e) {
@@ -306,11 +310,30 @@
     }
     btn.textContent = 'Versturen...';
     btn.disabled = true;
+
+    const data = {
+      voornaam:  form.querySelector('[name="voornaam"]').value,
+      achternaam: form.querySelector('[name="achternaam"]').value,
+      email:     form.querySelector('[name="email"]').value,
+      bedrijf:   form.querySelector('[name="bedrijf"]').value,
+      functie:   form.querySelector('[name="functie"]').value,
+      training:  document.getElementById('training-hidden').value,
+    };
+
     try {
-      const res = await fetch('https://formspree.io/f/mzdjyeab', { method:'POST', body:new FormData(form), headers:{'Accept':'application/json'} });
-      if (res.ok) { form.style.display='none'; document.getElementById('success-msg').style.display='block'; }
-      else { btn.textContent='Er ging iets mis — probeer opnieuw'; btn.disabled=false; }
-    } catch { btn.textContent='Er ging iets mis — probeer opnieuw'; btn.disabled=false; }
+      const res = await emailjs.send('service_4qb0r45', 'template_v9y8pyc', data);
+      if (res.status === 200) {
+        form.style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+      } else {
+        btn.textContent = 'Er ging iets mis — probeer opnieuw';
+        btn.disabled = false;
+      }
+    } catch(err) {
+      console.error(err);
+      btn.textContent = 'Er ging iets mis — probeer opnieuw';
+      btn.disabled = false;
+    }
   });
 </script>
 </body>
