@@ -307,7 +307,7 @@
     btn.textContent = 'Versturen...';
     btn.disabled = true;
     try {
-      const res = await fetch('https://formspree.io/f/myknbern', { method:'POST', body:new FormData(form), headers:{'Accept':'application/json'} });
+      const res = await fetch('https://formspree.io/f/mzdjyeab', { method:'POST', body:new FormData(form), headers:{'Accept':'application/json'} });
       if (res.ok) { form.style.display='none'; document.getElementById('success-msg').style.display='block'; }
       else { btn.textContent='Er ging iets mis — probeer opnieuw'; btn.disabled=false; }
     } catch { btn.textContent='Er ging iets mis — probeer opnieuw'; btn.disabled=false; }
