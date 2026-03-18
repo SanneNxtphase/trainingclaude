@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NXT Phase AI — Trainingen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#F5F0E8; --espresso:#3D2B1F; --stone:#9B9590; --pink:#E8174A; --pink-h:#cc1340;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--cream); color:var(--espresso); font-family:'DM Sans',sans-serif; overflow-x:hidden; }
+
+  /* NAV */
+  nav { background:#fff; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; border-bottom:1px solid rgba(61,43,31,0.08); position:sticky; top:0; z-index:200; }
+  .nav-logo img { height:38px; width:auto; display:block; }
+  .nav-cta { display:inline-block; padding:10px 24px; background:var(--pink); color:#fff; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; text-decoration:none; border-radius:100px; transition:background 0.2s; }
+  .nav-cta:hover { background:var(--pink-h); }
+
+  /* SPLIT */
+  .split { display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
+
+  .panel { position:relative; display:flex; flex-direction:column; padding:72px 56px 60px; overflow:hidden; }
+  .panel-finance { background:var(--cream); border-right:1px solid rgba(61,43,31,0.1); }
+  .panel-general { background:var(--espresso); }
+
+  #canvas-finance, #canvas-general { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+  .panel > *:not(canvas) { position:relative; z-index:1; }
+
+  .panel-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; margin-bottom:20px; }
+  .panel-finance .panel-tag { color:var(--pink); }
+  .panel-general .panel-tag { color:var(--stone); }
+
+  .panel-title { font-family:'Playfair Display',serif; font-size:clamp(28px,3vw,48px); font-weight:700; line-height:1.06; margin-bottom:16px; }
+  .panel-finance .panel-title { color:var(--espresso); }
+  .panel-general .panel-title { color:var(--cream); }
+  .panel-general .panel-title em { font-style:italic; color:var(--pink); }
+
+  .panel-desc { font-size:14px; font-weight:300; line-height:1.75; max-width:380px; margin-bottom:28px; opacity:0.7; }
+  .panel-finance .panel-desc { color:var(--espresso); }
+  .panel-general .panel-desc { color:var(--cream); }
+
+  .meta { display:flex; flex-direction:column; gap:10px; margin-bottom:32px; }
+  .meta-row { display:flex; align-items:flex-start; gap:14px; }
+  .meta-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.16em; text-transform:uppercase; width:56px; flex-shrink:0; padding-top:2px; }
+  .panel-finance .meta-label { color:var(--stone); }
+  .panel-general .meta-label { color:rgba(155,149,144,0.7); }
+  .meta-value { font-size:14px; font-weight:500; line-height:1.4; }
+  .panel-finance .meta-value { color:var(--espresso); }
+  .panel-general .meta-value { color:var(--cream); }
+  .meta-value small { display:block; font-size:12px; font-weight:300; opacity:0.6; margin-top:1px; }
+
+  /* PROGRAMMA */
+  .program-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; margin-bottom:16px; }
+  .panel-finance .program-label { color:var(--stone); }
+  .panel-general .program-label { color:rgba(155,149,144,0.7); }
+
+  .topic-list { list-style:none; }
+  .topic-list li { display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid; font-size:14px; }
+  .panel-finance .topic-list li { border-color:rgba(61,43,31,0.08); color:var(--espresso); }
+  .panel-general .topic-list li { border-color:rgba(245,240,232,0.07); color:var(--cream); }
+  .topic-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--pink); min-width:20px; }
+
+  .panel-number { font-family:'Playfair Display',serif; font-size:160px; font-weight:700; position:absolute; bottom:-30px; right:24px; opacity:0.04; line-height:1; pointer-events:none; }
+  .panel-finance .panel-number { color:var(--espresso); }
+  .panel-general .panel-number { color:var(--cream); }
+
+  /* REGISTER */
+  .register-section { background:var(--cream); padding:80px 60px; border-top:1px solid rgba(61,43,31,0.08); }
+  .register-section h2 { font-family:'Playfair Display',serif; font-size:clamp(28px,3vw,44px); font-weight:400; color:var(--espresso); text-align:center; margin-bottom:8px; }
+  .register-section .sub { font-size:14px; color:var(--stone); text-align:center; margin-bottom:8px; }
+  .price-big { font-family:'Playfair Display',serif; font-size:42px; font-weight:700; color:var(--pink); text-align:center; margin-bottom:4px; }
+  .price-note { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--stone); text-align:center; margin-bottom:48px; }
+
+  /* Training keuze checkboxes */
+  .training-keuze { max-width:480px; margin:0 auto 32px; display:flex; flex-direction:column; gap:12px; }
+  .keuze-label {
+    display:flex; align-items:flex-start; gap:14px;
+    padding:16px 20px; border:1px solid rgba(61,43,31,0.15);
+    border-radius:6px; cursor:pointer;
+    transition:border-color 0.2s, background 0.2s;
+    background:#fff;
+  }
+  .keuze-label:hover { border-color:var(--pink); background:rgba(232,23,74,0.03); }
+  .keuze-label input[type="checkbox"] { display:none; }
+  .keuze-box {
+    width:20px; height:20px; border-radius:4px;
+    border:2px solid rgba(61,43,31,0.25);
+    flex-shrink:0; margin-top:1px;
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color 0.2s, background 0.2s;
+  }
+  .keuze-label.checked .keuze-box { background:var(--pink); border-color:var(--pink); }
+  .keuze-label.checked .keuze-box::after { content:'✓'; color:#fff; font-size:12px; font-weight:700; }
+  .keuze-label.checked { border-color:var(--pink); background:rgba(232,23,74,0.04); }
+  .keuze-info { flex:1; }
+  .keuze-title { font-size:14px; font-weight:500; color:var(--espresso); margin-bottom:3px; }
+  .keuze-date { font-family:'DM Mono',monospace; font-size:10px; color:var(--stone); letter-spacing:0.08em; }
+
+  .reg-form { max-width:480px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  input[type="text"], input[type="email"] {
+    width:100%; padding:14px 18px;
+    border:1px solid rgba(61,43,31,0.18);
+    background:#fff;
+    color:var(--espresso); font-family:'DM Sans',sans-serif; font-size:14px;
+    border-radius:6px; outline:none; transition:border-color 0.2s;
+  }
+  input::placeholder { color:var(--stone); }
+  input:focus { border-color:var(--pink); }
+  .submit-btn { width:100%; padding:16px; background:var(--pink); color:#fff; border:none; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; cursor:pointer; border-radius:100px; transition:background 0.2s, transform 0.15s; margin-top:6px; }
+  .submit-btn:hover { background:var(--pink-h); transform:translateY(-1px); }
+  .submit-btn:disabled { opacity:0.55; cursor:not-allowed; transform:none; }
+
+  #success-msg { display:none; text-align:center; padding:40px 0; }
+  .success-check { width:52px; height:52px; border-radius:50%; background:var(--pink); color:#fff; font-size:22px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; }
+  #success-msg h3 { font-family:'Playfair Display',serif; font-size:26px; color:var(--espresso); margin-bottom:10px; }
+  #success-msg p { font-size:14px; color:var(--stone); line-height:1.7; }
+
+  /* FOOTER */
+  footer { background:var(--espresso); border-top:1px solid rgba(245,240,232,0.07); padding:24px 60px; display:flex; justify-content:space-between; align-items:center; }
+  .footer-text { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; color:rgba(155,149,144,0.55); }
+  .footer-pink { color:var(--pink); font-weight:700; }
+
+  @media (max-width:768px) {
+    nav { padding:18px 24px; }
+    .split { grid-template-columns:1fr; min-height:auto; }
+    .panel { padding:56px 28px 48px; }
+    .panel-finance { border-right:none; border-bottom:1px solid rgba(61,43,31,0.1); }
+    .register-section { padding:60px 24px; }
+    footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
+    .form-row { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="data:image/png;base64,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" alt="Nxt Phase AI">
+  </div>
+  <a href="#inschrijven" class="nav-cta">Aanmelden →</a>
+</nav>
+
+<!-- SPLIT -->
+<div class="split">
+
+  <!-- LEFT: FINANCE -->
+  <div class="panel panel-finance">
+    <canvas id="canvas-finance"></canvas>
+    <div>
+      <p class="panel-tag">Masterclass · 16 juni 2026</p>
+      <h2 class="panel-title">Claude for<br>Finance<br>Professionals</h2>
+      <p class="panel-desc">Een praktische masterclass over Claude AI voor financiële analyse, rapportage en besluitvorming. Geen technische achtergrond vereist.</p>
+      <div class="meta">
+        <div class="meta-row"><span class="meta-label">Datum</span><span class="meta-value">16 juni 2026</span></div>
+        <div class="meta-row"><span class="meta-label">Tijd</span><span class="meta-value">13:00 – 17:00 uur</span></div>
+        <div class="meta-row"><span class="meta-label">Locatie</span><span class="meta-value">Nxt Phase AI<small>Grasweg 83, 1031 HX Amsterdam</small></span></div>
+      </div>
+      <p class="program-label">Programma</p>
+      <ul class="topic-list">
+        <li><span class="topic-num">01</span>Financiële analyses automatiseren</li>
+        <li><span class="topic-num">02</span>Rapporten en memo's sneller schrijven</li>
+        <li><span class="topic-num">03</span>Data interpreteren met AI</li>
+        <li><span class="topic-num">04</span>Veilig en verantwoord gebruik van Claude</li>
+      </ul>
+    </div>
+    <span class="panel-number">01</span>
+  </div>
+
+  <!-- RIGHT: GENERAL -->
+  <div class="panel panel-general">
+    <canvas id="canvas-general"></canvas>
+    <div>
+      <p class="panel-tag">Masterclass · 23 juni 2026</p>
+      <h2 class="panel-title">Werken met<br><em>Claude AI</em><br>— van A tot Z</h2>
+      <p class="panel-desc">Voor iedereen die efficiënter wil werken met AI. Praktisch, hands-on en direct toepasbaar in je dagelijks werk.</p>
+      <div class="meta">
+        <div class="meta-row"><span class="meta-label">Datum</span><span class="meta-value">23 juni 2026</span></div>
+        <div class="meta-row"><span class="meta-label">Tijd</span><span class="meta-value">13:00 – 17:00 uur</span></div>
+        <div class="meta-row"><span class="meta-label">Locatie</span><span class="meta-value">Nxt Phase AI<small>Grasweg 83, 1031 HX Amsterdam</small></span></div>
+      </div>
+      <p class="program-label">Programma</p>
+      <ul class="topic-list">
+        <li><span class="topic-num">01</span>Wat is Claude en hoe werkt het?</li>
+        <li><span class="topic-num">02</span>Effectief prompts schrijven</li>
+        <li><span class="topic-num">03</span>Taken automatiseren en delegeren</li>
+        <li><span class="topic-num">04</span>Veilig gebruik in je organisatie</li>
+      </ul>
+    </div>
+    <span class="panel-number">02</span>
+  </div>
+
+</div>
+
+<!-- REGISTER -->
+<section class="register-section" id="inschrijven">
+  <h2>Schrijf je in</h2>
+  <p class="sub">Kies de training waarvoor je je wilt aanmelden.</p>
+  <p class="price-big">€ 299,-</p>
+  <p class="price-note">Per persoon · Excl. btw</p>
+
+  <!-- Keuze -->
+  <div class="training-keuze">
+    <label class="keuze-label" id="keuze-finance">
+      <input type="checkbox" id="check-finance" value="Claude for Finance Professionals – 16 juni 2026">
+      <span class="keuze-box"></span>
+      <span class="keuze-info">
+        <span class="keuze-title">Claude for Finance Professionals</span>
+        <span class="keuze-date">16 juni 2026 · 13:00 – 17:00 uur</span>
+      </span>
+    </label>
+    <label class="keuze-label" id="keuze-general">
+      <input type="checkbox" id="check-general" value="Werken met Claude AI — van A tot Z – 23 juni 2026">
+      <span class="keuze-box"></span>
+      <span class="keuze-info">
+        <span class="keuze-title">Werken met Claude AI — van A tot Z</span>
+        <span class="keuze-date">23 juni 2026 · 13:00 – 17:00 uur</span>
+      </span>
+    </label>
+  </div>
+
+  <form id="reg-form" class="reg-form">
+    <input type="hidden" name="training" id="training-hidden" value="">
+    <div class="form-row">
+      <input type="text" name="voornaam" placeholder="Voornaam" required>
+      <input type="text" name="achternaam" placeholder="Achternaam">
+    </div>
+    <input type="email" name="email" placeholder="Zakelijk e-mailadres" required>
+    <input type="text" name="bedrijf" placeholder="Bedrijf" required>
+    <input type="text" name="functie" placeholder="Functietitel">
+    <input type="hidden" name="_subject" value="Nieuwe aanmelding NXT Phase AI Training">
+    <button type="submit" class="submit-btn" id="submit-btn">Plek reserveren →</button>
+  </form>
+
+  <div id="success-msg">
+    <div class="success-check">✓</div>
+    <h3>Aanmelding ontvangen!</h3>
+    <p>We nemen zo snel mogelijk contact met je op ter bevestiging.</p>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">© 2026 Nxt Phase AI</span>
+  <span class="footer-text footer-pink">WE MAKE PRAGMATIC AI WORK</span>
+  <span class="footer-text">sanne@nxtphase.ai</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init('M3enm1KLe2e_wPpEN');
+
+  // ── STIPJES ANIMATIE FINANCE ──
+  function makeDotAnim(canvasId, color1, color2) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    let W, H, dots;
+    function resize() { const p = canvas.parentElement; W = canvas.width = p.offsetWidth; H = canvas.height = p.offsetHeight; }
+    function makeDot() { return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*3.5+1, vx:(Math.random()-.5)*.25, vy:-Math.random()*.35-.05, alpha:Math.random()*.18+.06, color:Math.random()>.45?color1:color2, life:Math.random()*400+200, age:0 }; }
+    function init() { resize(); dots = Array.from({length:80}, makeDot); }
+    function draw() {
+      ctx.clearRect(0,0,W,H);
+      dots.forEach((d,i) => {
+        d.x+=d.vx; d.y+=d.vy; d.age++;
+        ctx.globalAlpha=d.alpha*Math.min(1,d.age/50)*Math.min(1,(d.life-d.age)/50);
+        ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fillStyle=d.color; ctx.fill();
+        if(d.age>=d.life||d.y<-10) dots[i]={...makeDot(),y:H+5,age:0};
+      });
+      ctx.globalAlpha=1; requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize);
+    init(); draw();
+  }
+
+  // Finance: roze + espresso stipjes
+  makeDotAnim('canvas-finance', '#E8174A', '#3D2B1F');
+  // General: crème + stone stipjes (zacht op donkere achtergrond)
+  makeDotAnim('canvas-general', '#F5F0E8', '#9B9590');
+
+  // ── CHECKBOXES ──
+  function toggleKeuze(labelId, checkId) {
+    const label = document.getElementById(labelId);
+    const check = document.getElementById(checkId);
+    label.addEventListener('click', () => {
+      check.checked = !check.checked;
+      label.classList.toggle('checked', check.checked);
+      updateHidden();
+    });
+  }
+  toggleKeuze('keuze-finance', 'check-finance');
+  toggleKeuze('keuze-general', 'check-general');
+
+  function updateHidden() {
+    const vals = [];
+    if (document.getElementById('check-finance').checked) vals.push('Claude for Finance Professionals (16 juni 2026)');
+    if (document.getElementById('check-general').checked) vals.push('Werken met Claude AI — van A tot Z (23 juni 2026)');
+    document.getElementById('training-hidden').value = vals.join(' + ') || '';
+  }
+
+  // ── FORMULIER via EmailJS ──
+  const form = document.getElementById('reg-form');
+  const btn  = document.getElementById('submit-btn');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!document.getElementById('check-finance').checked && !document.getElementById('check-general').checked) {
+      alert('Selecteer minimaal één training.');
+      return;
+    }
+    btn.textContent = 'Versturen...';
+    btn.disabled = true;
+
+    const data = {
+      voornaam:  form.querySelector('[name="voornaam"]').value,
+      achternaam: form.querySelector('[name="achternaam"]').value,
+      email:     form.querySelector('[name="email"]').value,
+      bedrijf:   form.querySelector('[name="bedrijf"]').value,
+      functie:   form.querySelector('[name="functie"]').value,
+      training:  document.getElementById('training-hidden').value,
+    };
+
+    try {
+      const res = await emailjs.send('service_4qb0r45', 'template_v9y8pyc', data);
+      if (res.status === 200) {
+        form.style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+      } else {
+        btn.textContent = 'Er ging iets mis — probeer opnieuw';
+        btn.disabled = false;
+      }
+    } catch(err) {
+      console.error(err);
+      btn.textContent = 'Er ging iets mis — probeer opnieuw';
+      btn.disabled = false;
+    }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('M3enm1KLe2e_wPpEN');</script>
+</body>
+</html>
