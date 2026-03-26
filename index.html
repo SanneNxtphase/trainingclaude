@@ -3,345 +3,546 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NXT Phase AI — Trainingen</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Claude for Executives — NXT Phase AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream:#F5F0E8; --espresso:#3D2B1F; --stone:#9B9590; --pink:#E8174A; --pink-h:#cc1340;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--cream); color:var(--espresso); font-family:'DM Sans',sans-serif; overflow-x:hidden; }
+:root{
+  --esp:    #542916;  /* Espresso */
+  --eau:    #b79858;  /* Eau Trouble — gold */
+  --terre:  #C8960A;  /* Brûlé — terracotta red */
+  --bleu:   #542916;  /* Bleu Porcelaine */
+  --lait:   #FAF7F2;  /* Nuage de lait — near white */
+  --miel:   #f1c166;  /* Miel Doré — honey yellow */
+  --white:  #ffffff;
+  --border: #e2d8c8;
+  --off:    #F2EDE4;
+  --mid:    #8a6f5a;
+  --body:   #3d2010;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--lait);color:var(--body);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-  /* NAV */
-  nav { background:#fff; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; border-bottom:1px solid rgba(61,43,31,0.08); position:sticky; top:0; z-index:200; }
-  .nav-logo img { height:38px; width:auto; display:block; }
-  .nav-cta { display:inline-block; padding:10px 24px; background:var(--pink); color:#fff; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; text-decoration:none; border-radius:100px; transition:background 0.2s; }
-  .nav-cta:hover { background:var(--pink-h); }
+#bg-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
+nav,main,.stats-section,.questions-band,footer{position:relative;z-index:1;}
 
-  /* SPLIT */
-  .split { display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
+/* NAV */
+nav{background:rgba(254,250,240,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 56px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.nav-brand{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--esp);letter-spacing:0.04em;}
+.nav-brand span{color:var(--eau);}
+.nav-right{font-size:11px;color:var(--mid);letter-spacing:0.08em;text-transform:uppercase;}
 
-  .panel { position:relative; display:flex; flex-direction:column; padding:72px 56px 60px; overflow:hidden; }
-  .panel-finance { background:var(--cream); border-right:1px solid rgba(61,43,31,0.1); }
-  .panel-general { background:var(--espresso); }
+/* HERO */
+.hero{text-align:center;padding:100px 24px 68px;max-width:780px;margin:0 auto;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);background:var(--off);padding:7px 18px;border-radius:2px;margin-bottom:28px;border:1px solid var(--border);}
+.led{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.led-b{background:var(--esp);box-shadow:0 0 4px rgba(84,41,22,0.4);}
+.led-t{background:var(--eau);box-shadow:0 0 4px rgba(200,150,10,0.4);}
+h1{font-family:'Playfair Display',serif;font-size:clamp(42px,5.5vw,68px);font-weight:700;line-height:1.05;color:var(--esp);margin-bottom:18px;letter-spacing:-0.02em;}
+h1 em{font-style:italic;color:var(--eau);}
+.hero-sub{font-size:17px;font-weight:300;line-height:1.8;color:var(--mid);max-width:540px;margin:0 auto 32px;}
+.hero-meta{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;}
+.hero-meta-item{font-size:12px;font-weight:500;color:var(--mid);padding:0 20px;border-right:1px solid var(--border);}
+.hero-meta-item:first-child{padding-left:0;}
+.hero-meta-item:last-child{border-right:none;padding-right:0;}
 
-  #canvas-finance, #canvas-general { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
-  .panel > *:not(canvas) { position:relative; z-index:1; }
+/* CARDS */
+.trainingen-wrap{max-width:1060px;margin:0 auto;padding:48px 48px 80px;}
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 0.3s,transform 0.3s;}
+.card:hover{box-shadow:0 12px 48px rgba(84,41,22,0.14);transform:translateY(-5px);}
+.card-stripe-b{height:4px;background:var(--esp);}
+.card-stripe-t{height:4px;background:var(--eau);}
+.card-top{padding:28px 32px 20px;border-bottom:1px solid var(--border);}
+.card-date{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;}
+.card-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1.1;color:var(--esp);margin-bottom:10px;}
+.card-title .acc-b{color:var(--esp);font-style:italic;}
+.card-title .acc-t{color:var(--eau);font-style:italic;}
+.card-desc{font-size:14px;font-weight:300;line-height:1.75;color:var(--mid);}
+.card-meta{padding:14px 32px;border-bottom:1px solid var(--border);}
+.meta-row{display:flex;align-items:baseline;margin-bottom:3px;}
+.meta-key{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);min-width:68px;flex-shrink:0;}
+.meta-val{font-size:13px;color:var(--body);}
+.card-program{padding:20px 32px;border-bottom:1px solid var(--border);}
+.prog-head{font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;}
+.prog-items{list-style:none;}
+.prog-item{display:flex;flex-direction:column;gap:3px;padding:10px 0;border-bottom:1px solid var(--off);}
+.prog-item:last-child{border-bottom:none;padding-bottom:0;}
+.prog-item-top{display:flex;align-items:center;gap:10px;}
+.prog-tag{font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 7px;border-radius:2px;white-space:nowrap;flex-shrink:0;background:var(--off);color:var(--mid);border:1px solid var(--border);}
+.prog-text{font-size:13.5px;font-weight:600;color:var(--esp);line-height:1.3;}
+.prog-sub{font-size:12.5px;font-weight:300;color:var(--mid);line-height:1.5;}
 
-  .panel-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; margin-bottom:20px; }
-  .panel-finance .panel-tag { color:var(--pink); }
-  .panel-general .panel-tag { color:var(--stone); }
+/* MEER */
+.meer-btn{width:100%;padding:12px 32px;background:none;border:none;border-bottom:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:space-between;color:var(--esp);transition:background 0.15s;}
+.meer-btn:hover{background:var(--off);}
+.meer-btn svg{transition:transform 0.2s;}
+.meer-btn.open svg{transform:rotate(180deg);}
+.meer-panel{display:none;border-bottom:1px solid var(--border);background:var(--off);}
+.meer-panel.open{display:block;}
+.meer-panel-inner{padding:18px 32px;}
+.meer-panel h4{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+.meer-panel ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.meer-panel li{font-size:12.5px;color:var(--body);display:flex;gap:8px;align-items:flex-start;line-height:1.45;}
+.meer-panel li::before{content:'✓';font-weight:700;font-size:11px;margin-top:1px;flex-shrink:0;}
+.check-b::before{color:var(--esp);}
+.check-t::before{color:var(--eau);}
 
-  .panel-title { font-family:'Playfair Display',serif; font-size:clamp(28px,3vw,48px); font-weight:700; line-height:1.06; margin-bottom:16px; min-height:170px; }
-  .panel-finance .panel-title { color:var(--espresso); }
-  .panel-general .panel-title { color:var(--cream); }
-  .panel-general .panel-title em { font-style:italic; color:var(--pink); }
+/* BUY */
+.card-buy{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.price-main{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--esp);}
+.price-sub{font-size:9px;color:var(--mid);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;}
+.price-incl{font-size:11px;margin-top:3px;font-weight:500;}
+.price-incl-b{color:var(--esp);}
+.price-incl-t{color:var(--eau);}
+.buy-btns{display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.btn-b{display:inline-block;padding:13px 22px;background:var(--esp);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;border:none;border-radius:2px;cursor:pointer;transition:opacity 0.2s,transform 0.15s;white-space:nowrap;letter-spacing:0.02em;}
+.btn-b:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 4px 16px rgba(84,41,22,0.25);}
+.btn-t{display:inline-block;padding:13px 22px;background:var(--eau);color:var(--esp);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;border:none;border-radius:2px;cursor:pointer;transition:opacity 0.2s,transform 0.15s;white-space:nowrap;letter-spacing:0.02em;}
+.btn-t:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 6px 20px rgba(196,98,45,0.35);}
+.btn-factuur{font-size:11px;color:var(--mid);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline;text-underline-offset:3px;transition:color 0.2s;}
+.btn-factuur:hover{color:var(--esp);}
 
-  .panel-desc { font-size:14px; font-weight:300; line-height:1.75; max-width:380px; margin-bottom:28px; opacity:0.7; min-height:75px; }
-  .panel-finance .panel-desc { color:var(--espresso); }
-  .panel-general .panel-desc { color:var(--cream); }
+/* STATS */
+.stats-section{padding:72px 48px;background:var(--esp);border-top:1px solid var(--border);position:relative;overflow:hidden;}
+.stats-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;}
+.stat-item{text-align:center;padding:0 40px;}
+.stat-item+.stat-item{border-left:1px solid rgba(255,255,255,0.15);}
+.stat-number{font-family:'Playfair Display',serif;font-size:clamp(48px,5vw,68px);font-weight:700;line-height:1;margin-bottom:8px;}
+.sn-eau{color:var(--eau);}
+.sn-bleu{color:var(--esp);}
+.sn-miel{color:var(--miel);}
+.stat-label{font-size:14px;font-weight:600;color:var(--lait);margin-bottom:8px;}
+.stat-desc{font-size:13px;font-weight:300;color:rgba(254,250,240,0.6);line-height:1.7;max-width:240px;margin:0 auto;}
 
-  /* Vaste hoogte zodat meta op beide kanten gelijk loopt */
-  .panel-header { min-height:260px; display:flex; flex-direction:column; }
+/* MODAL */
+.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(84,41,22,0.55);backdrop-filter:blur(5px);}
+.overlay.open{display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal{background:var(--white);width:100%;max-width:400px;border-radius:4px;overflow:hidden;box-shadow:0 20px 60px rgba(84,41,22,0.3);animation:mIn 0.22s ease-out;}
+@keyframes mIn{from{opacity:0;transform:translateY(-16px) scale(0.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.modal-top-stripe{height:4px;}
+.modal-top-b{background:var(--esp);}
+.modal-top-t{background:var(--eau);}
+.modal-hdr{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.modal-training-lbl{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:3px;}
+.modal-hdr h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--esp);}
+.modal-x{background:none;border:none;font-size:18px;cursor:pointer;color:var(--mid);padding:4px 6px;border-radius:2px;}
+.modal-x:hover{background:var(--off);}
+.modal-bdy{padding:20px 24px 24px;}
+.modal-price{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--esp);}
+.modal-pnote{font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--mid);margin-bottom:18px;}
+.m-input{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:3px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--esp);background:var(--white);outline:none;margin-bottom:12px;transition:border-color 0.2s;}
+.m-input:focus{border-color:var(--eau);}
+.m-input.err{border-color:var(--terre);}
+.m-btn-b{width:100%;padding:15px;background:var(--esp);color:#fff;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:10px;letter-spacing:0.02em;transition:opacity 0.2s;}
+.m-btn-b:hover{opacity:0.85;}
+.m-btn-b:disabled{opacity:0.5;cursor:not-allowed;}
+.m-btn-t{width:100%;padding:15px;background:var(--eau);color:var(--esp);color:#fff;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:10px;letter-spacing:0.02em;transition:opacity 0.2s;}
+.m-btn-t:hover{opacity:0.85;}
+.m-btn-t:disabled{opacity:0.5;cursor:not-allowed;}
+.m-divider{display:flex;align-items:center;gap:10px;margin:2px 0 10px;}
+.m-divider::before,.m-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.m-divider span{font-size:11px;color:var(--mid);}
+.m-factuur-btn{width:100%;padding:12px;background:var(--off);color:var(--body);border:1px solid var(--border);border-radius:3px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background 0.15s;}
+.m-factuur-btn:hover{background:var(--border);}
+.m-factuur-form{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
+.m-factuur-form.open{display:block;}
+.m-factuur-form label{display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:5px;}
+.m-fi{width:100%;padding:11px 13px;margin-bottom:10px;border:1.5px solid var(--border);border-radius:3px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--esp);background:var(--white);outline:none;transition:border-color 0.2s;}
+.m-fi:focus{border-color:var(--eau);}
+.m-fsend{width:100%;padding:13px;background:var(--esp);color:var(--lait);border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;margin-top:2px;}
+.m-fsend:hover{opacity:0.85;}
+.m-success{display:none;padding:36px 24px;text-align:center;}
+.m-success.show{display:block;}
+.m-success-dot{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:20px;font-weight:700;}
+.m-success-dot-b{background:#f5ede0;color:var(--esp);}
+.m-success-dot-t{background:#fdf5e0;color:var(--eau);}
+.m-success h3{font-family:'Playfair Display',serif;font-size:21px;color:var(--esp);margin-bottom:8px;}
+.m-success p{font-size:13px;color:var(--mid);line-height:1.7;}
 
-  .meta { display:flex; flex-direction:column; gap:10px; margin-bottom:32px; }
-  .meta-row { display:grid; grid-template-columns:64px 1fr; align-items:flex-start; gap:0; }
-  .meta-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.16em; text-transform:uppercase; padding-top:2px; }
-  .panel-finance .meta-label { color:var(--stone); }
-  .panel-general .meta-label { color:rgba(155,149,144,0.7); }
-  .meta-value { font-size:14px; font-weight:500; line-height:1.4; }
-  .panel-finance .meta-value { color:var(--espresso); }
-  .panel-general .meta-value { color:var(--cream); }
-  .meta-value small { display:block; font-size:12px; font-weight:300; opacity:0.6; margin-top:1px; }
+/* FOOTER */
+.questions-band{padding:24px 56px;text-align:center;background:var(--off);border-top:1px solid var(--border);}
+.questions-band p{font-size:13px;color:var(--mid);}
+.questions-band a{color:var(--eau);text-decoration:none;font-weight:500;}
+.questions-band a:hover{text-decoration:underline;}
+footer{background:var(--esp);padding:22px 56px;display:flex;justify-content:space-between;align-items:center;}
+.footer-t{font-size:11px;color:rgba(254,250,240,0.4);}
+.footer-acc{color:var(--eau);}
 
-  /* PROGRAMMA */
-  .program-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; margin-bottom:16px; }
-  .panel-finance .program-label { color:var(--stone); }
-  .panel-general .program-label { color:rgba(155,149,144,0.7); }
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .hero{padding:72px 20px 52px;}
+  .trainingen-wrap{padding:40px 20px 64px;}
+  .cards-grid{grid-template-columns:1fr;}
+  .card-top,.card-meta,.card-program,.card-buy,.meer-panel-inner,.meer-btn{padding-left:20px;padding-right:20px;}
+  .stats-inner{grid-template-columns:1fr;}
+  .stat-item+.stat-item{border-left:none;border-top:1px solid rgba(255,255,255,0.15);padding-top:36px;margin-top:36px;}
+  .stats-section{padding:52px 24px;}
+  .meer-panel ul{grid-template-columns:1fr;}
+  .questions-band,footer{padding:18px 20px;}
+  footer{flex-direction:column;gap:8px;text-align:center;}
+  .hero-meta{flex-direction:column;gap:8px;}
+  .hero-meta-item{border-right:none;padding:0;}
+}
 
-  .topic-list { list-style:none; }
-  .topic-list li { display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid; font-size:14px; }
-  .panel-finance .topic-list li { border-color:rgba(61,43,31,0.08); color:var(--espresso); }
-  .panel-general .topic-list li { border-color:rgba(245,240,232,0.07); color:var(--cream); }
-  .topic-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--pink); min-width:20px; }
-
-  .panel-number { font-family:'Playfair Display',serif; font-size:160px; font-weight:700; position:absolute; bottom:-30px; right:24px; opacity:0.04; line-height:1; pointer-events:none; }
-  .panel-finance .panel-number { color:var(--espresso); }
-  .panel-general .panel-number { color:var(--cream); }
-
-  /* REGISTER */
-  .register-section { background:var(--cream); padding:80px 60px; border-top:1px solid rgba(61,43,31,0.08); }
-  .register-section h2 { font-family:'Playfair Display',serif; font-size:clamp(28px,3vw,44px); font-weight:400; color:var(--espresso); text-align:center; margin-bottom:8px; }
-  .register-section .sub { font-size:14px; color:var(--stone); text-align:center; margin-bottom:8px; }
-  .price-big { font-family:'Playfair Display',serif; font-size:42px; font-weight:700; color:var(--pink); text-align:center; margin-bottom:4px; }
-  .price-note { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--stone); text-align:center; margin-bottom:48px; }
-
-  /* Training keuze checkboxes */
-  .training-keuze { max-width:480px; margin:0 auto 32px; display:flex; flex-direction:column; gap:12px; }
-  .keuze-label {
-    display:flex; align-items:flex-start; gap:14px;
-    padding:16px 20px; border:1px solid rgba(61,43,31,0.15);
-    border-radius:6px; cursor:pointer;
-    transition:border-color 0.2s, background 0.2s;
-    background:#fff;
-  }
-  .keuze-label:hover { border-color:var(--pink); background:rgba(232,23,74,0.03); }
-  .keuze-label input[type="checkbox"] { display:none; }
-  .keuze-box {
-    width:20px; height:20px; border-radius:4px;
-    border:2px solid rgba(61,43,31,0.25);
-    flex-shrink:0; margin-top:1px;
-    display:flex; align-items:center; justify-content:center;
-    transition:border-color 0.2s, background 0.2s;
-  }
-  .keuze-label.checked .keuze-box { background:var(--pink); border-color:var(--pink); }
-  .keuze-label.checked .keuze-box::after { content:'✓'; color:#fff; font-size:12px; font-weight:700; }
-  .keuze-label.checked { border-color:var(--pink); background:rgba(232,23,74,0.04); }
-  .keuze-info { flex:1; }
-  .keuze-title { font-size:14px; font-weight:500; color:var(--espresso); margin-bottom:3px; }
-  .keuze-date { font-family:'DM Mono',monospace; font-size:10px; color:var(--stone); letter-spacing:0.08em; }
-
-  .reg-form { max-width:480px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  input[type="text"], input[type="email"] {
-    width:100%; padding:14px 18px;
-    border:1px solid rgba(61,43,31,0.18);
-    background:#fff;
-    color:var(--espresso); font-family:'DM Sans',sans-serif; font-size:14px;
-    border-radius:6px; outline:none; transition:border-color 0.2s;
-  }
-  input::placeholder { color:var(--stone); }
-  input:focus { border-color:var(--pink); }
-  .submit-btn { width:100%; padding:16px; background:var(--pink); color:#fff; border:none; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; cursor:pointer; border-radius:100px; transition:background 0.2s, transform 0.15s; margin-top:6px; }
-  .submit-btn:hover { background:var(--pink-h); transform:translateY(-1px); }
-  .submit-btn:disabled { opacity:0.55; cursor:not-allowed; transform:none; }
-
-  #success-msg { display:none; text-align:center; padding:40px 0; }
-  .success-check { width:52px; height:52px; border-radius:50%; background:var(--pink); color:#fff; font-size:22px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; }
-  #success-msg h3 { font-family:'Playfair Display',serif; font-size:26px; color:var(--espresso); margin-bottom:10px; }
-  #success-msg p { font-size:14px; color:var(--stone); line-height:1.7; }
-
-  /* FOOTER */
-  footer { background:var(--espresso); border-top:1px solid rgba(245,240,232,0.07); padding:24px 60px; display:flex; justify-content:space-between; align-items:center; }
-  .footer-text { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; color:rgba(155,149,144,0.55); }
-  .footer-pink { color:var(--pink); font-weight:700; }
-
-  @media (max-width:768px) {
-    nav { padding:18px 24px; }
-    .split { grid-template-columns:1fr; min-height:auto; }
-    .panel { padding:56px 28px 48px; }
-    .panel-finance { border-right:none; border-bottom:1px solid rgba(61,43,31,0.1); }
-    .register-section { padding:60px 24px; }
-    footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
-    .form-row { grid-template-columns:1fr; }
-  }
+/* ── FADE-IN ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.hero-eyebrow{animation:fadeIn 0.7s ease both;}
+h1{animation:fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.1s both;}
+.hero-sub{animation:fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.22s both;}
+.hero-meta{animation:fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.34s both;}
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1);}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up.delay1{transition-delay:0.1s;}
+.fade-up.delay2{transition-delay:0.22s;}
 </style>
 </head>
 <body>
+<canvas id="bg-canvas"></canvas>
 
 <nav>
-  <div class="nav-logo">
-    <img src="data:image/png;base64,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" alt="Nxt Phase AI">
-  </div>
-  <a href="#inschrijven" class="nav-cta">Aanmelden →</a>
+  <div class="nav-brand">Nxt Phase <span>AI</span></div>
+  <span class="nav-right">nxtphase.ai</span>
 </nav>
 
-<!-- SPLIT -->
-<div class="split">
-
-  <!-- LEFT: FINANCE -->
-  <div class="panel panel-finance">
-    <canvas id="canvas-finance"></canvas>
-    <div>
-      <div class="panel-header">
-        <p class="panel-tag">Masterclass · 16 juni 2026</p>
-        <h2 class="panel-title">Claude for<br>Finance<br>Professionals</h2>
-        <p class="panel-desc">Een praktische masterclass over Claude AI voor financiële analyse, rapportage en besluitvorming. Geen technische achtergrond vereist.</p>
-      </div>
-      <div class="meta">
-        <div class="meta-row"><span class="meta-label">Datum</span><span class="meta-value">16 juni 2026</span></div>
-        <div class="meta-row"><span class="meta-label">Tijd</span><span class="meta-value">13:00 – 17:00 uur</span></div>
-        <div class="meta-row"><span class="meta-label">Locatie</span><span class="meta-value">Nxt Phase AI<small>Grasweg 83, 1031 HX Amsterdam</small></span></div>
-      </div>
-      <p class="program-label">Programma</p>
-      <ul class="topic-list">
-        <li><span class="topic-num">01</span>Financiële analyses automatiseren</li>
-        <li><span class="topic-num">02</span>Rapporten en memo's sneller schrijven</li>
-        <li><span class="topic-num">03</span>Data interpreteren met AI</li>
-        <li><span class="topic-num">04</span>Veilig en verantwoord gebruik van Claude</li>
-      </ul>
-    </div>
-    <span class="panel-number">01</span>
+<main>
+<div class="hero">
+  <div class="hero-eyebrow">
+    <span class="led led-b"></span>
+    Masterclasses · Juni 2026 · Amsterdam
+    <span class="led led-t"></span>
   </div>
-
-  <!-- RIGHT: GENERAL -->
-  <div class="panel panel-general">
-    <canvas id="canvas-general"></canvas>
-    <div>
-      <div class="panel-header">
-        <p class="panel-tag">Masterclass · 23 juni 2026</p>
-        <h2 class="panel-title">Werken met<br><em>Claude AI</em><br>— van A tot Z</h2>
-        <p class="panel-desc">Voor iedereen die efficiënter wil werken met AI. Praktisch, hands-on en direct toepasbaar in je dagelijks werk.</p>
-      </div>
-      <div class="meta">
-        <div class="meta-row"><span class="meta-label">Datum</span><span class="meta-value">23 juni 2026</span></div>
-        <div class="meta-row"><span class="meta-label">Tijd</span><span class="meta-value">13:00 – 17:00 uur</span></div>
-        <div class="meta-row"><span class="meta-label">Locatie</span><span class="meta-value">Nxt Phase AI<small>Grasweg 83, 1031 HX Amsterdam</small></span></div>
-      </div>
-      <p class="program-label">Programma</p>
-      <ul class="topic-list">
-        <li><span class="topic-num">01</span>Wat is Claude en hoe werkt het?</li>
-        <li><span class="topic-num">02</span>Effectief prompts schrijven</li>
-        <li><span class="topic-num">03</span>Taken automatiseren en delegeren</li>
-        <li><span class="topic-num">04</span>Veilig gebruik in je organisatie</li>
-      </ul>
-    </div>
-    <span class="panel-number">02</span>
+  <h1>Claude for <em>Executives</em></h1>
+  <p class="hero-sub">Voor leiders die AI niet alleen begrijpen, maar direct inzetten om sneller te beslissen, beter te communiceren en hun organisatie een stap voor te laten lopen.</p>
+  <div class="hero-meta">
+    <span class="hero-meta-item">16 &amp; 23 juni 2026</span>
+    <span class="hero-meta-item">9:30 – 12:30 uur</span>
+    <span class="hero-meta-item">Inclusief lunch</span>
   </div>
-
 </div>
 
-<!-- REGISTER -->
-<section class="register-section" id="inschrijven">
-  <h2>Schrijf je in</h2>
-  <p class="sub">Kies de training waarvoor je je wilt aanmelden.</p>
-  <p class="price-big">€ 299,-</p>
-  <p class="price-note">Per persoon · Excl. btw</p>
+<div class="trainingen-wrap">
+  <div class="cards-grid">
 
-  <!-- Keuze -->
-  <div class="training-keuze">
-    <label class="keuze-label" id="keuze-finance">
-      <input type="checkbox" id="check-finance" value="Claude for Finance Professionals – 16 juni 2026">
-      <span class="keuze-box"></span>
-      <span class="keuze-info">
-        <span class="keuze-title">Claude for Finance Professionals</span>
-        <span class="keuze-date">16 juni 2026 · 13:00 – 17:00 uur</span>
-      </span>
-    </label>
-    <label class="keuze-label" id="keuze-general">
-      <input type="checkbox" id="check-general" value="Werken met Claude AI — van A tot Z – 23 juni 2026">
-      <span class="keuze-box"></span>
-      <span class="keuze-info">
-        <span class="keuze-title">Werken met Claude AI — van A tot Z</span>
-        <span class="keuze-date">23 juni 2026 · 13:00 – 17:00 uur</span>
-      </span>
-    </label>
-  </div>
-
-  <form id="reg-form" class="reg-form">
-    <input type="hidden" name="training" id="training-hidden" value="">
-    <div class="form-row">
-      <input type="text" name="voornaam" placeholder="Voornaam" required>
-      <input type="text" name="achternaam" placeholder="Achternaam">
+    <!-- CARD 1 — Bleu Porcelaine -->
+    <div class="card fade-up">
+      <div class="card-stripe-b"></div>
+      <div class="card-top">
+        <div class="card-date">Dinsdag 16 juni 2026</div>
+        <h2 class="card-title">Claude van <span class="acc-b">A tot Z</span></h2>
+        <p class="card-desc">Van chatten naar delegeren. Je leert hoe Claude écht werkt, hoe je een productief gesprek voert met AI, en hoe je terugkerende taken omzet in werkende automatisering.</p>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="meta-key">Tijd</span><span class="meta-val">9:30 – 12:30 · inloop 9:00</span></div>
+        <div class="meta-row"><span class="meta-key">Locatie</span><span class="meta-val">Nxt Phase AI · Grasweg 83, Amsterdam</span></div>
+      </div>
+      <div class="card-program">
+        <p class="prog-head">Programma</p>
+        <ul class="prog-items">
+          <li class="prog-item">
+            <div class="prog-item-top"><span class="prog-tag">Positie</span><span class="prog-text">Claude, ChatGPT en Gemini — wat is het verschil?</span></div>
+            <p class="prog-sub">Welk model past bij welk werk — en waarom steeds meer professionals voor Claude kiezen.</p>
+          </li>
+          <li class="prog-item">
+            <div class="prog-item-top"><span class="prog-tag">Werkwijze</span><span class="prog-text">Chat, Cowork en Code — drie modi, één keuze</span></div>
+            <p class="prog-sub">Van snelle vragen tot autonome taken die Claude zelfstandig uitvoert terwijl jij iets anders doet.</p>
+          </li>
+          <li class="prog-item">
+            <div class="prog-item-top"><span class="prog-tag">Resultaat</span><span class="prog-text">Delegeren, niet chatten</span></div>
+            <p class="prog-sub">Terugkerende taken herkennen en live omzetten. Je eerste workflow stel je vandaag in.</p>
+          </li>
+          <li class="prog-item">
+            <div class="prog-item-top"><span class="prog-tag">Compliance</span><span class="prog-text">Veilig inzetten — AVG en organisatie</span></div>
+            <p class="prog-sub">Spelregels voor databescherming en hoe je dit verantwoord uitrolt in je team.</p>
+          </li>
+        </ul>
+      </div>
+      <button class="meer-btn" id="btn-a" onclick="toggleMeer('a')">Wat neem je mee?
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="meer-panel" id="panel-a">
+        <div class="meer-panel-inner">
+          <h4>Concreet mee naar huis</h4>
+          <ul>
+            <li class="check-b">Werkende AI-setup direct inzetbaar</li>
+            <li class="check-b">Je eerste automatisering actief</li>
+            <li class="check-b">Overzicht chat / Cowork / Code</li>
+            <li class="check-b">Persoonlijk actieplan</li>
+            <li class="check-b">Templates voor dagelijks gebruik</li>
+            <li class="check-b">Samenvatting one-pager</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-buy">
+        <div>
+          <div class="price-main">€ 299,–</div>
+          <div class="price-sub">p.p. · excl. btw</div>
+          <div class="price-incl price-incl-b">✓ Inclusief lunch</div>
+        </div>
+        <div class="buy-btns">
+          <button class="btn-b" onclick="openModal('algemeen')">Schrijf mij in</button>
+          <button class="btn-factuur" onclick="openModal('algemeen',true)">Op factuur betalen</button>
+        </div>
+      </div>
     </div>
-    <input type="email" name="email" placeholder="Zakelijk e-mailadres" required>
-    <input type="text" name="bedrijf" placeholder="Bedrijf" required>
-    <input type="text" name="functie" placeholder="Functietitel">
-    <input type="hidden" name="_subject" value="Nieuwe aanmelding NXT Phase AI Training">
-    <button type="submit" class="submit-btn" id="submit-btn">Plek reserveren →</button>
-  </form>
 
-  <div id="success-msg">
-    <div class="success-check">✓</div>
-    <h3>Aanmelding ontvangen!</h3>
-    <p>We nemen zo snel mogelijk contact met je op ter bevestiging.</p>
+    <!-- CARD 2 — Brûlé -->
+    <div class="card fade-up delay1">
+      <div class="card-stripe-t"></div>
+      <div class="card-top">
+        <div class="card-date">Dinsdag 23 juni 2026</div>
+        <h2 class="card-title">Claude for <span class="acc-t">Finance</span></h2>
+        <p class="card-desc">Specifiek voor finance professionals. Van data verwerken en analyses maken tot managementrapportages schrijven — met aandacht voor AVG en verantwoord gebruik.</p>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="meta-key">Tijd</span><span class="meta-val">9:30 – 12:30 · inloop 9:00</span></div>
+        <div class="meta-row"><span class="meta-key">Locatie</span><span class="meta-val">Nxt Phase AI · Grasweg 83, Amsterdam</span></div>
+      </div>
+      <div class="card-program">
+        <p class="prog-head">Programma</p>
+        <ul class="prog-items">
+          <li class="prog-item">
+            <div class="prog-item-top"><span class="prog-tag">Positie</span><span class="prog-text">Claude voor finance — wat het onderscheidt</span></div>
+            <p class="prog-sub">Preciezer bij complexe redenering, eerlijker over onzekerheid, beter met lange documenten.</p>
+          </li>
+          <li class="prog-item">
+            <div class="prog-item-top"><span class="prog-tag">Data</span><span class="prog-text">Financiële data snel verwerken</span></div>
+            <p class="prog-sub">Declaraties, bankafschriften en ERP-exports omzetten naar bruikbare output. Live gedaan.</p>
+          </li>
+          <li class="prog-item">
+            <div class="prog-item-top"><span class="prog-tag">Rapportage</span><span class="prog-text">Van data naar managementverhaal</span></div>
+            <p class="prog-sub">Claude schrijft de toelichting bij de cijfers. Jij stuurt aan op strategie en nuance.</p>
+          </li>
+          <li class="prog-item">
+            <div class="prog-item-top"><span class="prog-tag">Compliance</span><span class="prog-text">AVG, audit trails en finance-richtlijnen</span></div>
+            <p class="prog-sub">Wat mag en wat niet — praktische spelregels voor je afdeling en organisatie.</p>
+          </li>
+        </ul>
+      </div>
+      <button class="meer-btn" id="btn-f" onclick="toggleMeer('f')">Wat neem je mee?
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="meer-panel" id="panel-f">
+        <div class="meer-panel-inner">
+          <h4>Concreet mee naar huis</h4>
+          <ul>
+            <li class="check-t">Werkende AI-setup voor je afdeling</li>
+            <li class="check-t">Je eerste finance-workflow actief</li>
+            <li class="check-t">Templates voor rapportages</li>
+            <li class="check-t">Compliant gebruik checklist</li>
+            <li class="check-t">Top 10 finance use cases</li>
+            <li class="check-t">Samenvatting one-pager</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-buy">
+        <div>
+          <div class="price-main">€ 299,–</div>
+          <div class="price-sub">p.p. · excl. btw</div>
+          <div class="price-incl price-incl-t">✓ Inclusief lunch</div>
+        </div>
+        <div class="buy-btns">
+          <button class="btn-t" onclick="openModal('finance')">Schrijf mij in</button>
+          <button class="btn-factuur" onclick="openModal('finance',true)">Op factuur betalen</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</main>
+
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-item fade-up">
+      <div class="stat-number sn-eau">80%</div>
+      <div class="stat-label">Mindset, 20% techniek</div>
+      <div class="stat-desc">De grootste winst zit niet in de tool — maar in de vraag: <em>"Waarom doe ik dit eigenlijk zelf?"</em></div>
+    </div>
+    <div class="stat-item fade-up delay1">
+      <div class="stat-number sn-bleu">3×</div>
+      <div class="stat-label">Sneller dan nu</div>
+      <div class="stat-desc">Rapporten en analyses die nu een uur kosten, doe je na deze training in 15–20 minuten.</div>
+    </div>
+    <div class="stat-item fade-up delay2">
+      <div class="stat-number sn-miel">1 dag</div>
+      <div class="stat-label">En je begint meteen</div>
+      <div class="stat-desc">Je gaat naar huis met een werkende setup en je eerste automatisering al actief.</div>
+    </div>
   </div>
 </section>
 
+<!-- MODAL — twee aparte modals, geen className-manipulatie -->
+<div class="overlay" id="modal-algemeen">
+  <div class="modal">
+    <div class="modal-top-stripe modal-top-b"></div>
+    <div class="modal-hdr">
+      <div>
+        <div class="modal-training-lbl">Claude van A tot Z · 16 juni 2026</div>
+        <h3>Schrijf mij in</h3>
+      </div>
+      <button class="modal-x" onclick="closeModal('algemeen')">✕</button>
+    </div>
+    <div id="step1-a">
+      <div class="modal-bdy">
+        <div class="modal-price">€ 299,–</div>
+        <div class="modal-pnote">p.p. · excl. btw · inclusief lunch</div>
+        <input type="email" class="m-input" id="email-a" placeholder="jouw@email.nl" autocomplete="email">
+        <button class="m-btn-b" id="paybtn-a" onclick="doPay('a')">Direct betalen &amp; inschrijven →</button>
+        <div class="m-divider"><span>of</span></div>
+        <button class="m-factuur-btn" onclick="toggleF('a')">Op factuur betalen</button>
+        <div class="m-factuur-form" id="ff-a">
+          <label>Naam</label><input type="text" class="m-fi" id="fn-a" placeholder="Voornaam Achternaam">
+          <label>Bedrijfsnaam</label><input type="text" class="m-fi" id="fb-a" placeholder="Bedrijfsnaam">
+          <label>KVK-nummer</label><input type="text" class="m-fi" id="fk-a" placeholder="12345678">
+          <label>Factuuradres</label><input type="text" class="m-fi" id="fa-a" placeholder="Straat 1, 1234 AB Amsterdam">
+          <button class="m-fsend" onclick="doFactuur('a')">Aanmelding versturen →</button>
+        </div>
+      </div>
+    </div>
+    <div class="m-success" id="ok-a">
+      <div class="m-success-dot m-success-dot-b">✓</div>
+      <h3>Je bent ingeschreven!</h3>
+      <p>Bevestiging onderweg naar<br><strong id="oke-a" style="color:var(--esp);"></strong><br><span style="font-size:12px;">Tot 16 juni!</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modal-finance">
+  <div class="modal">
+    <div class="modal-top-stripe modal-top-t"></div>
+    <div class="modal-hdr">
+      <div>
+        <div class="modal-training-lbl">Claude for Finance · 23 juni 2026</div>
+        <h3>Schrijf mij in</h3>
+      </div>
+      <button class="modal-x" onclick="closeModal('finance')">✕</button>
+    </div>
+    <div id="step1-f">
+      <div class="modal-bdy">
+        <div class="modal-price">€ 299,–</div>
+        <div class="modal-pnote">p.p. · excl. btw · inclusief lunch</div>
+        <input type="email" class="m-input" id="email-f" placeholder="jouw@email.nl" autocomplete="email">
+        <button class="m-btn-t" id="paybtn-f" onclick="doPay('f')">Direct betalen &amp; inschrijven →</button>
+        <div class="m-divider"><span>of</span></div>
+        <button class="m-factuur-btn" onclick="toggleF('f')">Op factuur betalen</button>
+        <div class="m-factuur-form" id="ff-f">
+          <label>Naam</label><input type="text" class="m-fi" id="fn-f" placeholder="Voornaam Achternaam">
+          <label>Bedrijfsnaam</label><input type="text" class="m-fi" id="fb-f" placeholder="Bedrijfsnaam">
+          <label>KVK-nummer</label><input type="text" class="m-fi" id="fk-f" placeholder="12345678">
+          <label>Factuuradres</label><input type="text" class="m-fi" id="fa-f" placeholder="Straat 1, 1234 AB Amsterdam">
+          <button class="m-fsend" onclick="doFactuur('f')">Aanmelding versturen →</button>
+        </div>
+      </div>
+    </div>
+    <div class="m-success" id="ok-f">
+      <div class="m-success-dot m-success-dot-t">✓</div>
+      <h3>Je bent ingeschreven!</h3>
+      <p>Bevestiging onderweg naar<br><strong id="oke-f" style="color:var(--eau);"></strong><br><span style="font-size:12px;">Tot 23 juni!</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="questions-band">
+  <p>Vragen? Mail naar <a href="mailto:info@nxtphase.ai">info@nxtphase.ai</a></p>
+</div>
 <footer>
-  <span class="footer-text">© 2026 Nxt Phase AI</span>
-  <span class="footer-text footer-pink">WE MAKE PRAGMATIC AI WORK</span>
-  <span class="footer-text">sanne@nxtphase.ai</span>
+  <span class="footer-t">© 2026 NXT Phase AI</span>
+  <span class="footer-t footer-acc">We make pragmatic AI work</span>
+  <span class="footer-t">info@nxtphase.ai</span>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  emailjs.init('M3enm1KLe2e_wPpEN');
+// ── EMAILJS ──
+(function(){try{emailjs.init('M3enm1KLe2e_wPpEN');}catch(e){}})();
 
-  // ── STIPJES ANIMATIE FINANCE ──
-  function makeDotAnim(canvasId, color1, color2) {
-    const canvas = document.getElementById(canvasId);
-    const ctx = canvas.getContext('2d');
-    let W, H, dots;
-    function resize() { const p = canvas.parentElement; W = canvas.width = p.offsetWidth; H = canvas.height = p.offsetHeight; }
-    function makeDot() { return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*3.5+1, vx:(Math.random()-.5)*.25, vy:-Math.random()*.35-.05, alpha:Math.random()*.18+.06, color:Math.random()>.45?color1:color2, life:Math.random()*400+200, age:0 }; }
-    function init() { resize(); dots = Array.from({length:80}, makeDot); }
-    function draw() {
-      ctx.clearRect(0,0,W,H);
-      dots.forEach((d,i) => {
-        d.x+=d.vx; d.y+=d.vy; d.age++;
-        ctx.globalAlpha=d.alpha*Math.min(1,d.age/50)*Math.min(1,(d.life-d.age)/50);
-        ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fillStyle=d.color; ctx.fill();
-        if(d.age>=d.life||d.y<-10) dots[i]={...makeDot(),y:H+5,age:0};
-      });
-      ctx.globalAlpha=1; requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize', resize);
-    init(); draw();
-  }
-
-  // Finance: roze + espresso stipjes
-  makeDotAnim('canvas-finance', '#E8174A', '#3D2B1F');
-  // General: crème + stone stipjes (zacht op donkere achtergrond)
-  makeDotAnim('canvas-general', '#F5F0E8', '#9B9590');
-
-  // ── CHECKBOXES ──
-  function toggleKeuze(labelId, checkId) {
-    const label = document.getElementById(labelId);
-    const check = document.getElementById(checkId);
-    label.addEventListener('click', () => {
-      check.checked = !check.checked;
-      label.classList.toggle('checked', check.checked);
-      updateHidden();
+// ── DOTS ──
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let W,H,dots;
+  const COLS=['#542916','#C8960A','#b79858','#542916','#f1c166'];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  function mk(){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*5+1.5,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.11,wx:Math.random()*Math.PI*2,wa:Math.random()*.003+.001,wamp:Math.random()*.5+.1,a:Math.random()*.07+.025,col:COLS[Math.floor(Math.random()*COLS.length)]};}
+  function init(){resize();dots=Array.from({length:32},mk);}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    dots.forEach(d=>{
+      d.wx+=d.wa;d.x+=d.vx+Math.sin(d.wx)*d.wamp;d.y+=d.vy+Math.cos(d.wx*.7)*d.wamp*.6;
+      if(d.x<-d.r)d.x=W+d.r;if(d.x>W+d.r)d.x=-d.r;
+      if(d.y<-d.r)d.y=H+d.r;if(d.y>H+d.r)d.y=-d.r;
+      ctx.globalAlpha=d.a;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=d.col;ctx.fill();
     });
+    ctx.globalAlpha=1;requestAnimationFrame(draw);
   }
-  toggleKeuze('keuze-finance', 'check-finance');
-  toggleKeuze('keuze-general', 'check-general');
+  window.addEventListener('resize',resize);init();draw();
+})();
 
-  function updateHidden() {
-    const vals = [];
-    if (document.getElementById('check-finance').checked) vals.push('Claude for Finance Professionals (16 juni 2026)');
-    if (document.getElementById('check-general').checked) vals.push('Werken met Claude AI — van A tot Z (23 juni 2026)');
-    document.getElementById('training-hidden').value = vals.join(' + ') || '';
+// ── MEER INFO ──
+function toggleMeer(id){
+  var p=document.getElementById('panel-'+id),b=document.getElementById('btn-'+id);
+  var o=p.classList.toggle('open');
+  b.classList.toggle('open',o);
+  b.childNodes[0].nodeValue=o?'Minder info ':' Wat neem je mee? ';
+}
+
+// ── MODAL ──
+var stripeLinks={algemeen:null,finance:null};
+
+function openModal(t,factuur){
+  var id='modal-'+t;
+  document.getElementById(id).classList.add('open');
+  if(factuur){document.getElementById('ff-'+( t==='algemeen'?'a':'f')).classList.add('open');}
+}
+function closeModal(t){document.getElementById('modal-'+t).classList.remove('open');}
+function toggleF(k){document.getElementById('ff-'+k).classList.toggle('open');}
+
+function doPay(k){
+  var inp=document.getElementById('email-'+k);
+  var email=(inp.value||'').trim();
+  if(!email||email.indexOf('@')<0){inp.classList.add('err');inp.focus();setTimeout(function(){inp.classList.remove('err');},1500);return;}
+  var btn=document.getElementById('paybtn-'+k);
+  btn.disabled=true;btn.textContent='…';
+  var t=k==='a'?'algemeen':'finance';
+  var label=k==='a'?'Claude van A tot Z · 16 juni 2026':'Claude for Finance · 23 juni 2026';
+  if(stripeLinks[t])window.open(stripeLinks[t],'_blank');
+  function ok(){
+    document.getElementById('oke-'+k).textContent=email;
+    document.getElementById('step1-'+k).style.display='none';
+    document.getElementById('ok-'+k).classList.add('show');
   }
+  try{
+    emailjs.send('service_4qb0r45','template_v9y8pyc',{training:label,voornaam:email,achternaam:'',email:email,bedrijf:'Online inschrijving',functie:''}).then(ok,ok);
+  }catch(e){ok();}
+}
 
-  // ── FORMULIER via EmailJS ──
-  const form = document.getElementById('reg-form');
-  const btn  = document.getElementById('submit-btn');
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    if (!document.getElementById('check-finance').checked && !document.getElementById('check-general').checked) {
-      alert('Selecteer minimaal één training.');
-      return;
-    }
-    btn.textContent = 'Versturen...';
-    btn.disabled = true;
+function doFactuur(k){
+  var email=(document.getElementById('email-'+k).value||'').trim();
+  var naam=(document.getElementById('fn-'+k).value||'').trim();
+  var bedrijf=(document.getElementById('fb-'+k).value||'').trim();
+  if(!email||!naam||!bedrijf){alert('Vul minimaal e-mail, naam en bedrijf in.');return;}
+  var label=k==='a'?'Claude van A tot Z · 16 juni 2026 [FACTUUR]':'Claude for Finance · 23 juni 2026 [FACTUUR]';
+  function ok(){
+    document.getElementById('oke-'+k).textContent=email;
+    document.getElementById('step1-'+k).style.display='none';
+    document.getElementById('ok-'+k).classList.add('show');
+  }
+  try{
+    emailjs.send('service_4qb0r45','template_v9y8pyc',{training:label,voornaam:naam,achternaam:'',email:email,bedrijf:bedrijf+' KVK: '+(document.getElementById('fk-'+k).value||''),functie:(document.getElementById('fa-'+k).value||'')}).then(ok,ok);
+  }catch(e){ok();}
+}
 
-    const data = {
-      voornaam:  form.querySelector('[name="voornaam"]').value,
-      achternaam: form.querySelector('[name="achternaam"]').value,
-      email:     form.querySelector('[name="email"]').value,
-      bedrijf:   form.querySelector('[name="bedrijf"]').value,
-      functie:   form.querySelector('[name="functie"]').value,
-      training:  document.getElementById('training-hidden').value,
-    };
+// ── SCROLL FADE-IN ──
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.12});
+document.querySelectorAll('.fade-up').forEach(function(el){observer.observe(el);});
 
-    try {
-      const res = await emailjs.send('service_4qb0r45', 'template_v9y8pyc', data);
-      if (res.status === 200) {
-        form.style.display = 'none';
-        document.getElementById('success-msg').style.display = 'block';
-      } else {
-        btn.textContent = 'Er ging iets mis — probeer opnieuw';
-        btn.disabled = false;
-      }
-    } catch(err) {
-      console.error(err);
-      btn.textContent = 'Er ging iets mis — probeer opnieuw';
-      btn.disabled = false;
-    }
-  });
+// Close on backdrop
+document.getElementById('modal-algemeen').addEventListener('click',function(e){if(e.target===this)closeModal('algemeen');});
+document.getElementById('modal-finance').addEventListener('click',function(e){if(e.target===this)closeModal('finance');});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal('algemeen');closeModal('finance');}});
 </script>
 </body>
 </html>
