@@ -14,15 +14,22 @@
 html{scroll-behavior:smooth;}
 body{background:#fff;color:var(--esp);font-family:"DM Sans",sans-serif;font-size:16px;line-height:1.6;}
 
-/* NAVBAR — cream so logo reads correctly */
-.navbar{background:#fff;border-bottom:1px solid rgba(61,43,31,.1);padding:0 40px;position:relative;z-index:10;}
+/* STICKY NAVBAR */
+.navbar{
+  background:#fff;
+  border-bottom:1px solid rgba(61,43,31,.1);
+  padding:0 40px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
 .navbar-inner{max-width:1080px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;}
-.logo{display:flex;align-items:center;text-decoration:none;}.logo svg{height:28px;width:auto;display:block;}
-.logo img{height:26px;width:auto;display:block;}
+.logo{display:flex;align-items:center;text-decoration:none;}
+.logo svg{height:28px;width:auto;display:block;}
 .nav-tag{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);}
 
-/* HERO — espresso */
-.hero{background:var(--esp);padding:56px 0;position:relative;z-index:1;}
+/* HERO */
+.hero{background:var(--esp);padding:56px 0;}
 .hero-inner{max-width:1080px;margin:0 auto;padding:0 40px;}
 .overline{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:20px;}
 .overline::before{content:"";display:block;width:20px;height:2px;background:var(--green);}
@@ -35,8 +42,8 @@ h1{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(44px,5.5
 .mv{font-size:16px;font-weight:400;color:var(--cream);}
 .mv small{font-size:13px;font-weight:300;color:rgba(245,240,232,.45);display:block;margin-top:2px;}
 
-/* BODY — white */
-.body{max-width:1080px;margin:0 auto;padding:64px 40px 80px;position:relative;z-index:1;}
+/* BODY */
+.body{max-width:1080px;margin:0 auto;padding:64px 40px 80px;}
 .body-grid{display:grid;grid-template-columns:1fr 300px;gap:80px;align-items:start;}
 
 .prog-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:20px;}
@@ -50,24 +57,26 @@ h1{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(44px,5.5
 .quote-strip p{font-size:17px;font-weight:300;color:rgba(245,240,232,.85);line-height:1.55;}
 .quote-strip strong{color:var(--cream);font-weight:500;}
 
-/* CTA CARD — espresso */
-.cta-sticky{position:sticky;top:24px;}
+/* CTA CARD */
+.cta-sticky{position:sticky;top:88px;}
 .cta-card{background:var(--esp);padding:36px;}
 .cta-price{font-family:"Playfair Display",serif;font-size:56px;font-weight:400;color:var(--cream);line-height:1;}
 .cta-note{font-size:12px;font-weight:300;color:rgba(245,240,232,.38);margin-top:4px;margin-bottom:32px;}
-.f-em{width:100%;background:rgba(245,240,232,.1);border:1px solid rgba(245,240,232,.15);color:var(--cream);font-family:"DM Sans",sans-serif;font-size:14px;font-weight:300;padding:13px 14px;outline:none;transition:border-color .2s;border-radius:0;-webkit-appearance:none;margin-bottom:10px;}
+.f-em{width:100%;background:rgba(245,240,232,.1);border:1px solid rgba(245,240,232,.18);color:var(--cream);font-family:"DM Sans",sans-serif;font-size:14px;font-weight:300;padding:13px 14px;outline:none;transition:border-color .2s;border-radius:0;-webkit-appearance:none;margin-bottom:10px;display:block;}
 .f-em::placeholder{color:rgba(245,240,232,.3);}
 .f-em:focus{border-color:var(--green);}
 .btn-buy{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--green);color:#fff;font-family:"DM Sans",sans-serif;font-size:15px;font-weight:600;letter-spacing:.02em;padding:18px 24px;border:none;cursor:pointer;transition:opacity .2s;}
 .btn-buy:hover{opacity:.88;}
 .btn-buy svg{width:18px;height:18px;flex-shrink:0;}
-.inv-toggle{display:block;width:100%;background:transparent;border:none;color:rgba(245,240,232,.3);font-family:"DM Sans",sans-serif;font-size:11px;font-weight:300;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:10px 0 0;text-align:center;transition:color .2s;}
-.inv-toggle:hover{color:rgba(245,240,232,.6);}
-.success{display:none;padding:8px 0;}
-.success.show{display:block;}
+.inv-toggle{display:block;width:100%;background:transparent;border:none;color:rgba(245,240,232,.35);font-family:"DM Sans",sans-serif;font-size:11px;font-weight:300;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:10px 0 0;text-align:center;transition:color .2s;}
+.inv-toggle:hover{color:rgba(245,240,232,.65);}
+
+/* success state */
+.success-msg{display:none;padding:8px 0;}
+.success-msg.show{display:block;}
 .s-check{width:40px;height:40px;border:1.5px solid var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
-.success h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--cream);margin-bottom:6px;}
-.success p{font-size:13px;font-weight:300;color:rgba(245,240,232,.5);}
+.success-msg h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--cream);margin-bottom:6px;}
+.success-msg p{font-size:13px;font-weight:300;color:rgba(245,240,232,.5);}
 
 /* INVOICE MODAL */
 .inv-overlay{display:none;position:fixed;inset:0;background:rgba(30,18,10,.6);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(2px);}
@@ -88,18 +97,21 @@ h1{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(44px,5.5
 .inv-success h3{font-family:"Playfair Display",serif;font-size:22px;color:var(--esp);margin-bottom:8px;}
 .inv-success p{font-size:14px;font-weight:300;color:var(--stone);}
 
-footer{border-top:1px solid rgba(61,43,31,.1);padding:28px 40px;max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;position:relative;z-index:1;}
+footer{border-top:1px solid rgba(61,43,31,.1);padding:28px 40px;max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 footer span,footer a{font-size:12px;font-weight:300;color:var(--stone);text-decoration:none;}
 footer a:hover{color:var(--esp);}
 
-/* SCROLL FADE */
 .fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
 .fade.in{opacity:1;transform:none;}
-
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.navbar,.hero,.body,footer{position:relative;z-index:1;}
+.navbar{z-index:100;}
 
 @media(max-width:860px){.body-grid{grid-template-columns:1fr;}.cta-sticky{position:static;}}
-@media(max-width:560px){.navbar,.body{padding-left:20px;padding-right:20px;}.hero-inner{padding:0 20px;}.inv-row{grid-template-columns:1fr;}.meta-item{padding-right:20px;}footer{padding:24px 20px;}}
+@media(max-width:560px){
+  .navbar{padding:0 20px;}.hero-inner,.body{padding-left:20px;padding-right:20px;}
+  footer{padding:24px 20px;}.inv-row{grid-template-columns:1fr;}.meta-item{padding-right:20px;}
+}
 </style>
 </head>
 <body>
@@ -132,14 +144,12 @@ footer a:hover{color:var(--esp);}
     <div>
       <div class="prog-label fade">Wat je leert</div>
       <ul class="prog-list">
-        
         <li class="prog-item"><span class="prog-n">01</span><span class="prog-t">Wat is Claude — en hoe verschilt het van ChatGPT en Gemini?</span></li>
-        <li class="prog-item"><span class="prog-n">02</span><span class="prog-t">Chat, Cowork of Code: welke modus werkt voor jou?</span></li>
-        <li class="prog-item"><span class="prog-n">03</span><span class="prog-t">Van chatten naar delegeren: terugkerende taken automatiseren</span></li>
-        <li class="prog-item"><span class="prog-n">04</span><span class="prog-t">Hoe voer je een productief gesprek met AI?</span></li>
-        <li class="prog-item"><span class="prog-n">05</span><span class="prog-t">Scheduled tasks en werkautomatisering</span></li>
-        <li class="prog-item"><span class="prog-n">06</span><span class="prog-t">Veiligheid, AVG en compliance: wat deel je wel en niet?</span></li>
-
+<li class="prog-item"><span class="prog-n">02</span><span class="prog-t">Chat, Cowork of Code: welke modus werkt voor jou?</span></li>
+<li class="prog-item"><span class="prog-n">03</span><span class="prog-t">Van chatten naar delegeren: terugkerende taken automatiseren</span></li>
+<li class="prog-item"><span class="prog-n">04</span><span class="prog-t">Hoe voer je een productief gesprek met AI?</span></li>
+<li class="prog-item"><span class="prog-n">05</span><span class="prog-t">Scheduled tasks en werkautomatisering</span></li>
+<li class="prog-item"><span class="prog-n">06</span><span class="prog-t">Veiligheid, AVG en compliance: wat deel je wel en niet?</span></li>
       </ul>
       <div class="quote-strip fade">
         <p><strong>80% van de productiviteitswinst zit niet in de techniek.</strong> De vraag die alles verandert: waarom doe ik dit eigenlijk zelf?</p>
@@ -150,18 +160,27 @@ footer a:hover{color:var(--esp);}
       <div class="cta-card fade">
         <div class="cta-price">€299</div>
         <div class="cta-note">p.p. excl. btw · lunch inbegrepen</div>
+
         <div id="form-area">
           <form id="main-form" onsubmit="payNow(event)">
             <input class="f-em" type="email" id="em" placeholder="je@email.nl" required>
             <button type="submit" class="btn-buy">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
               Schrijf mij in
             </button>
           </form>
           <button class="inv-toggle" onclick="openInv()">Op factuur betalen</button>
         </div>
-        <div class="success" id="ok">
-          <div class="s-check"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="#3E9B5D" stroke-width="1.5" stroke-linecap="square"/></svg></div>
+
+        <div class="success-msg" id="ok">
+          <div class="s-check">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8l3.5 3.5L13 4" stroke="#3E9B5D" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+          </div>
           <h3>Aanmelding ontvangen.</h3>
           <p>Je hoort snel van ons.</p>
         </div>
@@ -195,33 +214,69 @@ footer a:hover{color:var(--esp);}
 
 <footer>
   <span>© 2026 nxt phase ai</span>
-  <a href="/cdn-cgi/l/email-protection#95fcfbf3fad5fbede1e5fdf4e6f0bbf4fc"><span class="__cf_email__" data-cfemail="61080f070e210f191511090012044f0008">[email&#160;protected]</span></a>
+  <a href="mailto:info@nxtphase.ai">info@nxtphase.ai</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const STRIPE='https://buy.stripe.com/28E7sMgqMeUsaSm88U7g401';
+<script>
+const STRIPE = 'https://buy.stripe.com/28E7sMgqMeUsaSm88U7g401';
 emailjs.init('M3enm1KLe2e_wPpEN');
-function payNow(e){e.preventDefault();window.location.href=STRIPE+'?prefilled_email='+encodeURIComponent(document.getElementById('em').value);}
-function openInv(){document.getElementById('inv-overlay').classList.add('open');}
-function closeInv(){document.getElementById('inv-overlay').classList.remove('open');}
-function closeInvOutside(e){if(e.target===document.getElementById('inv-overlay'))closeInv();}
-function sendInv(e){
+
+function payNow(e) {
   e.preventDefault();
-  emailjs.send('service_4qb0r45','template_v9y8pyc',{
-    type:'Factuur',training:'Claude for Executives — 16 juni 2026',
-    name:document.getElementById('iv-name').value,
-    company:document.getElementById('iv-co').value,
-    address:document.getElementById('iv-addr').value,
-    email:document.getElementById('iv-em').value
-  }).then(()=>{document.getElementById('inv-form-wrap').style.display='none';document.getElementById('inv-ok').classList.add('show');})
-    .catch(()=>{document.getElementById('inv-form-wrap').style.display='none';document.getElementById('inv-ok').classList.add('show');});
+  window.location.href = STRIPE + '?prefilled_email=' + encodeURIComponent(document.getElementById('em').value);
 }
+function openInv() { document.getElementById('inv-overlay').classList.add('open'); }
+function closeInv() { document.getElementById('inv-overlay').classList.remove('open'); }
+function closeInvOutside(e) { if (e.target === document.getElementById('inv-overlay')) closeInv(); }
+function sendInv(e) {
+  e.preventDefault();
+  emailjs.send('service_4qb0r45', 'template_v9y8pyc', {
+    type: 'Factuur', training: 'Claude for Executives — 16 juni 2026',
+    name: document.getElementById('iv-name').value,
+    company: document.getElementById('iv-co').value,
+    address: document.getElementById('iv-addr').value,
+    email: document.getElementById('iv-em').value
+  }).then(() => {
+    document.getElementById('inv-form-wrap').style.display = 'none';
+    document.getElementById('inv-ok').classList.add('show');
+  }).catch(() => {
+    document.getElementById('inv-form-wrap').style.display = 'none';
+    document.getElementById('inv-ok').classList.add('show');
+  });
+}
+
 // Scroll fade
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.05});
-document.querySelectorAll('.fade').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.observe(el);});
-setTimeout(()=>{document.querySelectorAll('.fade').forEach(el=>el.classList.add('in'));},1400);
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('in');
+}), { threshold: 0.05 });
+document.querySelectorAll('.fade').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.07) + 's';
+  io.observe(el);
+});
+setTimeout(() => { document.querySelectorAll('.fade').forEach(el => el.classList.add('in')); }, 1200);
+
 // Soft background blobs
-const cv=document.getElementById('bg'),cx=cv.getContext('2d');
-const rsz=()=>{cv.width=innerWidth;cv.height=innerHeight;};rsz();addEventListener('resize',rsz);
-const blobs=Array.from({length:8},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:160+Math.random()*180,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,a:.018+Math.random()*.018,c:'62,155,93'}));
-(function loop(){cx.clearRect(0,0,cv.width,cv.height);blobs.forEach(b=>{const g=cx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);g.addColorStop(0,`rgba(${b.c},${b.a})`);g.addColorStop(1,'rgba(0,0,0,0)');cx.beginPath();cx.arc(b.x,b.y,b.r,0,Math.PI
+const cv = document.getElementById('bg'), cx = cv.getContext('2d');
+const rsz = () => { cv.width = innerWidth; cv.height = innerHeight; };
+rsz(); addEventListener('resize', rsz);
+const blobs = Array.from({length: 8}, () => ({
+  x: Math.random() * innerWidth, y: Math.random() * innerHeight,
+  r: 160 + Math.random() * 180, vx: (Math.random() - .5) * .12, vy: (Math.random() - .5) * .12,
+  a: .015 + Math.random() * .015, c: '62,155,93'
+}));
+(function loop() {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  blobs.forEach(b => {
+    const g = cx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+    g.addColorStop(0, `rgba(${b.c},${b.a})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+    cx.beginPath(); cx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    cx.fillStyle = g; cx.fill();
+    b.x += b.vx; b.y += b.vy;
+    if (b.x < -b.r) b.x = innerWidth + b.r; if (b.x > innerWidth + b.r) b.x = -b.r;
+    if (b.y < -b.r) b.y = innerHeight + b.r; if (b.y > innerHeight + b.r) b.y = -b.r;
+  });
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
