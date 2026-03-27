@@ -3,291 +3,228 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude for Executives -- NXT Phase AI</title>
+<title>Claude for Executives — nxt phase ai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+:root{--cream:#F5F0E8;--esp:#3D2B1F;--stone:#9B9590;--green:#3E9B5D;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:#2A1506;color:#FFFFFF;font-family:'Helvetica Neue', Arial, sans-serif;-webkit-font-smoothing:antialiased;}
-#bg-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;padding:0 48px;justify-content:space-between;background:rgba(42,21,6,0.93);border-bottom:1px solid rgba(255,255,255,0.06);}
-.nb{font-size:14px;font-weight:700;color:#FFFFFF;letter-spacing:0.06em;text-transform:uppercase;}
-.nb em{color:#3A8C52;font-style:normal;}
-.nback{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.38);text-decoration:none;transition:color 0.2s;}
-.nback:hover{color:#FFFFFF;}
+body{background:#fff;color:var(--esp);font-family:"DM Sans",sans-serif;font-size:16px;line-height:1.6;}
 
-/* HERO — left title, right info+programme */
-.hero{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(110deg, #2A1506 0%, #3D2208 45%, #2D6A3F 100%);padding-top:56px;}
-.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:56px 48px 56px 48px;}
-.eyebrow{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
-.dot{width:6px;height:6px;border-radius:50%;background:#3A8C52;flex-shrink:0;}
-h1{font-family:'Georgia', serif;font-size:clamp(44px,5.5vw,72px);font-weight:700;line-height:1.03;color:#FFFFFF;letter-spacing:-0.025em;margin-bottom:20px;}
-h1 em{font-style:italic;color:#3A8C52;}
-.hsub{font-size:15px;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.5);max-width:360px;margin-bottom:36px;}
-.hcta{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:#3A8C52;color:#FFFFFF;padding:14px 28px;border-radius:2px;border:none;cursor:pointer;font-family:'Helvetica Neue', Arial, sans-serif;transition:opacity 0.2s,transform 0.15s;}
-.hcta:hover{opacity:0.88;transform:translateY(-2px);}
+/* NAVBAR — cream so logo reads correctly */
+.navbar{background:#fff;border-bottom:1px solid rgba(61,43,31,.1);padding:0 40px;position:relative;z-index:10;}
+.navbar-inner{max-width:1080px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;text-decoration:none;}.logo svg{height:28px;width:auto;display:block;}
+.logo img{height:26px;width:auto;display:block;}
+.nav-tag{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);}
 
-/* RIGHT PANEL — info + programme */
-.hero-right{background:rgba(0,0,0,0.25);border-left:1px solid rgba(255,255,255,0.08);padding:72px 48px 48px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;}
-.info-block{margin-bottom:36px;}
-.info-row{display:flex;gap:0;margin-bottom:10px;align-items:baseline;}
-.info-val{font-size:clamp(22px,2.5vw,32px);font-weight:700;color:#FFFFFF;font-family:'Georgia', serif;line-height:1.1;margin-right:10px;}
-.info-lbl{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);}
-.info-divider{height:1px;background:rgba(255,255,255,0.1);margin:20px 0;}
-.prog-label{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:16px;}
-.pi{list-style:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.08);}
-.prog-items .pi:last-child{border-bottom:none;}
-.pitop{display:flex;align-items:flex-start;gap:10px;margin-bottom:3px;}
-.ptag{font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 7px;border-radius:2px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);white-space:nowrap;flex-shrink:0;margin-top:2px;}
-.ptxt{font-size:13px;font-weight:600;color:#FFFFFF;line-height:1.3;}
-.psub{font-size:12px;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.55;padding-left:0;}
+/* HERO — espresso */
+.hero{background:var(--esp);padding:56px 0;position:relative;z-index:1;}
+.hero-inner{max-width:1080px;margin:0 auto;padding:0 40px;}
+.overline{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:20px;}
+.overline::before{content:"";display:block;width:20px;height:2px;background:var(--green);}
+h1{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(44px,5.5vw,72px);line-height:1.05;color:var(--cream);margin-bottom:20px;max-width:700px;}
+.hero-sub{font-size:18px;font-weight:300;color:rgba(245,240,232,.65);max-width:560px;line-height:1.65;margin-bottom:44px;}
+.meta-row{display:flex;flex-wrap:wrap;border-top:1px solid rgba(245,240,232,.12);}
+.meta-item{padding:20px 40px 20px 0;}
+.meta-item:last-child{padding-right:0;}
+.ml{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:4px;}
+.mv{font-size:16px;font-weight:400;color:var(--cream);}
+.mv small{font-size:13px;font-weight:300;color:rgba(245,240,232,.45);display:block;margin-top:2px;}
 
-/* MEER INFO */
-.meer-wrap{position:relative;z-index:1;background:#F5F0E8;color:#2A1506;}
-.meer-inner{max-width:860px;margin:0 auto;padding:48px;}
-.meer-label{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#7A6352;margin-bottom:20px;display:flex;align-items:center;gap:12px;}
-.meer-label::after{content:'';flex:1;height:1px;background:#D5C9B8;}
-.meer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-.mi{font-size:13px;color:#3D2208;display:flex;gap:9px;align-items:flex-start;line-height:1.5;padding:6px 0;}
-.mck{color:#3A8C52;font-weight:700;font-size:13px;flex-shrink:0;margin-top:0px;}
+/* BODY — white */
+.body{max-width:1080px;margin:0 auto;padding:64px 40px 80px;position:relative;z-index:1;}
+.body-grid{display:grid;grid-template-columns:1fr 300px;gap:80px;align-items:start;}
 
-/* BUY */
-.buy-row{position:relative;z-index:1;background:#3D2208;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;border-top:1px solid rgba(255,255,255,0.06);}
-.bprice{font-family:'Georgia', serif;font-size:48px;font-weight:700;color:#FFFFFF;line-height:1;}
-.bnote{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:4px;}
-.bincl{font-size:12px;color:#3A8C52;margin-top:6px;font-weight:500;}
-.bbtns{display:flex;align-items:center;gap:16px;}
-.bbuy{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:#3A8C52;color:#FFFFFF;padding:16px 32px;border-radius:2px;border:none;cursor:pointer;font-family:'Helvetica Neue', Arial, sans-serif;transition:opacity 0.2s,transform 0.15s;}
-.bbuy:hover{opacity:0.88;transform:translateY(-2px);}
-.binv{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.38);border:1px solid rgba(255,255,255,0.15);padding:12px 20px;border-radius:2px;cursor:pointer;font-family:'Helvetica Neue', Arial, sans-serif;transition:border-color 0.2s,color 0.2s;}
-.binv:hover{border-color:rgba(255,255,255,0.4);color:#FFFFFF;}
+.prog-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:20px;}
+.prog-list{list-style:none;margin-bottom:48px;}
+.prog-item{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid rgba(61,43,31,.1);align-items:baseline;}
+.prog-item:first-child{border-top:1px solid rgba(61,43,31,.1);}
+.prog-n{font-size:11px;font-weight:500;color:var(--stone);letter-spacing:.06em;flex-shrink:0;width:22px;}
+.prog-t{font-weight:500;font-size:15px;color:var(--esp);}
 
-/* STATS */
-.stats-row{position:relative;z-index:1;background:#3A8C52;padding:48px;}
-.si{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;}
-.st{text-align:center;padding:0 24px;}
-.st+.st{border-left:1px solid rgba(255,255,255,0.2);}
-.sn{font-family:'Georgia', serif;font-size:clamp(40px,4.5vw,56px);font-weight:700;color:#FFFFFF;line-height:1;margin-bottom:8px;}
-.sl{font-size:12px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:4px;letter-spacing:0.04em;}
-.sd{font-size:11px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.65;}
+.quote-strip{background:var(--esp);padding:28px 36px;}
+.quote-strip p{font-size:17px;font-weight:300;color:rgba(245,240,232,.85);line-height:1.55;}
+.quote-strip strong{color:var(--cream);font-weight:500;}
 
-/* MODAL */
-.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(42,21,6,0.8);}
-.overlay.open{display:flex;align-items:center;justify-content:center;padding:20px;}
-.modal{background:#FFFFFF;width:100%;max-width:420px;border-radius:3px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.5);animation:mIn 0.2s ease-out;}
-@keyframes mIn{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:translateY(0);}}
-.ms{height:4px;background:#3A8C52;}
-.mh{padding:18px 22px 14px;border-bottom:1px solid #D5C9B8;display:flex;justify-content:space-between;align-items:center;}
-.ml{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#7A6352;margin-bottom:3px;}
-.mh h3{font-family:'Georgia', serif;font-size:20px;font-weight:700;color:#2A1506;}
-.mx{background:none;border:none;font-size:18px;cursor:pointer;color:#7A6352;padding:3px 6px;}
-.mb{padding:18px 22px 22px;}
-.mp{font-family:'Georgia', serif;font-size:28px;font-weight:700;color:#2A1506;}
-.mpn{font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#7A6352;margin-bottom:16px;}
-.min{width:100%;padding:12px 13px;border:1.5px solid #D5C9B8;border-radius:2px;font-size:15px;color:#2A1506;background:#FFFFFF;outline:none;margin-bottom:11px;font-family:'Helvetica Neue', Arial, sans-serif;transition:border-color 0.2s;}
-.min:focus{border-color:#3A8C52;}
-.min.err{border-color:#b83232;}
-.mbtn{width:100%;padding:14px;background:#3A8C52;color:#FFFFFF;border:none;border-radius:2px;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:10px;font-family:'Helvetica Neue', Arial, sans-serif;transition:opacity 0.2s;letter-spacing:0.04em;}
-.mbtn:hover{opacity:0.88;}
-.mbtn:disabled{opacity:0.4;cursor:not-allowed;}
-.mdiv{display:flex;align-items:center;gap:10px;margin:2px 0 10px;}
-.mdiv::before,.mdiv::after{content:'';flex:1;height:1px;background:#D5C9B8;}
-.mdiv span{font-size:11px;color:#7A6352;}
-.mfb{width:100%;padding:11px;background:#EDE5D8;color:#2A1506;border:1px solid #D5C9B8;border-radius:2px;font-size:12px;cursor:pointer;font-family:'Helvetica Neue', Arial, sans-serif;}
-.mfb:hover{background:#D5C9B8;}
-.mff{display:none;margin-top:12px;padding-top:12px;border-top:1px solid #D5C9B8;}
-.mff.open{display:block;}
-.mff label{display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#7A6352;margin-bottom:4px;}
-.mfi{width:100%;padding:10px 12px;margin-bottom:9px;border:1.5px solid #D5C9B8;border-radius:2px;font-size:13px;color:#2A1506;background:#FFFFFF;outline:none;font-family:'Helvetica Neue', Arial, sans-serif;}
-.mfi:focus{border-color:#3A8C52;}
-.mfs{width:100%;padding:12px;background:#2A1506;color:#F5F0E8;border:none;border-radius:2px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Helvetica Neue', Arial, sans-serif;}
-.mok{display:none;padding:32px 22px;text-align:center;}
-.mok.show{display:block;}
-.mokdot{width:44px;height:44px;border-radius:50%;background:#3A8C52;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:20px;color:#FFFFFF;font-weight:700;}
-.mok h3{font-family:'Georgia', serif;font-size:20px;color:#2A1506;margin-bottom:8px;}
-.mok p{font-size:13px;color:#7A6352;line-height:1.7;}
+/* CTA CARD — espresso */
+.cta-sticky{position:sticky;top:24px;}
+.cta-card{background:var(--esp);padding:36px;}
+.cta-price{font-family:"Playfair Display",serif;font-size:56px;font-weight:400;color:var(--cream);line-height:1;}
+.cta-note{font-size:12px;font-weight:300;color:rgba(245,240,232,.38);margin-top:4px;margin-bottom:32px;}
+.f-em{width:100%;background:rgba(245,240,232,.1);border:1px solid rgba(245,240,232,.15);color:var(--cream);font-family:"DM Sans",sans-serif;font-size:14px;font-weight:300;padding:13px 14px;outline:none;transition:border-color .2s;border-radius:0;-webkit-appearance:none;margin-bottom:10px;}
+.f-em::placeholder{color:rgba(245,240,232,.3);}
+.f-em:focus{border-color:var(--green);}
+.btn-buy{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--green);color:#fff;font-family:"DM Sans",sans-serif;font-size:15px;font-weight:600;letter-spacing:.02em;padding:18px 24px;border:none;cursor:pointer;transition:opacity .2s;}
+.btn-buy:hover{opacity:.88;}
+.btn-buy svg{width:18px;height:18px;flex-shrink:0;}
+.inv-toggle{display:block;width:100%;background:transparent;border:none;color:rgba(245,240,232,.3);font-family:"DM Sans",sans-serif;font-size:11px;font-weight:300;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:10px 0 0;text-align:center;transition:color .2s;}
+.inv-toggle:hover{color:rgba(245,240,232,.6);}
+.success{display:none;padding:8px 0;}
+.success.show{display:block;}
+.s-check{width:40px;height:40px;border:1.5px solid var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.success h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--cream);margin-bottom:6px;}
+.success p{font-size:13px;font-weight:300;color:rgba(245,240,232,.5);}
 
-footer{position:relative;z-index:1;background:#2A1506;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.05);}
-.ft{font-size:11px;color:rgba(255,255,255,0.22);}
-.fta{color:#3A8C52;}
+/* INVOICE MODAL */
+.inv-overlay{display:none;position:fixed;inset:0;background:rgba(30,18,10,.6);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(2px);}
+.inv-overlay.open{display:flex;}
+.inv-box{background:#fff;padding:40px;max-width:440px;width:90%;position:relative;}
+.inv-close{position:absolute;top:14px;right:16px;background:transparent;border:none;cursor:pointer;color:var(--stone);font-size:20px;line-height:1;padding:4px;}
+.inv-close:hover{color:var(--esp);}
+.inv-title{font-family:"Playfair Display",serif;font-size:22px;font-weight:400;color:var(--esp);margin-bottom:20px;}
+.f-g{margin-bottom:8px;}
+.f-g input{width:100%;background:transparent;border:1px solid rgba(61,43,31,.2);color:var(--esp);font-family:"DM Sans",sans-serif;font-size:14px;font-weight:300;padding:12px 14px;outline:none;transition:border-color .2s;border-radius:0;-webkit-appearance:none;}
+.f-g input::placeholder{color:rgba(61,43,31,.35);}
+.f-g input:focus{border-color:var(--green);}
+.inv-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.btn-inv-sub{display:block;width:100%;background:var(--esp);color:var(--cream);font-family:"DM Sans",sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:15px;border:none;cursor:pointer;margin-top:10px;transition:opacity .2s;}
+.btn-inv-sub:hover{opacity:.85;}
+.inv-success{display:none;text-align:center;padding:8px 0;}
+.inv-success.show{display:block;}
+.inv-success h3{font-family:"Playfair Display",serif;font-size:22px;color:var(--esp);margin-bottom:8px;}
+.inv-success p{font-size:14px;font-weight:300;color:var(--stone);}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-.eyebrow{animation:fadeUp 0.5s ease both;}
-h1{animation:fadeUp 0.62s cubic-bezier(0.16,1,0.3,1) 0.06s both;}
-.hsub{animation:fadeUp 0.62s cubic-bezier(0.16,1,0.3,1) 0.14s both;}
-.hcta{animation:fadeUp 0.62s cubic-bezier(0.16,1,0.3,1) 0.22s both;}
-.hero-right{animation:fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both;}
-.fade{opacity:0;transform:translateY(16px);transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s;}
-.fade.in{opacity:1;transform:translateY(0);}
-.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}
+footer{border-top:1px solid rgba(61,43,31,.1);padding:28px 40px;max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;position:relative;z-index:1;}
+footer span,footer a{font-size:12px;font-weight:300;color:var(--stone);text-decoration:none;}
+footer a:hover{color:var(--esp);}
 
-@media(max-width:860px){
-  nav{padding:0 18px;}
-  .hero{grid-template-columns:1fr;min-height:auto;}
-  .hero-left{padding:80px 24px 40px;}
-  .hero-right{border-left:none;border-top:1px solid rgba(255,255,255,0.08);padding:32px 24px;}
-  .buy-row{padding:32px 24px;flex-direction:column;align-items:flex-start;gap:20px;}
-  .bbtns{flex-direction:column;align-items:flex-start;}
-  .stats-row{padding:40px 24px;}
-  .si{grid-template-columns:1fr;}
-  .st+.st{border-left:none;border-top:1px solid rgba(255,255,255,0.2);padding-top:20px;margin-top:20px;}
-  .meer-inner{padding:36px 24px;}
-  .meer-grid{grid-template-columns:1fr 1fr;}
-  footer{padding:14px 18px;flex-direction:column;gap:5px;text-align:center;}
-}
-@media(max-width:480px){
-  .meer-grid{grid-template-columns:1fr;}
-}
+/* SCROLL FADE */
+.fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+.fade.in{opacity:1;transform:none;}
+
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+@media(max-width:860px){.body-grid{grid-template-columns:1fr;}.cta-sticky{position:static;}}
+@media(max-width:560px){.navbar,.body{padding-left:20px;padding-right:20px;}.hero-inner{padding:0 20px;}.inv-row{grid-template-columns:1fr;}.meta-item{padding-right:20px;}footer{padding:24px 20px;}}
 </style>
 </head>
 <body>
-<canvas id="bg-canvas"></canvas>
-<nav>
-  <div class="nb">Nxt Phase <em style="color:#3A8C52;font-style:normal;">AI</em></div>
-  <a class="nback" href="index.html">&larr; Alle trainingen</a>
-</nav>
+<canvas id="bg"></canvas>
 
-<!-- HERO: left=title, right=info+programme -->
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="logo" href="#"><?xml version="1.0" encoding="UTF-8"?><svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 509.0883 71.265"><g id="Components"><g id="_7d90af56-6036-4d4e-9358-67b11c3edb5f_13"><path d="M119.8222,21.9527h.243c2.8244-4.4389,6.6182-6.7798,12.267-6.7798,8.5559,0,14.2861,6.4567,14.2861,15.496v27.0379h-10.977v-25.4234c0-4.4389-2.5827-7.5864-7.1831-7.5864-4.8422,0-8.393,3.874-8.393,9.5241v23.4857h-10.977V16.3039h10.734v5.6488Z" style="fill:#3d2b1f;"/><path d="M164.7785,35.754l-13.4782-19.4501h12.51l7.3447,11.8637h.1616l6.9401-11.8637h11.3803l-12.8319,19.37,14.7695,22.0328h-13.0749l-7.6679-13.7199h-.1616l-8.9579,13.7199h-12.0266l15.0927-21.9527Z" style="fill:#3d2b1f;"/><path d="M190.9296,16.3039h5.7302V3.3906h10.734v12.9133h7.103v7.2633h-7.103v21.9527c0,3.0674,1.6959,4.1157,4.117,4.1157,1.3715,0,3.2277-.0801,3.2277-.0801v8.0712s-2.5012.1603-6.86.1603c-5.3269,0-11.2187-2.0979-11.2187-9.9261v-24.2936h-5.7302v-7.2633Z" style="fill:#3d2b1f;"/><path d="M232.0907,16.3039h10.5737v5.1653h.2417c2.6628-3.6323,6.5368-6.2964,12.1869-6.2964,10.9757,0,17.9985,8.9592,17.9985,21.8725,0,13.3981-7.2646,21.8725-17.9184,21.8725-5.8103,0-9.6042-2.341-11.9438-5.8918h-.1616v18.2389h-10.977V16.3039ZM261.953,37.3685c0-7.8294-2.7442-13.3166-9.5228-13.3166-6.8613,0-9.6055,5.8905-9.6055,13.3166,0,7.505,3.4707,12.4286,10.0088,12.4286,5.5686,0,9.1195-4.6005,9.1195-12.4286Z" style="fill:#3d2b1f;"/><path d="M288.3471,21.711h.2417c2.986-4.3587,6.3765-6.5381,12.0253-6.5381,8.5559,0,14.2861,6.4567,14.2861,15.496v27.0379h-10.977v-25.4234c0-4.4389-2.5827-7.5864-7.1831-7.5864-4.8422,0-8.393,3.874-8.393,9.5241v23.4857h-10.977V0h10.977v21.711Z" style="fill:#3d2b1f;"/><path d="M345.6518,53.1062h-.1616c-2.0992,3.1475-5.0852,5.5686-12.1869,5.5686-8.4745,0-14.4477-4.4389-14.4477-12.6703,0-9.1208,7.4262-12.0266,16.6258-13.3179,6.8613-.9682,10.0088-1.533,10.0088-4.6806,0-2.986-2.341-4.9236-6.9414-4.9236-5.1653,0-7.6666,1.8562-7.9897,5.8117h-9.7658c.3232-7.2646,5.7302-13.6398,17.837-13.6398,12.4286,0,17.4323,5.5686,17.4323,15.2543v21.0646c0,3.1475.4847,5.0038,1.4529,5.7302v.4033h-10.5724c-.6463-.8066-1.0496-2.7442-1.2913-4.6005ZM345.732,43.0987v-6.215c-1.9363,1.1298-4.9236,1.7761-7.6679,2.4211-5.7302,1.2913-8.5546,2.5827-8.5546,6.4567s2.5827,5.2468,6.4567,5.2468c6.2951,0,9.7658-3.874,9.7658-7.9096Z" style="fill:#3d2b1f;"/><path d="M359.6148,44.3086h10.1691c.7258,4.762,4.1177,6.8613,9.0387,6.8613,4.8448,0,7.5877-1.8562,7.5877-4.762,0-3.9554-5.2468-4.3587-10.8955-5.4885-7.4255-1.4529-14.6888-3.4707-14.6888-12.51,0-8.9579,7.4248-13.2365,16.8668-13.2365,10.8955,0,16.9489,5.4084,17.7555,13.7212h-9.9261c-.4834-4.4389-3.3078-6.0534-7.9897-6.0534-4.2773,0-7.1017,1.6145-7.1017,4.6005,0,3.5508,5.4885,3.874,11.379,5.0839,6.9414,1.4529,14.608,3.3906,14.608,13.0749,0,8.3129-7.1017,13.3179-17.4323,13.3179-12.026,0-18.7243-5.8117-19.3707-14.6093Z" style="fill:#3d2b1f;"/><path d="M398.919,36.9652c0-12.2683,8.3129-21.7924,20.4196-21.7924,13.3153,0,20.4196,10.1704,20.4196,24.9399h-30.0251c.8066,6.3752,4.3587,10.3307,10.5724,10.3307,4.2773,0,6.7811-1.9377,7.9923-5.0852h10.8141c-1.5344,7.3447-8.0712,13.5597-18.725,13.5597-13.7199,0-21.4679-9.6042-21.4679-21.9527ZM409.896,32.525h18.4018c-.3232-5.2455-3.7939-8.8778-8.7989-8.8778-5.8117,0-8.636,3.4707-9.6029,8.8778Z" style="fill:#3d2b1f;"/><path d="M481.567,53.1062h-.1629c-2.0992,3.1475-5.0839,5.5686-12.1856,5.5686-8.4758,0-14.4477-4.4389-14.4477-12.6703,0-9.1208,7.4248-12.0266,16.6258-13.3179,6.86-.9682,10.0075-1.533,10.0075-4.6806,0-2.986-2.341-4.9236-6.9414-4.9236-5.1653,0-7.6666,1.8562-7.9897,5.8117h-9.7658c.3232-7.2646,5.7302-13.6398,17.837-13.6398,12.4299,0,17.4323,5.5686,17.4323,15.2543v21.0646c0,3.1475.4861,5.0038,1.4529,5.7302v.4033h-10.5724c-.6463-.8066-1.0483-2.7442-1.29-4.6005ZM481.6458,43.0987v-6.215c-1.9363,1.1298-4.9236,1.7761-7.6666,2.4211-5.7302,1.2913-8.5546,2.5827-8.5546,6.4567s2.5827,5.2468,6.4554,5.2468c6.2951,0,9.7658-3.874,9.7658-7.9096Z" style="fill:#3d2b1f;"/><path d="M498.1113,0h10.977v9.8472h-10.977V0ZM498.1113,16.3039h10.977v41.4028h-10.977V16.3039Z" style="fill:#3d2b1f;"/><path d="M31.5606,41.1671l35.6416.0301c1.5455.0013,2.7978,1.3203,2.7978,2.947v23.537c0,2.2628-2.3226,3.6814-4.1892,2.5587l-35.6416-23.5671c-2.494-1.5-1.4811-5.5081,1.3914-5.5057Z" style="fill:#3d2b1f;"/><path d="M38.4394,70.6193l-35.6416-.0301c-1.5455-.0013-2.7978-1.3203-2.7978-2.947v-21.4058c0-2.2628,2.3226-3.6814,4.1892-2.5587l35.6416,21.4359c2.494,1.5,1.4811,5.5081-1.3914,5.5057Z" style="fill:#3d2b1f;"/><path d="M38.4394,30.098l-35.6416-.0301c-1.5455-.0013-2.7978-1.3203-2.7978-2.947V3.5839C0,1.3211,2.3226-.0975,4.1892,1.0252l35.6416,23.5671c2.494,1.5,1.4811,5.5081-1.3914,5.5057Z" style="fill:#3d2b1f;"/><path d="M31.5606.6458l35.6416.0301c1.5455.0013,2.7978,1.3203,2.7978,2.947v21.4058c0,2.2628-2.3226,3.6814-4.1892,2.5587L30.1692,6.1515c-2.494-1.5-1.4811-5.5081,1.3914-5.5057Z" style="fill:#3d2b1f;"/></g></g></svg></a>
+    <span class="nav-tag">Masterclass</span>
+  </div>
+</div>
+
 <div class="hero">
-  <div class="hero-left">
-    <div class="eyebrow"><span class="dot"></span>Masterclass &middot; Amsterdam</div>
-    <h1>Claude for<br><em>Executives</em></h1>
-    <p class="hsub">Voor managers en beslissers die AI direct willen omzetten in dagelijkse resultaten. Hands-on, geen technische achtergrond nodig.</p>
-    <button class="hcta" onclick="openModal()">Schrijf mij in &rarr;</button>
-  </div>
-  <div class="hero-right">
-    <div class="info-block">
-      <div class="info-row">
-        <span class="info-val">Dinsdag 16 juni 2026</span>
-      </div>
-      <div class="info-row">
-        <span class="info-val">9:30 &ndash; 12:30</span><span class="info-lbl">&nbsp;inloop 9:00</span>
-      </div>
-      <div class="info-row">
-        <span class="info-val">&euro;&thinsp;299,&ndash;</span><span class="info-lbl">&nbsp;p.p. excl. btw &middot; incl. lunch</span>
-      </div>
-      <div class="info-row">
-        <span class="info-val" style="font-size:16px;color:rgba(255,255,255,0.5);">Grasweg 83, Amsterdam</span>
-      </div>
-    </div>
-    <div class="info-divider"></div>
-    <div class="prog-label">Programma</div>
-    <ul class="prog-items">
-<li class="pi">
-  <div class="pitop"><span class="ptag">Positie</span><span class="ptxt">Claude, ChatGPT en Gemini &mdash; wat is het verschil?</span></div>
-  <p class="psub">Welk model past bij welk werk en waarom steeds meer professionals voor Claude kiezen.</p>
-</li><li class="pi">
-  <div class="pitop"><span class="ptag">Werkwijze</span><span class="ptxt">Chat, Cowork en Code &mdash; drie modi, een keuze</span></div>
-  <p class="psub">Van snelle vragen tot autonome taken die Claude zelfstandig uitvoert terwijl jij iets anders doet.</p>
-</li><li class="pi">
-  <div class="pitop"><span class="ptag">Resultaat</span><span class="ptxt">Delegeren, niet chatten</span></div>
-  <p class="psub">Terugkerende taken herkennen en live omzetten. Je eerste geautomatiseerde workflow stel je vandaag in.</p>
-</li><li class="pi">
-  <div class="pitop"><span class="ptag">Compliance</span><span class="ptxt">Veilig inzetten &mdash; AVG en organisatie</span></div>
-  <p class="psub">Spelregels voor databescherming en hoe je dit verantwoord uitrolt in je team.</p>
-</li>
-    </ul>
-  </div>
-</div>
-
-<!-- WAT NEEM JE MEE -->
-<div class="meer-wrap">
-  <div class="meer-inner">
-    <div class="meer-label fade">Wat neem je mee</div>
-    <div class="meer-grid fade d1">
-<div class="mi"><span class="mck">&#10003;</span>Werkende AI-setup direct inzetbaar</div><div class="mi"><span class="mck">&#10003;</span>Je eerste automatisering actief</div><div class="mi"><span class="mck">&#10003;</span>Overzicht chat / Cowork / Code</div><div class="mi"><span class="mck">&#10003;</span>Persoonlijk actieplan</div><div class="mi"><span class="mck">&#10003;</span>Templates voor dagelijks gebruik</div><div class="mi"><span class="mck">&#10003;</span>Samenvatting one-pager</div>
+  <div class="hero-inner">
+    <div class="overline">Masterclass — 16 juni 2026</div>
+    <h1>Claude for Executives</h1>
+    <p class="hero-sub">Je hoeft AI niet te begrijpen om het te laten werken. Je moet weten wat je kunt delegeren. In drie uur leer je precies dat.</p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="ml">Datum</div><div class="mv">16 juni 2026 <small>Maandag</small></div></div>
+      <div class="meta-item"><div class="ml">Tijd</div><div class="mv">9:30 – 12:30 <small>Inloop 9:00</small></div></div>
+      <div class="meta-item"><div class="ml">Locatie</div><div class="mv">Grasweg 83 <small>Amsterdam</small></div></div>
+      <div class="meta-item"><div class="ml">Investering</div><div class="mv">€299 <small>excl. btw · incl. lunch</small></div></div>
     </div>
   </div>
 </div>
 
-<!-- BUY -->
-<div class="buy-row">
-  <div>
-    <div class="bprice">&euro; 299,&ndash;</div>
-    <div class="bnote">p.p. &middot; excl. btw</div>
-    <div class="bincl">&#10003; Inclusief lunch</div>
-  </div>
-  <div class="bbtns">
-    <button class="bbuy" onclick="openModal()">Schrijf mij in &rarr;</button>
-    <button class="binv" onclick="openModal();toggleF()">Op factuur betalen</button>
-  </div>
-</div>
+<div class="body">
+  <div class="body-grid">
 
-<!-- STATS -->
-<div class="stats-row">
-  <div class="si">
-<div class="st fade d1"><div class="sn">80%</div><div class="sl">Mindset, 20% techniek</div><div class="sd">De vraag die alles verandert: waarom doe ik dit eigenlijk zelf?</div></div><div class="st fade d1"><div class="sn">3x</div><div class="sl">Sneller dan nu</div><div class="sd">Rapporten en analyses die nu een uur kosten, doe je in 15-20 minuten.</div></div><div class="st fade d1"><div class="sn">1 dag</div><div class="sl">En je begint meteen</div><div class="sd">Werkende setup en eerste automatisering actief.</div></div>
-  </div>
-</div>
+    <div>
+      <div class="prog-label fade">Wat je leert</div>
+      <ul class="prog-list">
+        
+        <li class="prog-item"><span class="prog-n">01</span><span class="prog-t">Wat is Claude — en hoe verschilt het van ChatGPT en Gemini?</span></li>
+        <li class="prog-item"><span class="prog-n">02</span><span class="prog-t">Chat, Cowork of Code: welke modus werkt voor jou?</span></li>
+        <li class="prog-item"><span class="prog-n">03</span><span class="prog-t">Van chatten naar delegeren: terugkerende taken automatiseren</span></li>
+        <li class="prog-item"><span class="prog-n">04</span><span class="prog-t">Hoe voer je een productief gesprek met AI?</span></li>
+        <li class="prog-item"><span class="prog-n">05</span><span class="prog-t">Scheduled tasks en werkautomatisering</span></li>
+        <li class="prog-item"><span class="prog-n">06</span><span class="prog-t">Veiligheid, AVG en compliance: wat deel je wel en niet?</span></li>
 
-<!-- MODAL -->
-<div class="overlay" id="modal">
-  <div class="modal">
-    <div class="ms"></div>
-    <div class="mh">
-      <div><div class="ml">Claude for Executives &middot; 16 juni 2026</div><h3>Schrijf mij in</h3></div>
-      <button class="mx" onclick="closeModal()">&#x2715;</button>
+      </ul>
+      <div class="quote-strip fade">
+        <p><strong>80% van de productiviteitswinst zit niet in de techniek.</strong> De vraag die alles verandert: waarom doe ik dit eigenlijk zelf?</p>
+      </div>
     </div>
-    <div id="mstep1">
-      <div class="mb">
-        <div class="mp">&euro; 299,&ndash;</div>
-        <div class="mpn">p.p. &middot; excl. btw &middot; inclusief lunch</div>
-        <input type="email" class="min" id="min" placeholder="jouw@email.nl" autocomplete="email">
-        <button class="mbtn" id="mpaybtn" onclick="doPay()">Direct betalen &amp; inschrijven &rarr;</button>
-        <div class="mdiv"><span>of</span></div>
-        <button class="mfb" onclick="toggleF()">Op factuur betalen</button>
-        <div class="mff" id="mff">
-          <label>Naam</label><input type="text" class="mfi" id="mnaam" placeholder="Voornaam Achternaam">
-          <label>Bedrijfsnaam</label><input type="text" class="mfi" id="mbedrijf" placeholder="Bedrijfsnaam">
-          <label>Factuuradres</label><input type="text" class="mfi" id="madres" placeholder="Straat 1, 1234 AB Amsterdam">
-          <button class="mfs" onclick="doFactuur()">Aanmelding versturen &rarr;</button>
+
+    <div class="cta-sticky">
+      <div class="cta-card fade">
+        <div class="cta-price">€299</div>
+        <div class="cta-note">p.p. excl. btw · lunch inbegrepen</div>
+        <div id="form-area">
+          <form id="main-form" onsubmit="payNow(event)">
+            <input class="f-em" type="email" id="em" placeholder="je@email.nl" required>
+            <button type="submit" class="btn-buy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              Schrijf mij in
+            </button>
+          </form>
+          <button class="inv-toggle" onclick="openInv()">Op factuur betalen</button>
+        </div>
+        <div class="success" id="ok">
+          <div class="s-check"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="#3E9B5D" stroke-width="1.5" stroke-linecap="square"/></svg></div>
+          <h3>Aanmelding ontvangen.</h3>
+          <p>Je hoort snel van ons.</p>
         </div>
       </div>
     </div>
-    <div class="mok" id="mok">
-      <div class="mokdot">&#10003;</div>
-      <h3>Je bent ingeschreven!</h3>
-      <p>Bevestiging onderweg naar<br><strong id="mokmail" style="color:#3A8C52;"></strong></p>
+
+  </div>
+</div>
+
+<div class="inv-overlay" id="inv-overlay" onclick="closeInvOutside(event)">
+  <div class="inv-box">
+    <button class="inv-close" onclick="closeInv()">&#x2715;</button>
+    <div class="inv-title">Aanmelden op factuur</div>
+    <div id="inv-form-wrap">
+      <form id="inv-form" onsubmit="sendInv(event)">
+        <div class="inv-row">
+          <div class="f-g"><input type="text" id="iv-name" placeholder="Naam" required></div>
+          <div class="f-g"><input type="text" id="iv-co" placeholder="Bedrijf" required></div>
+        </div>
+        <div class="f-g"><input type="text" id="iv-addr" placeholder="Factuuradres" required></div>
+        <div class="f-g"><input type="email" id="iv-em" placeholder="E-mailadres" required></div>
+        <button type="submit" class="btn-inv-sub">Verstuur aanmelding</button>
+      </form>
+    </div>
+    <div class="inv-success" id="inv-ok">
+      <h3>Aanmelding ontvangen.</h3>
+      <p>Je ontvangt een factuur per e-mail.</p>
     </div>
   </div>
 </div>
 
 <footer>
-  <span class="ft">&copy; 2026 NXT Phase AI</span>
-  <span class="ft fta">We make pragmatic AI work</span>
-  <span class="ft">info@nxtphase.ai</span>
+  <span>© 2026 nxt phase ai</span>
+  <a href="mailto:info@nxtphase.ai">info@nxtphase.ai</a>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
-(function(){try{emailjs.init('M3enm1KLe2e_wPpEN');}catch(e){}}());
-(function(){
-  var c=document.getElementById('bg-canvas'),ctx=c.getContext('2d'),W,H,dots;
-  var C=['#3A8C52','#2D6A3F','#3D2208','rgba(58,140,82,0.5)'];
-  function r(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
-  function mk(){return{x:Math.random()*W,y:Math.random()*H,rad:Math.random()*7+2,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.1,wx:Math.random()*Math.PI*2,wa:Math.random()*.003+.001,wa2:Math.random()*.6+.18,a:Math.random()*.08+.03,col:C[Math.floor(Math.random()*C.length)]};}
-  function init(){r();dots=Array.from({length:36},mk);}
-  function draw(){ctx.clearRect(0,0,W,H);dots.forEach(function(d){d.wx+=d.wa;d.x+=d.vx+Math.sin(d.wx)*d.wa2;d.y+=d.vy+Math.cos(d.wx*.7)*d.wa2*.55;if(d.x<-d.rad)d.x=W+d.rad;if(d.x>W+d.rad)d.x=-d.rad;if(d.y<-d.rad)d.y=H+d.rad;if(d.y>H+d.rad)d.y=-d.rad;ctx.globalAlpha=d.a;ctx.beginPath();ctx.arc(d.x,d.y,d.rad,0,Math.PI*2);ctx.fillStyle=d.col;ctx.fill();});ctx.globalAlpha=1;requestAnimationFrame(draw);}
-  window.addEventListener('resize',r);init();draw();
-}());
-var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in');});},{threshold:0.1});
-document.querySelectorAll('.fade').forEach(function(el){obs.observe(el);});
-function openModal(){document.getElementById('modal').classList.add('open');setTimeout(function(){document.getElementById('min').focus();},120);}
-function closeModal(){document.getElementById('modal').classList.remove('open');}
-function toggleF(){document.getElementById('mff').classList.toggle('open');}
-function doPay(){
-  var inp=document.getElementById('min'),email=(inp.value||'').trim();
-  if(!email||email.indexOf('@')<0){inp.classList.add('err');inp.focus();setTimeout(function(){inp.classList.remove('err');},1500);return;}
-  var btn=document.getElementById('mpaybtn');btn.disabled=true;btn.textContent='...';
-  function ok(){document.getElementById('mokmail').textContent=email;document.getElementById('mstep1').style.display='none';document.getElementById('mok').classList.add('show');}
-  try{emailjs.send('service_4qb0r45','template_v9y8pyc',{training:document.title,voornaam:email,achternaam:'',email:email,bedrijf:'Online inschrijving',functie:''}).then(ok,ok);}catch(e){ok();}
+const STRIPE='https://buy.stripe.com/eVqeVefmI5jS3pUgFq7g400';
+emailjs.init('M3enm1KLe2e_wPpEN');
+function payNow(e){e.preventDefault();window.location.href=STRIPE+'?prefilled_email='+encodeURIComponent(document.getElementById('em').value);}
+function openInv(){document.getElementById('inv-overlay').classList.add('open');}
+function closeInv(){document.getElementById('inv-overlay').classList.remove('open');}
+function closeInvOutside(e){if(e.target===document.getElementById('inv-overlay'))closeInv();}
+function sendInv(e){
+  e.preventDefault();
+  emailjs.send('service_4qb0r45','template_v9y8pyc',{
+    type:'Factuur',training:'Claude for Executives — 16 juni 2026',
+    name:document.getElementById('iv-name').value,
+    company:document.getElementById('iv-co').value,
+    address:document.getElementById('iv-addr').value,
+    email:document.getElementById('iv-em').value
+  }).then(()=>{document.getElementById('inv-form-wrap').style.display='none';document.getElementById('inv-ok').classList.add('show');})
+    .catch(()=>{document.getElementById('inv-form-wrap').style.display='none';document.getElementById('inv-ok').classList.add('show');});
 }
-function doFactuur(){
-  var email=(document.getElementById('min').value||'').trim(),naam=(document.getElementById('mnaam').value||'').trim(),bedrijf=(document.getElementById('mbedrijf').value||'').trim();
-  if(!email||!naam||!bedrijf){alert('Vul minimaal e-mail, naam en bedrijf in.');return;}
-  function ok(){document.getElementById('mokmail').textContent=email;document.getElementById('mstep1').style.display='none';document.getElementById('mok').classList.add('show');}
-  try{emailjs.send('service_4qb0r45','template_v9y8pyc',{training:document.title+' [FACTUUR]',voornaam:naam,achternaam:'',email:email,bedrijf:bedrijf,functie:(document.getElementById('madres').value||'')}).then(ok,ok);}catch(e){ok();}
-}
-document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+// Scroll fade
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.05});
+document.querySelectorAll('.fade').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.observe(el);});
+setTimeout(()=>{document.querySelectorAll('.fade').forEach(el=>el.classList.add('in'));},1400);
+// Soft background blobs
+const cv=document.getElementById('bg'),cx=cv.getContext('2d');
+const rsz=()=>{cv.width=innerWidth;cv.height=innerHeight;};rsz();addEventListener('resize',rsz);
+const blobs=Array.from({length:8},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:160+Math.random()*180,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,a:.018+Math.random()*.018,c:'62,155,93'}));
+(function loop(){cx.clearRect(0,0,cv.width,cv.height);blobs.forEach(b=>{const g=cx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);g.addColorStop(0,`rgba(${b.c},${b.a})`);g.addColorStop(1,'rgba(0,0,0,0)');cx.beginPath();cx.arc(b.x,b.y,b.r,0,Math.PI*2);cx.fillStyle=g;cx.fill();b.x+=b.vx;b.y+=b.vy;if(b.x<-b.r)b.x=innerWidth+b.r;if(b.x>innerWidth+b.r)b.x=-b.r;if(b.y<-b.r)b.y=innerHeight+b.r;if(b.y>innerHeight+b.r)b.y=-b.r;});requestAnimationFrame(loop);})();
 </script>
 </body>
 </html>
