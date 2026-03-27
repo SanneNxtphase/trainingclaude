@@ -195,11 +195,11 @@ footer a:hover{color:var(--esp);}
 
 <footer>
   <span>© 2026 nxt phase ai</span>
-  <a href="mailto:info@nxtphase.ai">info@nxtphase.ai</a>
+  <a href="/cdn-cgi/l/email-protection#95fcfbf3fad5fbede1e5fdf4e6f0bbf4fc"><span class="__cf_email__" data-cfemail="61080f070e210f191511090012044f0008">[email&#160;protected]</span></a>
 </footer>
 
-<script>
-const STRIPE='https://buy.stripe.com/eVqeVefmI5jS3pUgFq7g400';
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const STRIPE='https://buy.stripe.com/28E7sMgqMeUsaSm88U7g401';
 emailjs.init('M3enm1KLe2e_wPpEN');
 function payNow(e){e.preventDefault();window.location.href=STRIPE+'?prefilled_email='+encodeURIComponent(document.getElementById('em').value);}
 function openInv(){document.getElementById('inv-overlay').classList.add('open');}
@@ -224,7 +224,4 @@ setTimeout(()=>{document.querySelectorAll('.fade').forEach(el=>el.classList.add(
 const cv=document.getElementById('bg'),cx=cv.getContext('2d');
 const rsz=()=>{cv.width=innerWidth;cv.height=innerHeight;};rsz();addEventListener('resize',rsz);
 const blobs=Array.from({length:8},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:160+Math.random()*180,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,a:.018+Math.random()*.018,c:'62,155,93'}));
-(function loop(){cx.clearRect(0,0,cv.width,cv.height);blobs.forEach(b=>{const g=cx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);g.addColorStop(0,`rgba(${b.c},${b.a})`);g.addColorStop(1,'rgba(0,0,0,0)');cx.beginPath();cx.arc(b.x,b.y,b.r,0,Math.PI*2);cx.fillStyle=g;cx.fill();b.x+=b.vx;b.y+=b.vy;if(b.x<-b.r)b.x=innerWidth+b.r;if(b.x>innerWidth+b.r)b.x=-b.r;if(b.y<-b.r)b.y=innerHeight+b.r;if(b.y>innerHeight+b.r)b.y=-b.r;});requestAnimationFrame(loop);})();
-</script>
-</body>
-</html>
+(function loop(){cx.clearRect(0,0,cv.width,cv.height);blobs.forEach(b=>{const g=cx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);g.addColorStop(0,`rgba(${b.c},${b.a})`);g.addColorStop(1,'rgba(0,0,0,0)');cx.beginPath();cx.arc(b.x,b.y,b.r,0,Math.PI
