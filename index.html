@@ -4,424 +4,485 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude for Executives — nxt phase ai</title>
-
-<!-- SEO -->
 <meta name="description" content="Een praktische masterclass van 3 uur over Claude voor directeuren en managers. Leer wat je kunt delegeren aan AI en hoe je dat morgen al in je organisatie borgt.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://nxtphasetraining.vercel.app/">
-
-<!-- Open Graph (LinkedIn, WhatsApp, etc.) -->
 <meta property="og:title" content="Claude for Executives — nxt phase ai">
 <meta property="og:description" content="Masterclass: wat kun je delegeren aan Claude? Donderdag 6 oktober, Amsterdam.">
 <meta property="og:url" content="https://nxtphasetraining.vercel.app/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://nxtphasetraining.vercel.app/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Claude for Executives — nxt phase ai">
-<meta name="twitter:description" content="Masterclass: wat kun je delegeren aan Claude? Donderdag 6 oktober, Amsterdam.">
-
-<!-- Favicon: Claude star as inline SVG data URI -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a1612'/%3E%3Cpath fill='%23DA7756' d='m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029 1.01.846.9.726.807.266.39-.105.65-.514.29-.311-.089-.335-.267-.881-.832-1.024-.98-.972-.98-.044.024-.02.044.524 1.649.629 1.978.35 1.272-.133.56-.738.199-.589-.375-.226-.55-.37-1.456-.428-1.578-.352-1.37h-.124l-.472 1.037-.93 1.827-.589 1.085-.624.937-.34.294-.598-.052-.418-.432.044-.513.145-.26.87-1.378.706-1.126.87-1.708-.028-.06-.085.012-1.327 1.326-1.546 1.48-.9.83-.592.415-.56-.136-.35-.456.089-.569.28-.302 1.09-1.017 1.077-1.025 1.64-1.598.02-.044-.04-.024z'/%3E%3C/svg%3E">
-
-<!-- Google Analytics 4 — laadt pas na cookietoestemming -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent','default',{'analytics_storage':'denied'});
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied'});</script>
 <style>
-:root {
-  --black:     #0d0c0b;
-  --dark:      #1a1612;
-  --cream:     #F5F2ED;
-  --stone:     #8a8480;
-  --claude:    #DA7756;
-  --claude-d:  #b85c3a;
-  --claude-lt: #f9ede8;
-  --border:    #e4e0da;
-  --font-d:    "Playfair Display", serif;
-  --font-b:    "DM Sans", sans-serif;
+:root{
+  --black:    #0d0c0b;
+  --dark:     #1a1612;
+  --cream:    #F5F2ED;
+  --cream2:   #EDEAE4;
+  --white:    #ffffff;
+  --stone:    #8a8480;
+  --claude:   #DA7756;
+  --claude-d: #b85c3a;
+  --claude-lt:#f9ede8;
+  --border:   #e0dbd4;
+  --font-d:   "Playfair Display",serif;
+  --font-b:   "DM Sans",sans-serif;
+  --max:      1080px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--cream);color:var(--black);font-family:var(--font-b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+body{background:var(--cream);color:var(--black);font-family:var(--font-b);-webkit-font-smoothing:antialiased;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--dark);text-align:center;padding:10px 20px;}
+.topbar a{font-size:12px;font-weight:500;color:rgba(255,255,255,.7);text-decoration:none;display:inline-flex;align-items:center;gap:8px;letter-spacing:.01em;}
+.topbar a:hover{color:#fff;}
+.topbar-dot{width:6px;height:6px;border-radius:50%;background:var(--claude);animation:pulse 2.4s infinite;display:inline-block;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.2;}}
 
 /* ── NAVBAR ── */
-.navbar{background:var(--black);position:sticky;top:0;z-index:100;}
-.navbar-inner{max-width:1100px;margin:0 auto;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.navbar{background:var(--black);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.05);}
+.navbar-inner{max-width:var(--max);margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
 .logo-group{display:flex;align-items:center;gap:12px;}
 .logo{display:flex;align-items:center;text-decoration:none;}
-.logo svg{height:19px;width:auto;}
-.logo-div{width:1px;height:18px;background:rgba(255,255,255,.14);}
-.claude-wrap{display:flex;align-items:center;gap:7px;}
-.claude-icon{width:22px;height:22px;flex-shrink:0;}
-.claude-label{font-size:12px;font-weight:400;color:rgba(255,255,255,.4);letter-spacing:.03em;}
-.nav-tag{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.28);}
+.logo svg{height:18px;width:auto;}
+.logo-div{width:1px;height:18px;background:rgba(255,255,255,.12);}
+.claude-wrap{display:flex;align-items:center;gap:6px;}
+.claude-icon{width:20px;height:20px;flex-shrink:0;}
+.claude-label{font-size:12px;color:rgba(255,255,255,.38);letter-spacing:.03em;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-link{font-size:13px;font-weight:400;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:rgba(255,255,255,.85);}
+.nav-btn{background:var(--claude);color:#fff;font-family:var(--font-b);font-size:12px;font-weight:600;letter-spacing:.04em;padding:9px 18px;border:none;cursor:pointer;text-decoration:none;transition:background .2s;}
+.nav-btn:hover{background:var(--claude-d);}
 
 /* ── HERO ── */
 .hero{
-  background: #1a1612;
+  background:var(--dark);
+  padding:96px 0 80px;
   position:relative;overflow:hidden;
-  padding:80px 0 68px;
-  min-height:420px;
-  display:flex;align-items:center;
 }
-
-/* Dark radial bg like claude.ai */
 .hero-bg{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 70% 90% at 72% 50%, rgba(218,119,86,.22) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 60% at 88% 30%, rgba(218,119,86,.12) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 70% at 15% 80%, rgba(218,119,86,.07) 0%, transparent 60%);
+    radial-gradient(ellipse 65% 80% at 75% 50%,rgba(218,119,86,.18) 0%,transparent 65%),
+    radial-gradient(ellipse 35% 50% at 90% 20%,rgba(218,119,86,.1) 0%,transparent 55%);
 }
+.hero-grain{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");opacity:.5;}
+.hero-star{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:440px;height:440px;opacity:.055;pointer-events:none;}
+.hero-inner{max-width:var(--max);margin:0 auto;padding:0 40px;position:relative;z-index:1;}
+.hero-grid{display:grid;grid-template-columns:1fr 320px;gap:80px;align-items:center;}
 
-/* Grain */
-.hero-grain{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-  opacity:.6;
-}
+.badge{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(218,119,86,.3);background:rgba(218,119,86,.07);padding:5px 13px;margin-bottom:28px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--claude);}
+h1{font-family:var(--font-d);font-weight:400;font-size:clamp(44px,5.2vw,72px);line-height:1.02;color:#fff;letter-spacing:-.015em;margin-bottom:28px;}
+h1 em{font-style:italic;color:rgba(255,255,255,.6);}
+.hero-meta{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,.09);padding-top:24px;margin-top:8px;}
+.hm{padding:0 36px 0 0;}
+.hm:last-child{padding-right:0;}
+.hm-l{font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:4px;}
+.hm-v{font-size:14px;font-weight:500;color:rgba(255,255,255,.82);}
+.hm-v small{font-size:11px;font-weight:300;color:rgba(255,255,255,.32);display:block;margin-top:1px;}
 
-/* Large faint Claude star mark, right side */
-.hero-star{
-  position:absolute;
-  right:-40px;top:50%;
-  transform:translateY(-50%);
-  width:420px;height:420px;
-  opacity:.06;
-  pointer-events:none;
-}
-
-.hero-inner{max-width:1100px;margin:0 auto;padding:0 40px;position:relative;z-index:1;width:100%;}
-
-.badge{
-  display:inline-flex;align-items:center;gap:7px;
-  border:1px solid rgba(218,119,86,.35);
-  background:rgba(218,119,86,.08);
-  padding:5px 13px;margin-bottom:30px;
-  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(255,255,255,.65);
-}
-.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--claude);animation:pulse 2.4s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
-
-h1{
-  font-family:var(--font-d);font-weight:400;
-  font-size:clamp(50px,5.8vw,78px);line-height:1.01;
-  color:#fff;margin-bottom:0;max-width:680px;letter-spacing:-.015em;
-}
-
-.meta-row{
-  display:flex;flex-wrap:wrap;gap:0;
-  border-top:1px solid rgba(255,255,255,.1);
-  padding-top:28px;
-  margin-top:40px;
-}
-.meta-item{padding:0 44px 0 0;}
-.meta-item:last-child{padding-right:0;}
-.ml{font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:5px;}
-.mv{font-size:14px;font-weight:500;color:rgba(255,255,255,.88);}
-.mv small{font-size:11px;font-weight:300;color:rgba(255,255,255,.38);display:block;margin-top:1px;}
-
-/* ── BODY ── */
-.body-wrap{position:relative;z-index:1;}
-.body{max-width:1100px;margin:0 auto;padding:64px 40px 80px;}
-.body-grid{display:grid;grid-template-columns:1fr 300px;gap:72px;align-items:start;}
-
-.prog-label{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--claude-d);margin-bottom:20px;
-}
-.prog-label::before{content:"";display:block;width:14px;height:2px;background:var(--claude);}
-
-.prog-list{list-style:none;}
-.prog-item{
-  display:flex;gap:18px;padding:16px 0;
-  border-bottom:1px solid rgba(13,12,11,.07);
-  align-items:baseline;
-}
-.prog-item:first-child{border-top:1px solid rgba(13,12,11,.07);}
-.prog-n{font-size:11px;font-weight:400;color:var(--stone);letter-spacing:.04em;flex-shrink:0;width:22px;}
-.prog-t{font-weight:400;font-size:15px;color:var(--black);line-height:1.5;}
-.prog-sub{font-size:12px;font-weight:300;color:rgba(13,12,11,.45);display:block;margin-top:2px;}
-
-/* Sub-items */
-.sub-list{list-style:none;margin-top:10px;}
-.sub-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(13,12,11,.045);align-items:flex-start;}
-.sub-item:last-child{border-bottom:none;padding-bottom:0;}
-.sub-bullet{width:4px;height:4px;border-radius:50%;background:var(--claude);flex-shrink:0;margin-top:9px;}
-.sub-t{font-size:13px;font-weight:300;color:rgba(13,12,11,.58);line-height:1.5;}
-
-/* Actieplan row */
-.prog-item.actie{
-  border-left:2px solid var(--claude);
-  padding-left:14px;margin-left:-16px;
-}
-.actie-tag{
-  font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--claude-d);border:1px solid rgba(218,119,86,.3);
-  padding:2px 6px;margin-right:8px;vertical-align:middle;white-space:nowrap;
-  background:var(--claude-lt);
-}
-
-/* ── CTA CARD ── */
-.cta-sticky{position:sticky;top:72px;}
-.cta-card{
-  background:var(--dark);
-  border:1px solid rgba(218,119,86,.18);
-  padding:36px;position:relative;overflow:hidden;
-}
-/* Top gradient line */
-.cta-card::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg, transparent, var(--claude), transparent);
-}
-/* Glow */
-.cta-card::after{
-  content:"";position:absolute;bottom:-60px;right:-40px;
-  width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(218,119,86,.15),transparent 70%);
-  pointer-events:none;
-}
-.cta-eyebrow{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--claude);margin-bottom:14px;}
-.cta-price{font-family:var(--font-d);font-size:58px;font-weight:400;color:#fff;line-height:1;margin-bottom:4px;letter-spacing:-.02em;}
-.cta-note{font-size:11px;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:32px;}
-
-.f-em{
-  width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-  color:#fff;font-family:var(--font-b);font-size:14px;font-weight:300;
-  padding:13px 15px;outline:none;transition:border-color .2s;
-  border-radius:0;-webkit-appearance:none;margin-bottom:10px;display:block;
-}
-.f-em::placeholder{color:rgba(255,255,255,.22);}
+/* CTA card in hero */
+.hero-card{background:rgba(255,255,255,.04);border:1px solid rgba(218,119,86,.2);padding:32px;position:relative;}
+.hero-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--claude),transparent);}
+.hc-eyebrow{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--claude);margin-bottom:12px;}
+.hc-price{font-family:var(--font-d);font-size:54px;font-weight:400;color:#fff;line-height:1;letter-spacing:-.02em;margin-bottom:3px;}
+.hc-note{font-size:11px;font-weight:300;color:rgba(255,255,255,.28);margin-bottom:24px;}
+.f-em{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--font-b);font-size:14px;font-weight:300;padding:12px 14px;outline:none;transition:border-color .2s;margin-bottom:8px;display:block;border-radius:0;-webkit-appearance:none;}
+.f-em::placeholder{color:rgba(255,255,255,.2);}
 .f-em:focus{border-color:var(--claude);}
-
-.btn-buy{
-  display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
-  background:var(--claude);color:#fff;
-  font-family:var(--font-b);font-size:13px;font-weight:600;letter-spacing:.04em;
-  padding:16px 20px;border:none;cursor:pointer;transition:all .2s;
-}
-.btn-buy:hover{background:var(--claude-d);transform:translateY(-1px);box-shadow:0 6px 24px rgba(218,119,86,.4);}
-.btn-buy svg{width:15px;height:15px;flex-shrink:0;}
-
-.inv-toggle{
-  display:block;width:100%;background:transparent;border:none;
-  color:rgba(255,255,255,.25);font-family:var(--font-b);font-size:11px;font-weight:300;
-  text-decoration:underline;text-underline-offset:3px;
-  cursor:pointer;padding:10px 0 0;text-align:center;transition:color .2s;
-}
-.inv-toggle:hover{color:rgba(255,255,255,.55);}
-
-.success-msg{display:none;padding:8px 0;}
+.btn-buy{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--claude);color:#fff;font-family:var(--font-b);font-size:13px;font-weight:600;letter-spacing:.04em;padding:15px;border:none;cursor:pointer;transition:all .2s;}
+.btn-buy:hover{background:var(--claude-d);transform:translateY(-1px);box-shadow:0 6px 24px rgba(218,119,86,.35);}
+.btn-buy svg{width:14px;height:14px;}
+.inv-toggle{display:block;width:100%;background:transparent;border:none;color:rgba(255,255,255,.22);font-family:var(--font-b);font-size:11px;font-weight:300;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:9px 0 0;text-align:center;transition:color .2s;}
+.inv-toggle:hover{color:rgba(255,255,255,.5);}
+.success-msg{display:none;padding:4px 0;}
 .success-msg.show{display:block;}
-.s-check{width:38px;height:38px;border:1px solid var(--claude);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
-.success-msg h3{font-family:var(--font-d);font-size:18px;color:#fff;margin-bottom:5px;}
-.success-msg p{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);}
+.s-check{width:36px;height:36px;border:1px solid var(--claude);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.success-msg h3{font-family:var(--font-d);font-size:17px;color:#fff;margin-bottom:4px;}
+.success-msg p{font-size:11px;color:rgba(255,255,255,.3);}
+
+/* ── SECTIONS common ── */
+.section{padding:80px 0;border-bottom:1px solid var(--border);}
+.section:last-of-type{border-bottom:none;}
+.section-inner{max-width:var(--max);margin:0 auto;padding:0 40px;}
+.section-label{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--claude);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.section-label::before{content:"";display:block;width:14px;height:2px;background:var(--claude);}
+h2{font-family:var(--font-d);font-weight:400;font-size:clamp(28px,3.5vw,44px);line-height:1.12;color:var(--black);letter-spacing:-.01em;margin-bottom:48px;}
+h2 em{font-style:italic;color:var(--stone);}
+
+/* ── PROGRAMMA ── */
+.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.prog-item{background:var(--cream);padding:28px 30px;display:flex;gap:18px;align-items:flex-start;transition:background .2s;}
+.prog-item:hover{background:var(--white);}
+.prog-n{font-size:11px;font-weight:500;color:var(--stone);letter-spacing:.06em;flex-shrink:0;padding-top:3px;width:22px;}
+.prog-body{}
+.prog-t{font-size:15px;font-weight:500;color:var(--black);line-height:1.4;margin-bottom:4px;}
+.prog-sub{font-size:13px;font-weight:300;color:var(--stone);line-height:1.5;}
+.prog-item.accent{background:var(--dark);}
+.prog-item.accent:hover{background:#221c17;}
+.prog-item.accent .prog-n{color:rgba(255,255,255,.3);}
+.prog-item.accent .prog-t{color:#fff;}
+.prog-item.accent .prog-sub{color:rgba(255,255,255,.4);}
+.actie-tag{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--claude);border:1px solid rgba(218,119,86,.3);padding:2px 7px;margin-bottom:6px;background:rgba(218,119,86,.08);}
+
+/* Sub-bullets */
+.sub-list{list-style:none;margin-top:10px;}
+.sub-item{display:flex;gap:9px;padding:5px 0;font-size:13px;font-weight:300;color:var(--stone);line-height:1.5;border-bottom:1px solid rgba(13,12,11,.05);}
+.sub-item:last-child{border-bottom:none;padding-bottom:0;}
+.sub-bullet{width:4px;height:4px;border-radius:50%;background:var(--claude);flex-shrink:0;margin-top:8px;}
+
+/* ── AANPAK ── */
+.aanpak-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+.aanpak-card{padding:32px;background:var(--white);border:1px solid var(--border);}
+.aanpak-num{font-family:var(--font-d);font-size:48px;font-weight:400;color:var(--border);line-height:1;margin-bottom:20px;}
+.aanpak-title{font-size:16px;font-weight:500;color:var(--black);margin-bottom:10px;}
+.aanpak-body{font-size:14px;font-weight:300;color:var(--stone);line-height:1.75;}
+
+/* ── FAQ ── */
+.faq-list{max-width:680px;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;background:transparent;border:none;padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;font-family:var(--font-b);font-size:15px;font-weight:500;color:var(--black);text-align:left;transition:color .2s;}
+.faq-q:hover{color:var(--claude);}
+.faq-icon{width:20px;height:20px;flex-shrink:0;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.faq-q.open .faq-icon{background:var(--claude);border-color:var(--claude);}
+.faq-icon svg{width:10px;height:10px;color:var(--stone);transition:transform .2s;}
+.faq-q.open .faq-icon svg{color:#fff;transform:rotate(45deg);}
+.faq-a{display:none;padding:0 0 20px;font-size:14px;font-weight:300;color:var(--stone);line-height:1.8;max-width:560px;}
+.faq-a.open{display:block;}
+
+/* ── CTA SECTION ── */
+.cta-section{background:var(--dark);padding:80px 0;position:relative;overflow:hidden;}
+.cta-section::after{content:"";position:absolute;top:-100px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(218,119,86,.12),transparent 70%);pointer-events:none;}
+.cta-inner{max-width:var(--max);margin:0 auto;padding:0 40px;position:relative;z-index:1;}
+.cta-grid{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;}
+.cta-title{font-family:var(--font-d);font-size:clamp(28px,3vw,40px);color:#fff;font-weight:400;margin-bottom:12px;}
+.cta-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;}
+.cta-actions{display:flex;flex-direction:column;gap:10px;min-width:220px;}
+.btn-primary{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--claude);color:#fff;font-family:var(--font-b);font-size:13px;font-weight:600;letter-spacing:.04em;padding:16px 28px;border:none;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.btn-primary:hover{background:var(--claude-d);transform:translateY(-1px);box-shadow:0 6px 24px rgba(218,119,86,.35);}
+.btn-secondary{display:flex;align-items:center;justify-content:center;background:transparent;color:rgba(255,255,255,.45);font-family:var(--font-b);font-size:12px;font-weight:400;padding:12px;border:1px solid rgba(255,255,255,.1);cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.btn-secondary:hover{color:#fff;border-color:rgba(255,255,255,.3);}
 
 /* ── MODAL ── */
-.inv-overlay{display:none;position:fixed;inset:0;background:rgba(13,12,11,.75);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
-.inv-overlay.open{display:flex;}
-.inv-box{background:var(--dark);border:1px solid rgba(218,119,86,.2);padding:40px;max-width:420px;width:90%;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.5);}
-.inv-close{position:absolute;top:14px;right:16px;background:transparent;border:none;cursor:pointer;color:rgba(255,255,255,.3);font-size:20px;padding:4px;transition:color .2s;}
-.inv-close:hover{color:#fff;}
-.inv-title{font-family:var(--font-d);font-size:22px;color:#fff;margin-bottom:20px;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(13,12,11,.75);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.overlay.open{display:flex;}
+.modal-box{background:var(--dark);border:1px solid rgba(218,119,86,.2);padding:40px;max-width:420px;width:90%;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.5);}
+.modal-close{position:absolute;top:14px;right:16px;background:transparent;border:none;cursor:pointer;color:rgba(255,255,255,.3);font-size:20px;padding:4px;transition:color .2s;}
+.modal-close:hover{color:#fff;}
+.modal-title{font-family:var(--font-d);font-size:22px;color:#fff;margin-bottom:20px;}
 .f-g{margin-bottom:8px;}
-.f-g input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:var(--font-b);font-size:14px;font-weight:300;padding:12px 14px;outline:none;transition:border-color .2s;border-radius:0;-webkit-appearance:none;}
-.f-g input::placeholder{color:rgba(255,255,255,.22);}
+.f-g input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--font-b);font-size:14px;font-weight:300;padding:12px 14px;outline:none;transition:border-color .2s;border-radius:0;-webkit-appearance:none;}
+.f-g input::placeholder{color:rgba(255,255,255,.2);}
 .f-g input:focus{border-color:var(--claude);}
 .inv-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.btn-inv-sub{display:block;width:100%;background:var(--claude);color:#fff;border:none;font-family:var(--font-b);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:14px;cursor:pointer;margin-top:10px;transition:background .2s;}
-.btn-inv-sub:hover{background:var(--claude-d);}
-.inv-success{display:none;text-align:center;padding:8px 0;}
-.inv-success.show{display:block;}
-.inv-success h3{font-family:var(--font-d);font-size:20px;color:#fff;margin-bottom:8px;}
-.inv-success p{font-size:13px;font-weight:300;color:rgba(255,255,255,.38);}
+.btn-modal-sub{display:block;width:100%;background:var(--claude);color:#fff;border:none;font-family:var(--font-b);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:14px;cursor:pointer;margin-top:10px;transition:background .2s;}
+.btn-modal-sub:hover{background:var(--claude-d);}
+.modal-success{display:none;text-align:center;padding:8px 0;}
+.modal-success.show{display:block;}
+.modal-success h3{font-family:var(--font-d);font-size:20px;color:#fff;margin-bottom:8px;}
+.modal-success p{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);}
 
 /* ── FOOTER ── */
-.footer-wrap{background:var(--black);position:relative;z-index:1;}
-footer{max-width:1100px;margin:0 auto;padding:26px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-.footer-copy{font-size:12px;font-weight:400;color:rgba(255,255,255,.25);}
-.footer-right{display:flex;align-items:center;gap:20px;}
-.footer-email{font-size:14px;font-weight:400;color:rgba(255,255,255,.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:1px;transition:color .2s,border-color .2s;}
-.footer-email:hover{color:#fff;border-bottom-color:rgba(255,255,255,.45);}
-.footer-priv{background:transparent;border:none;cursor:pointer;font-family:var(--font-b);font-size:12px;font-weight:300;color:rgba(255,255,255,.28);text-decoration:underline;text-underline-offset:3px;padding:0;transition:color .2s;}
-.footer-priv:hover{color:rgba(255,255,255,.6);}
-.footer-avg{max-width:1100px;margin:0 auto;padding:0 40px 20px;font-size:11px;font-weight:300;color:rgba(255,255,255,.2);line-height:1.7;border-top:1px solid rgba(255,255,255,.05);padding-top:14px;}
+.footer{background:var(--black);}
+.footer-top{max-width:var(--max);margin:0 auto;padding:48px 40px 32px;display:grid;grid-template-columns:1fr auto;gap:40px;border-bottom:1px solid rgba(255,255,255,.06);}
+.footer-brand{font-family:var(--font-d);font-size:18px;color:#fff;font-weight:400;margin-bottom:10px;}
+.footer-addr{font-size:13px;font-weight:300;color:rgba(255,255,255,.28);line-height:1.8;}
+.footer-addr a{color:rgba(255,255,255,.28);text-decoration:none;}
+.footer-addr a:hover{color:rgba(255,255,255,.6);}
+.footer-links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
+.footer-link{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);text-decoration:none;text-underline-offset:3px;transition:color .2s;}
+.footer-link:hover{color:#fff;}
+.footer-bottom{max-width:var(--max);margin:0 auto;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.2);}
+.footer-avg{font-size:12px;font-weight:300;color:rgba(255,255,255,.2);max-width:540px;line-height:1.6;}
 
-@media(max-width:860px){.body-grid{grid-template-columns:1fr;}.cta-sticky{position:static;}}
+/* ── COOKIE BANNER ── */
+#cookie-banner{display:none;position:fixed;bottom:24px;right:24px;z-index:300;background:var(--dark);border:1px solid rgba(218,119,86,.2);box-shadow:0 8px 48px rgba(0,0,0,.45);padding:24px 26px 20px;max-width:300px;width:calc(100vw - 40px);flex-direction:column;gap:14px;}
+#cookie-banner::before{content:"";display:block;height:1px;background:linear-gradient(90deg,transparent,var(--claude),transparent);margin:-24px -26px 16px;}
+.cookie-title{font-family:var(--font-d);font-size:15px;color:#fff;margin-bottom:5px;}
+.cookie-text{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;}
+.cookie-text a{color:rgba(255,255,255,.45);text-underline-offset:2px;text-decoration:underline;}
+.cookie-text a:hover{color:rgba(255,255,255,.8);}
+.cookie-btns{display:flex;gap:8px;}
+.btn-cookie-acc{flex:1;background:var(--claude);color:#fff;border:none;font-family:var(--font-b);font-size:12px;font-weight:600;padding:10px;cursor:pointer;transition:background .2s;}
+.btn-cookie-acc:hover{background:var(--claude-d);}
+.btn-cookie-dec{flex:1;background:transparent;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.1);font-family:var(--font-b);font-size:12px;padding:10px;cursor:pointer;transition:all .2s;}
+.btn-cookie-dec:hover{color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.28);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;}
+  .prog-grid{grid-template-columns:1fr;}
+  .aanpak-grid{grid-template-columns:1fr;}
+  .cta-grid{grid-template-columns:1fr;}
+  .cta-actions{flex-direction:row;}
+  .footer-top{grid-template-columns:1fr;}
+  .footer-links{align-items:flex-start;}
+}
 @media(max-width:560px){
-  .navbar-inner,.hero-inner,.body{padding-left:20px;padding-right:20px;}
-  footer{padding:22px 20px;}.inv-row{grid-template-columns:1fr;}
-  .meta-item{padding-right:22px;}h1{font-size:46px;}
+  .navbar-inner,.hero-inner,.section-inner,.cta-inner,.footer-top,.footer-bottom{padding-left:20px;padding-right:20px;}
+  .nav-links{display:none;}
+  h1{font-size:40px;}
+  #cookie-banner{bottom:0;right:0;max-width:100%;width:100%;border-left:none;border-right:none;border-bottom:none;}
 }
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="#inschrijven"><span class="topbar-dot"></span> Live training · Donderdag 6 oktober 2026 · Amsterdam · Schrijf je in →</a>
+</div>
+
 <!-- NAVBAR -->
-<div class="navbar">
+<nav class="navbar">
   <div class="navbar-inner">
     <div class="logo-group">
       <a class="logo" href="https://nxtphase.ai" target="_blank">
-        <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 509.0883 71.265"><g><path d="M119.8222,21.9527h.243c2.8244-4.4389,6.6182-6.7798,12.267-6.7798,8.5559,0,14.2861,6.4567,14.2861,15.496v27.0379h-10.977v-25.4234c0-4.4389-2.5827-7.5864-7.1831-7.5864-4.8422,0-8.393,3.874-8.393,9.5241v23.4857h-10.977V16.3039h10.734v5.6488Z" style="fill:#fff;"/><path d="M164.7785,35.754l-13.4782-19.4501h12.51l7.3447,11.8637h.1616l6.9401-11.8637h11.3803l-12.8319,19.37,14.7695,22.0328h-13.0749l-7.6679-13.7199h-.1616l-8.9579,13.7199h-12.0266l15.0927-21.9527Z" style="fill:#fff;"/><path d="M190.9296,16.3039h5.7302V3.3906h10.734v12.9133h7.103v7.2633h-7.103v21.9527c0,3.0674,1.6959,4.1157,4.117,4.1157,1.3715,0,3.2277-.0801,3.2277-.0801v8.0712s-2.5012.1603-6.86.1603c-5.3269,0-11.2187-2.0979-11.2187-9.9261v-24.2936h-5.7302v-7.2633Z" style="fill:#fff;"/><path d="M232.0907,16.3039h10.5737v5.1653h.2417c2.6628-3.6323,6.5368-6.2964,12.1869-6.2964,10.9757,0,17.9985,8.9592,17.9985,21.8725,0,13.3981-7.2646,21.8725-17.9184,21.8725-5.8103,0-9.6042-2.341-11.9438-5.8918h-.1616v18.2389h-10.977V16.3039ZM261.953,37.3685c0-7.8294-2.7442-13.3166-9.5228-13.3166-6.8613,0-9.6055,5.8905-9.6055,13.3166,0,7.505,3.4707,12.4286,10.0088,12.4286,5.5686,0,9.1195-4.6005,9.1195-12.4286Z" style="fill:#fff;"/><path d="M288.3471,21.711h.2417c2.986-4.3587,6.3765-6.5381,12.0253-6.5381,8.5559,0,14.2861,6.4567,14.2861,15.496v27.0379h-10.977v-25.4234c0-4.4389-2.5827-7.5864-7.1831-7.5864-4.8422,0-8.393,3.874-8.393,9.5241v23.4857h-10.977V0h10.977v21.711Z" style="fill:#fff;"/><path d="M345.6518,53.1062h-.1616c-2.0992,3.1475-5.0852,5.5686-12.1869,5.5686-8.4745,0-14.4477-4.4389-14.4477-12.6703,0-9.1208,7.4262-12.0266,16.6258-13.3179,6.8613-.9682,10.0088-1.533,10.0088-4.6806,0-2.986-2.341-4.9236-6.9414-4.9236-5.1653,0-7.6666,1.8562-7.9897,5.8117h-9.7658c.3232-7.2646,5.7302-13.6398,17.837-13.6398,12.4286,0,17.4323,5.5686,17.4323,15.2543v21.0646c0,3.1475.4847,5.0038,1.4529,5.7302v.4033h-10.5724c-.6463-.8066-1.0496-2.7442-1.2913-4.6005ZM345.732,43.0987v-6.215c-1.9363,1.1298-4.9236,1.7761-7.6679,2.4211-5.7302,1.2913-8.5546,2.5827-8.5546,6.4567s2.5827,5.2468,6.4567,5.2468c6.2951,0,9.7658-3.874,9.7658-7.9096Z" style="fill:#fff;"/><path d="M359.6148,44.3086h10.1691c.7258,4.762,4.1177,6.8613,9.0387,6.8613,4.8448,0,7.5877-1.8562,7.5877-4.762,0-3.9554-5.2468-4.3587-10.8955-5.4885-7.4255-1.4529-14.6888-3.4707-14.6888-12.51,0-8.9579,7.4248-13.2365,16.8668-13.2365,10.8955,0,16.9489,5.4084,17.7555,13.7212h-9.9261c-.4834-4.4389-3.3078-6.0534-7.9897-6.0534-4.2773,0-7.1017,1.6145-7.1017,4.6005,0,3.5508,5.4885,3.874,11.379,5.0839,6.9414,1.4529,14.608,3.3906,14.608,13.0749,0,8.3129-7.1017,13.3179-17.4323,13.3179-12.026,0-18.7243-5.8117-19.3707-14.6093Z" style="fill:#fff;"/><path d="M398.919,36.9652c0-12.2683,8.3129-21.7924,20.4196-21.7924,13.3153,0,20.4196,10.1704,20.4196,24.9399h-30.0251c.8066,6.3752,4.3587,10.3307,10.5724,10.3307,4.2773,0,6.7811-1.9377,7.9923-5.0852h10.8141c-1.5344,7.3447-8.0712,13.5597-18.725,13.5597-13.7199,0-21.4679-9.6042-21.4679-21.9527ZM409.896,32.525h18.4018c-.3232-5.2455-3.7939-8.8778-8.7989-8.8778-5.8117,0-8.636,3.4707-9.6029,8.8778Z" style="fill:#fff;"/><path d="M481.567,53.1062h-.1629c-2.0992,3.1475-5.0839,5.5686-12.1856,5.5686-8.4758,0-14.4477-4.4389-14.4477-12.6703,0-9.1208,7.4248-12.0266,16.6258-13.3179,6.86-.9682,10.0075-1.533,10.0075-4.6806,0-2.986-2.341-4.9236-6.9414-4.9236-5.1653,0-7.6666,1.8562-7.9897,5.8117h-9.7658c.3232-7.2646,5.7302-13.6398,17.837-13.6398,12.4299,0,17.4323,5.5686,17.4323,15.2543v21.0646c0,3.1475.4861,5.0038,1.4529,5.7302v.4033h-10.5724c-.6463-.8066-1.0483-2.7442-1.29-4.6005ZM481.6458,43.0987v-6.215c-1.9363,1.1298-4.9236,1.7761-7.6666,2.4211-5.7302,1.2913-8.5546,2.5827-8.5546,6.4567s2.5827,5.2468,6.4554,5.2468c6.2951,0,9.7658-3.874,9.7658-7.9096Z" style="fill:#fff;"/><path d="M498.1113,0h10.977v9.8472h-10.977V0ZM498.1113,16.3039h10.977v41.4028h-10.977V16.3039Z" style="fill:#fff;"/><path d="M31.5606,41.1671l35.6416.0301c1.5455.0013,2.7978,1.3203,2.7978,2.947v23.537c0,2.2628-2.3226,3.6814-4.1892,2.5587l-35.6416-23.5671c-2.494-1.5-1.4811-5.5081,1.3914-5.5057Z" style="fill:#fff;"/><path d="M38.4394,70.6193l-35.6416-.0301c-1.5455-.0013-2.7978-1.3203-2.7978-2.947v-21.4058c0-2.2628,2.3226-3.6814,4.1892-2.5587l35.6416,21.4359c2.494,1.5,1.4811,5.5081-1.3914,5.5057Z" style="fill:#fff;"/><path d="M38.4394,30.098l-35.6416-.0301c-1.5455-.0013-2.7978-1.3203-2.7978-2.947V3.5839C0,1.3211,2.3226-.0975,4.1892,1.0252l35.6416,23.5671c2.494,1.5,1.4811,5.5081-1.3914,5.5057Z" style="fill:#fff;"/><path d="M31.5606.6458l35.6416.0301c1.5455.0013,2.7978,1.3203,2.7978,2.947v21.4058c0,2.2628-2.3226,3.6814-4.1892,2.5587L30.1692,6.1515c-2.494-1.5-1.4811-5.5081,1.3914-5.5057Z" style="fill:#fff;"/></g></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 509.0883 71.265"><g><path d="M119.8222,21.9527h.243c2.8244-4.4389,6.6182-6.7798,12.267-6.7798,8.5559,0,14.2861,6.4567,14.2861,15.496v27.0379h-10.977v-25.4234c0-4.4389-2.5827-7.5864-7.1831-7.5864-4.8422,0-8.393,3.874-8.393,9.5241v23.4857h-10.977V16.3039h10.734v5.6488Z" fill="#fff"/><path d="M164.7785,35.754l-13.4782-19.4501h12.51l7.3447,11.8637h.1616l6.9401-11.8637h11.3803l-12.8319,19.37,14.7695,22.0328h-13.0749l-7.6679-13.7199h-.1616l-8.9579,13.7199h-12.0266l15.0927-21.9527Z" fill="#fff"/><path d="M190.9296,16.3039h5.7302V3.3906h10.734v12.9133h7.103v7.2633h-7.103v21.9527c0,3.0674,1.6959,4.1157,4.117,4.1157,1.3715,0,3.2277-.0801,3.2277-.0801v8.0712s-2.5012.1603-6.86.1603c-5.3269,0-11.2187-2.0979-11.2187-9.9261v-24.2936h-5.7302v-7.2633Z" fill="#fff"/><path d="M232.0907,16.3039h10.5737v5.1653h.2417c2.6628-3.6323,6.5368-6.2964,12.1869-6.2964,10.9757,0,17.9985,8.9592,17.9985,21.8725,0,13.3981-7.2646,21.8725-17.9184,21.8725-5.8103,0-9.6042-2.341-11.9438-5.8918h-.1616v18.2389h-10.977V16.3039ZM261.953,37.3685c0-7.8294-2.7442-13.3166-9.5228-13.3166-6.8613,0-9.6055,5.8905-9.6055,13.3166,0,7.505,3.4707,12.4286,10.0088,12.4286,5.5686,0,9.1195-4.6005,9.1195-12.4286Z" fill="#fff"/><path d="M288.3471,21.711h.2417c2.986-4.3587,6.3765-6.5381,12.0253-6.5381,8.5559,0,14.2861,6.4567,14.2861,15.496v27.0379h-10.977v-25.4234c0-4.4389-2.5827-7.5864-7.1831-7.5864-4.8422,0-8.393,3.874-8.393,9.5241v23.4857h-10.977V0h10.977v21.711Z" fill="#fff"/><path d="M345.6518,53.1062h-.1616c-2.0992,3.1475-5.0852,5.5686-12.1869,5.5686-8.4745,0-14.4477-4.4389-14.4477-12.6703,0-9.1208,7.4262-12.0266,16.6258-13.3179,6.8613-.9682,10.0088-1.533,10.0088-4.6806,0-2.986-2.341-4.9236-6.9414-4.9236-5.1653,0-7.6666,1.8562-7.9897,5.8117h-9.7658c.3232-7.2646,5.7302-13.6398,17.837-13.6398,12.4286,0,17.4323,5.5686,17.4323,15.2543v21.0646c0,3.1475.4847,5.0038,1.4529,5.7302v.4033h-10.5724c-.6463-.8066-1.0496-2.7442-1.2913-4.6005ZM345.732,43.0987v-6.215c-1.9363,1.1298-4.9236,1.7761-7.6679,2.4211-5.7302,1.2913-8.5546,2.5827-8.5546,6.4567s2.5827,5.2468,6.4567,5.2468c6.2951,0,9.7658-3.874,9.7658-7.9096Z" fill="#fff"/><path d="M359.6148,44.3086h10.1691c.7258,4.762,4.1177,6.8613,9.0387,6.8613,4.8448,0,7.5877-1.8562,7.5877-4.762,0-3.9554-5.2468-4.3587-10.8955-5.4885-7.4255-1.4529-14.6888-3.4707-14.6888-12.51,0-8.9579,7.4248-13.2365,16.8668-13.2365,10.8955,0,16.9489,5.4084,17.7555,13.7212h-9.9261c-.4834-4.4389-3.3078-6.0534-7.9897-6.0534-4.2773,0-7.1017,1.6145-7.1017,4.6005,0,3.5508,5.4885,3.874,11.379,5.0839,6.9414,1.4529,14.608,3.3906,14.608,13.0749,0,8.3129-7.1017,13.3179-17.4323,13.3179-12.026,0-18.7243-5.8117-19.3707-14.6093Z" fill="#fff"/><path d="M398.919,36.9652c0-12.2683,8.3129-21.7924,20.4196-21.7924,13.3153,0,20.4196,10.1704,20.4196,24.9399h-30.0251c.8066,6.3752,4.3587,10.3307,10.5724,10.3307,4.2773,0,6.7811-1.9377,7.9923-5.0852h10.8141c-1.5344,7.3447-8.0712,13.5597-18.725,13.5597-13.7199,0-21.4679-9.6042-21.4679-21.9527ZM409.896,32.525h18.4018c-.3232-5.2455-3.7939-8.8778-8.7989-8.8778-5.8117,0-8.636,3.4707-9.6029,8.8778Z" fill="#fff"/><path d="M481.567,53.1062h-.1629c-2.0992,3.1475-5.0839,5.5686-12.1856,5.5686-8.4758,0-14.4477-4.4389-14.4477-12.6703,0-9.1208,7.4248-12.0266,16.6258-13.3179,6.86-.9682,10.0075-1.533,10.0075-4.6806,0-2.986-2.341-4.9236-6.9414-4.9236-5.1653,0-7.6666,1.8562-7.9897,5.8117h-9.7658c.3232-7.2646,5.7302-13.6398,17.837-13.6398,12.4299,0,17.4323,5.5686,17.4323,15.2543v21.0646c0,3.1475.4861,5.0038,1.4529,5.7302v.4033h-10.5724c-.6463-.8066-1.0483-2.7442-1.29-4.6005ZM481.6458,43.0987v-6.215c-1.9363,1.1298-4.9236,1.7761-7.6666,2.4211-5.7302,1.2913-8.5546,2.5827-8.5546,6.4567s2.5827,5.2468,6.4554,5.2468c6.2951,0,9.7658-3.874,9.7658-7.9096Z" fill="#fff"/><path d="M498.1113,0h10.977v9.8472h-10.977V0ZM498.1113,16.3039h10.977v41.4028h-10.977V16.3039Z" fill="#fff"/><path d="M31.5606,41.1671l35.6416.0301c1.5455.0013,2.7978,1.3203,2.7978,2.947v23.537c0,2.2628-2.3226,3.6814-4.1892,2.5587l-35.6416-23.5671c-2.494-1.5-1.4811-5.5081,1.3914-5.5057Z" fill="#fff"/><path d="M38.4394,70.6193l-35.6416-.0301c-1.5455-.0013-2.7978-1.3203-2.7978-2.947v-21.4058c0-2.2628,2.3226-3.6814,4.1892-2.5587l35.6416,21.4359c2.494,1.5,1.4811,5.5081-1.3914,5.5057Z" fill="#fff"/><path d="M38.4394,30.098l-35.6416-.0301c-1.5455-.0013-2.7978-1.3203-2.7978-2.947V3.5839C0,1.3211,2.3226-.0975,4.1892,1.0252l35.6416,23.5671c2.494,1.5,1.4811,5.5081-1.3914,5.5057Z" fill="#fff"/><path d="M31.5606.6458l35.6416.0301c1.5455.0013,2.7978,1.3203,2.7978,2.947v21.4058c0,2.2628-2.3226,3.6814-4.1892,2.5587L30.1692,6.1515c-2.494-1.5-1.4811-5.5081,1.3914-5.5057Z" fill="#fff"/></g></svg>
       </a>
       <span class="logo-div"></span>
       <div class="claude-wrap">
-        <!-- Claude star icon -->
-        <svg class="claude-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#DA7756">
-          <path d="m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029 1.01.846.9.726.807.266.39-.105.65-.514.29-.311-.089-.335-.267-.881-.832-1.024-.98-.972-.98-.044.024-.02.044.524 1.649.629 1.978.35 1.272-.133.56-.738.199-.589-.375-.226-.55-.37-1.456-.428-1.578-.352-1.37h-.124l-.472 1.037-.93 1.827-.589 1.085-.624.937-.34.294-.598-.052-.418-.432.044-.513.145-.26.87-1.378.706-1.126.87-1.708-.028-.06-.085.012-1.327 1.326-1.546 1.48-.9.83-.592.415-.56-.136-.35-.456.089-.569.28-.302 1.09-1.017 1.077-1.025 1.64-1.598.02-.044-.04-.024z"/>
-        </svg>
+        <svg class="claude-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#DA7756"><path d="m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029 1.01.846.9.726.807.266.39-.105.65-.514.29-.311-.089-.335-.267-.881-.832-1.024-.98-.972-.98-.044.024-.02.044.524 1.649.629 1.978.35 1.272-.133.56-.738.199-.589-.375-.226-.55-.37-1.456-.428-1.578-.352-1.37h-.124l-.472 1.037-.93 1.827-.589 1.085-.624.937-.34.294-.598-.052-.418-.432.044-.513.145-.26.87-1.378.706-1.126.87-1.708-.028-.06-.085.012-1.327 1.326-1.546 1.48-.9.83-.592.415-.56-.136-.35-.456.089-.569.28-.302 1.09-1.017 1.077-1.025 1.64-1.598.02-.044-.04-.024z"/></svg>
         <span class="claude-label">Claude</span>
       </div>
     </div>
-    <span class="nav-tag">Masterclass</span>
+    <div class="nav-links">
+      <a class="nav-link" href="#programma">Programma</a>
+      <a class="nav-link" href="#aanpak">Aanpak</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <a class="nav-btn" href="#inschrijven">Schrijf je in</a>
+    </div>
   </div>
-</div>
+</nav>
 
 <!-- HERO -->
-<div class="hero">
+<section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grain"></div>
-
-  <!-- Large background Claude star -->
-  <svg class="hero-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#DA7756">
-    <path d="m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029 1.01.846.9.726.807.266.39-.105.65-.514.29-.311-.089-.335-.267-.881-.832-1.024-.98-.972-.98-.044.024-.02.044.524 1.649.629 1.978.35 1.272-.133.56-.738.199-.589-.375-.226-.55-.37-1.456-.428-1.578-.352-1.37h-.124l-.472 1.037-.93 1.827-.589 1.085-.624.937-.34.294-.598-.052-.418-.432.044-.513.145-.26.87-1.378.706-1.126.87-1.708-.028-.06-.085.012-1.327 1.326-1.546 1.48-.9.83-.592.415-.56-.136-.35-.456.089-.569.28-.302 1.09-1.017 1.077-1.025 1.64-1.598.02-.044-.04-.024z"/>
-  </svg>
-
+  <svg class="hero-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#DA7756"><path d="m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029 1.01.846.9.726.807.266.39-.105.65-.514.29-.311-.089-.335-.267-.881-.832-1.024-.98-.972-.98-.044.024-.02.044.524 1.649.629 1.978.35 1.272-.133.56-.738.199-.589-.375-.226-.55-.37-1.456-.428-1.578-.352-1.37h-.124l-.472 1.037-.93 1.827-.589 1.085-.624.937-.34.294-.598-.052-.418-.432.044-.513.145-.26.87-1.378.706-1.126.87-1.708-.028-.06-.085.012-1.327 1.326-1.546 1.48-.9.83-.592.415-.56-.136-.35-.456.089-.569.28-.302 1.09-1.017 1.077-1.025 1.64-1.598.02-.044-.04-.024z"/></svg>
   <div class="hero-inner">
-    <div class="badge"><span class="badge-dot"></span>Amsterdam · 2026</div>
-    <h1>Claude for<br>Executives</h1>
-    <div class="meta-row">
-      <div class="meta-item">
-        <div class="ml">Datum</div>
-        <div class="mv">Donderdag 6 oktober<small>2026</small></div>
-      </div>
-      <div class="meta-item">
-        <div class="ml">Tijd</div>
-        <div class="mv">9:30 – 12:30<small>Inloop 9:00</small></div>
-      </div>
-      <div class="meta-item">
-        <div class="ml">Locatie</div>
-        <div class="mv">Nxt Phase AI, Grasweg 83<small>1031 HX Amsterdam</small></div>
-      </div>
-      <div class="meta-item">
-        <div class="ml">Investering</div>
-        <div class="mv">€299<small>excl. btw · incl. lunch</small></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- BODY -->
-<div class="body-wrap">
-<div class="body">
-  <div class="body-grid">
-
-    <!-- PROGRAMMA -->
-    <div>
-      <div class="prog-label">Programma</div>
-      <ul class="prog-list">
-
-        <li class="prog-item">
-          <span class="prog-n">01</span>
-          <span class="prog-t">Wat is Claude precies — en wat ook niet</span>
-        </li>
-
-        <li class="prog-item">
-          <span class="prog-n">02</span>
-          <span class="prog-t">
-            Welke tools zitten er in de Claude suite en wat doen ze
-            <span class="prog-sub">Skills, Code, Agents en meer</span>
-          </span>
-        </li>
-
-        <li class="prog-item">
-          <span class="prog-n">03</span>
-          <span class="prog-t">
-            Snelle en waardevolle initiatieven die je met Claude kunt doen
-            <ul class="sub-list">
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Automatisch funnel management van offertes</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Automatisch opstellen van offertes</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Automatisch scannen van tender portalen</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Automatisch ophalen van concurrentie prijzen</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Automatisering rondsturen van operationele planning</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Onboarding hulp van nieuwe medewerkers</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Opzoeken van relevante bedrijfsdocumentatie in Sharepoint</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Automatisering van contract opstellen</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Doorzoeken van contractvoorwaarden voor prijs- en leveringsafspraken</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Automatisering van marktonderzoek en positie</span></li>
-              <li class="sub-item"><span class="sub-bullet"></span><span class="sub-t">Automatisch opvolgen van inkoopprocessen</span></li>
-            </ul>
-          </span>
-        </li>
-
-        <li class="prog-item">
-          <span class="prog-n">04</span>
-          <span class="prog-t">Hoe zet je een initiatief op en hoe borg je deze in je organisatie</span>
-        </li>
-
-        <li class="prog-item">
-          <span class="prog-n">05</span>
-          <span class="prog-t">Hoe schaal je het gebruik van Claude binnen je organisatie</span>
-        </li>
-
-        <li class="prog-item actie">
-          <span class="prog-n">06</span>
-          <span class="prog-t">
-            <span class="actie-tag">Actieplan</span>Hoe begin je morgen het meest effectief in je Claude-avontuur
-          </span>
-        </li>
-
-      </ul>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta-sticky">
-      <div class="cta-card">
-        <div class="cta-eyebrow">Inschrijven · Donderdag 6 oktober</div>
-        <div class="cta-price">€299</div>
-        <div class="cta-note">p.p. excl. btw · lunch inbegrepen</div>
-        <div id="form-area">
-          <form id="main-form" onsubmit="payNow(event)">
-            <input class="f-em" type="email" id="em" placeholder="je@email.nl" required>
-            <button type="submit" class="btn-buy">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-              </svg>
-              Schrijf mij in
-            </button>
-          </form>
-          <button class="inv-toggle" onclick="openInv()">Op factuur betalen</button>
+    <div class="hero-grid">
+      <div>
+        <div class="badge"><span class="badge-dot"></span>Masterclass · Amsterdam · 2026</div>
+        <h1>Claude for<br><em>Executives.</em></h1>
+        <div class="hero-meta">
+          <div class="hm"><div class="hm-l">Datum</div><div class="hm-v">Donderdag 6 oktober<small>2026</small></div></div>
+          <div class="hm"><div class="hm-l">Tijd</div><div class="hm-v">9:30 – 12:30<small>Inloop 9:00</small></div></div>
+          <div class="hm"><div class="hm-l">Locatie</div><div class="hm-v">Grasweg 83, Amsterdam<small>Nxt Phase AI</small></div></div>
         </div>
-        <div class="success-msg" id="ok">
-          <div class="s-check">
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8l3.5 3.5L13 4" stroke="#DA7756" stroke-width="1.5" stroke-linecap="square"/>
-            </svg>
+      </div>
+      <div id="inschrijven">
+        <div class="hero-card">
+          <div class="hc-eyebrow">Inschrijven · 6 oktober</div>
+          <div class="hc-price">€299</div>
+          <div class="hc-note">p.p. excl. btw · lunch inbegrepen</div>
+          <div id="form-area">
+            <form id="main-form" onsubmit="payNow(event)">
+              <input class="f-em" type="email" id="em" placeholder="je@email.nl" required>
+              <button type="submit" class="btn-buy">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Schrijf mij in
+              </button>
+            </form>
           </div>
-          <h3>Aanmelding ontvangen.</h3>
-          <p>Je hoort snel van ons.</p>
+          <div class="success-msg" id="ok">
+            <div class="s-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="#DA7756" stroke-width="1.5" stroke-linecap="square"/></svg></div>
+            <h3>Aanmelding ontvangen.</h3>
+            <p>Je hoort snel van ons.</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- PROGRAMMA -->
+<section class="section" id="programma">
+  <div class="section-inner">
+    <div class="section-label">Programma</div>
+    <h2>Wat je<br><em>leert.</em></h2>
+    <div class="prog-grid">
+      <div class="prog-item">
+        <span class="prog-n">01</span>
+        <div class="prog-body">
+          <div class="prog-t">Wat is Claude precies — en wat ook niet</div>
+          <div class="prog-sub">Mogelijkheden, grenzen en hoe Claude verschilt van andere AI-tools</div>
+        </div>
+      </div>
+      <div class="prog-item">
+        <span class="prog-n">02</span>
+        <div class="prog-body">
+          <div class="prog-t">De Claude suite: tools, Skills, Code en Agents</div>
+          <div class="prog-sub">Wat elk onderdeel doet en wanneer je het inzet</div>
+        </div>
+      </div>
+      <div class="prog-item" style="grid-column: 1 / -1;">
+        <span class="prog-n">03</span>
+        <div class="prog-body">
+          <div class="prog-t">Snelle en waardevolle initiatieven die je met Claude kunt doen</div>
+          <ul class="sub-list">
+            <li class="sub-item"><span class="sub-bullet"></span>Automatisch funnel management van offertes</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Automatisch opstellen van offertes</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Automatisch scannen van tender portalen</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Automatisch ophalen van concurrentieprijzen</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Automatisering rondsturen van operationele planning</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Onboarding hulp van nieuwe medewerkers</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Opzoeken van relevante bedrijfsdocumentatie in SharePoint</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Automatisering van contract opstellen</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Doorzoeken van contractvoorwaarden voor prijs- en leveringsafspraken</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Automatisering van marktonderzoek en positie</li>
+            <li class="sub-item"><span class="sub-bullet"></span>Automatisch opvolgen van inkoopprocessen</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prog-item">
+        <span class="prog-n">04</span>
+        <div class="prog-body">
+          <div class="prog-t">Hoe zet je een initiatief op en hoe borg je dit</div>
+          <div class="prog-sub">Van idee naar werkend proces in je organisatie</div>
+        </div>
+      </div>
+      <div class="prog-item">
+        <span class="prog-n">05</span>
+        <div class="prog-body">
+          <div class="prog-t">Hoe schaal je het gebruik van Claude</div>
+          <div class="prog-sub">Uitrol, adoptie en governance binnen je organisatie</div>
+        </div>
+      </div>
+      <div class="prog-item accent" style="grid-column: 1 / -1;">
+        <span class="prog-n">06</span>
+        <div class="prog-body">
+          <div class="actie-tag">Actieplan</div>
+          <div class="prog-t">Hoe begin je morgen het meest effectief in je Claude-avontuur</div>
+          <div class="prog-sub">Concreet stappenplan waarmee je de volgende werkdag direct aan de slag gaat</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AANPAK -->
+<section class="section" id="aanpak" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="section-label">Aanpak</div>
+    <h2>Onze<br><em>aanpak.</em></h2>
+    <div class="aanpak-grid">
+      <div class="aanpak-card">
+        <div class="aanpak-num">01</div>
+        <div class="aanpak-title">Gericht op directe toepassing</div>
+        <div class="aanpak-body">Geen theorie om de theorie. Elk onderdeel is direct vertaalbaar naar beslissingen en acties die jij als leidinggevende kunt nemen.</div>
+      </div>
+      <div class="aanpak-card">
+        <div class="aanpak-num">02</div>
+        <div class="aanpak-title">Werken met jouw context</div>
+        <div class="aanpak-body">We werken niet met verzonnen voorbeelden maar met herkenbare situaties uit de dagelijkse praktijk van een directeur of manager.</div>
+      </div>
+      <div class="aanpak-card">
+        <div class="aanpak-num">03</div>
+        <div class="aanpak-title">Denken in organisatie</div>
+        <div class="aanpak-body">Je leert niet alleen wat Claude kan, maar hoe je het gebruik structureel borgt en schaalt — zodat het effect heeft op de hele organisatie.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOOR WIE -->
+<section class="section" id="faq">
+  <div class="section-inner">
+    <div class="section-label">Voor wie</div>
+    <h2>Gebouwd voor<br><em>Executives.</em></h2>
+    <div class="prog-grid" style="max-width:860px;">
+      <div class="prog-item">
+        <span class="prog-n" style="padding-top:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        </span>
+        <div class="prog-body">
+          <div class="prog-t">Directeuren & DGA's</div>
+          <div class="prog-sub">Die willen begrijpen wat Claude voor hun organisatie kan betekenen — zonder zelf de techniek in te duiken.</div>
+        </div>
+      </div>
+      <div class="prog-item">
+        <span class="prog-n" style="padding-top:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <div class="prog-body">
+          <div class="prog-t">Managers & teamleiders</div>
+          <div class="prog-sub">Die concrete initiatieven willen opzetten en geborgd willen krijgen binnen hun afdeling of team.</div>
+        </div>
+      </div>
+      <div class="prog-item">
+        <span class="prog-n" style="padding-top:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        </span>
+        <div class="prog-body">
+          <div class="prog-t">Operations & finance</div>
+          <div class="prog-sub">Die repetitieve processen willen automatiseren en AI willen inzetten voor rapportages, analyses en planning.</div>
+        </div>
+      </div>
+      <div class="prog-item">
+        <span class="prog-n" style="padding-top:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </span>
+        <div class="prog-body">
+          <div class="prog-t">Geen technische kennis nodig</div>
+          <div class="prog-sub">De masterclass is volledig gericht op strategisch inzicht en directe toepassing — niet op programmeren of prompts schrijven.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-grid">
+      <div>
+        <div class="section-label" style="color:rgba(218,119,86,.7);">Aanmelden</div>
+        <div class="cta-title">Donderdag 6 oktober.<br>Grasweg 83, Amsterdam.</div>
+        <div class="cta-sub">Vragen? Mail ons op <a href="mailto:info@nxtphase.ai" style="color:rgba(255,255,255,.6);">info@nxtphase.ai</a></div>
+      </div>
+      <div class="cta-actions">
+        <a class="btn-primary" href="#inschrijven">Schrijf je in →</a>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">nxt phase ai</div>
+      <div class="footer-addr">
+        Grasweg 83 · 1031 HX Amsterdam<br>
+        <a href="mailto:info@nxtphase.ai">info@nxtphase.ai</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a class="footer-link" href="/privacy">Privacyverklaring</a>
+      <a class="footer-link" href="mailto:info@nxtphase.ai">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 nxt phase ai</span>
+    <span class="footer-avg">Nxt Phase AI verwerkt je persoonsgegevens uitsluitend ten behoeve van de afhandeling van je inschrijving. Wij delen je gegevens niet met derden anders dan partijen die direct betrokken zijn bij de uitvoering van de overeenkomst.</span>
+  </div>
 </div>
 
 <!-- INVOICE MODAL -->
-<div class="inv-overlay" id="inv-overlay" onclick="closeInvOutside(event)">
-  <div class="inv-box">
-    <button class="inv-close" onclick="closeInv()">&#x2715;</button>
-    <div class="inv-title">Aanmelden op factuur</div>
+<div class="overlay" id="inv-overlay" onclick="closeInvOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeInv()">&#x2715;</button>
+    <div class="modal-title">Aanmelden op factuur</div>
     <div id="inv-form-wrap">
       <form id="inv-form" onsubmit="sendInv(event)">
         <div class="inv-row">
@@ -430,157 +491,54 @@ footer{max-width:1100px;margin:0 auto;padding:26px 40px;display:flex;justify-con
         </div>
         <div class="f-g"><input type="text" id="iv-addr" placeholder="Factuuradres" required></div>
         <div class="f-g"><input type="email" id="iv-em" placeholder="E-mailadres" required></div>
-        <button type="submit" class="btn-inv-sub">Verstuur aanmelding</button>
+        <button type="submit" class="btn-modal-sub">Verstuur aanmelding</button>
       </form>
     </div>
-    <div class="inv-success" id="inv-ok">
+    <div class="modal-success" id="inv-ok">
       <h3>Aanmelding ontvangen.</h3>
       <p>Je ontvangt een factuur per e-mail.</p>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
-<div class="footer-wrap">
-  <footer>
-    <span class="footer-copy">© 2026 nxt phase ai</span>
-    <div class="footer-right">
-      <a href="mailto:info@nxtphase.ai" class="footer-email">info&#64;nxtphase&#46;ai</a>
-      <button class="footer-priv" onclick="openPriv()">Privacyverklaring</button>
-    </div>
-  </footer>
-  <div class="footer-avg">
-    Nxt Phase AI verwerkt je persoonsgegevens uitsluitend ten behoeve van de afhandeling van je inschrijving. Wij delen je gegevens niet met derden anders dan de partijen die direct betrokken zijn bij de uitvoering van de overeenkomst. Deze website maakt gebruik van cookies voor analytische doeleinden. Zie onze <button onclick="openPriv()" style="background:none;border:none;padding:0;font:inherit;font-size:inherit;color:rgba(255,255,255,.45);text-decoration:underline;text-underline-offset:2px;cursor:pointer;">privacyverklaring</button> voor meer informatie.
-  </div>
-</div>
-
-<!-- PRIVACY MODAL -->
-<div class="inv-overlay" id="priv-overlay" onclick="closePrivOutside(event)">
-  <div class="inv-box" style="max-width:520px;">
-    <button class="inv-close" onclick="closePriv()">&#x2715;</button>
-    <div class="inv-title">Privacyverklaring</div>
-    <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.85;">
-      <p style="margin-bottom:14px;">
-        Nxt Phase AI verwerkt je persoonsgegevens uitsluitend voor de afhandeling van je inschrijving. Wij gebruiken je gegevens niet voor andere doeleinden en delen deze niet met derden, anders dan partijen die direct betrokken zijn bij de uitvoering van de overeenkomst, zoals de betalingsprovider en e-maildienst.
-      </p>
-      <p style="margin-bottom:14px;">
-        Deze website maakt gebruik van analytische cookies om inzicht te krijgen in het bezoekersgedrag. Cookies worden uitsluitend geplaatst na uw toestemming. U kunt uw voorkeur op elk moment intrekken.
-      </p>
-      <p style="margin-bottom:14px;">
-        Uw gegevens worden niet langer bewaard dan noodzakelijk voor de uitvoering van de overeenkomst.
-      </p>
-      <p>
-        Voor vragen over uw gegevens of het uitoefenen van uw rechten kunt u contact opnemen via <a href="mailto:info@nxtphase.ai" style="color:rgba(255,255,255,.55);text-underline-offset:2px;">info@nxtphase.ai</a>.
-      </p>
-    </div>
-  </div>
-</div>
-
-<script>
-const STRIPE = 'https://buy.stripe.com/bJe7sM7Ug8w44tY2OA7g403';
-const SELECTED_DATE = 'Donderdag 6 oktober 2026';
-const TRAINING_BASE = 'Claude for Executives';
-const GA_ID = 'G-XXXXXXXXXX'; // ← vervang door jouw GA4 Measurement ID
-emailjs.init('M3enm1KLe2e_wPpEN');
-
-/* ── GA4 laden na toestemming ── */
-function loadGA() {
-  if (document.getElementById('ga-script')) return;
-  var s = document.createElement('script');
-  s.id = 'ga-script';
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-  document.head.appendChild(s);
-  gtag('js', new Date());
-  gtag('config', GA_ID, { anonymize_ip: true });
-}
-
-/* ── Cookie consent ── */
-function getConsent() { return localStorage.getItem('cookie_consent'); }
-
-function applyConsent(val) {
-  localStorage.setItem('cookie_consent', val);
-  gtag('consent', 'update', { analytics_storage: val === 'granted' ? 'granted' : 'denied' });
-  if (val === 'granted') loadGA();
-  document.getElementById('cookie-banner').style.display = 'none';
-}
-
-window.addEventListener('DOMContentLoaded', function () {
-  var consent = getConsent();
-  if (consent === 'granted') { loadGA(); }
-  if (!consent) { document.getElementById('cookie-banner').style.display = 'flex'; }
-});
-
-function payNow(e) {
-  e.preventDefault();
-  window.location.href = STRIPE + '?prefilled_email=' + encodeURIComponent(document.getElementById('em').value);
-}
-function openPriv()  { document.getElementById('priv-overlay').classList.add('open'); }
-function closePriv() { document.getElementById('priv-overlay').classList.remove('open'); }
-function closePrivOutside(e) { if (e.target === document.getElementById('priv-overlay')) closePriv(); }
-function openInv()  { document.getElementById('inv-overlay').classList.add('open'); }
-function closeInv() { document.getElementById('inv-overlay').classList.remove('open'); }
-function closeInvOutside(e) { if (e.target === document.getElementById('inv-overlay')) closeInv(); }
-function sendInv(e) {
-  e.preventDefault();
-  emailjs.send('service_4qb0r45','template_v9y8pyc',{
-    type:'Factuur', training: TRAINING_BASE + ' — ' + SELECTED_DATE,
-    name:    document.getElementById('iv-name').value,
-    company: document.getElementById('iv-co').value,
-    address: document.getElementById('iv-addr').value,
-    email:   document.getElementById('iv-em').value
-  })
-  .then(()  => { document.getElementById('inv-form-wrap').style.display='none'; document.getElementById('inv-ok').classList.add('show'); })
-  .catch(()  => { document.getElementById('inv-form-wrap').style.display='none'; document.getElementById('inv-ok').classList.add('show'); });
-}
-</script>
-
 <!-- COOKIE BANNER -->
-<style>
-#cookie-banner{
-  display:none;
-  position:fixed;bottom:24px;right:24px;z-index:300;
-  background:var(--dark);
-  border:1px solid rgba(218,119,86,.2);
-  box-shadow:0 8px 48px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.04);
-  padding:24px 26px 20px;
-  max-width:320px;width:calc(100vw - 40px);
-  flex-direction:column;gap:16px;
-}
-#cookie-banner::before{
-  content:"";display:block;height:1px;
-  background:linear-gradient(90deg,transparent,var(--claude),transparent);
-  margin:-24px -26px 18px;
-}
-.cookie-title{font-family:var(--font-d);font-size:15px;color:#fff;margin-bottom:6px;}
-.cookie-text{font-size:12px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.7;}
-.cookie-text a{color:rgba(255,255,255,.5);text-underline-offset:2px;text-decoration:underline;}
-.cookie-text a:hover{color:rgba(255,255,255,.8);}
-.cookie-btns{display:flex;gap:8px;}
-.btn-cookie-acc{
-  flex:1;background:var(--claude);color:#fff;border:none;
-  font-family:var(--font-b);font-size:12px;font-weight:600;letter-spacing:.04em;
-  padding:10px 16px;cursor:pointer;transition:background .2s;
-}
-.btn-cookie-acc:hover{background:var(--claude-d);}
-.btn-cookie-dec{
-  flex:1;background:transparent;color:rgba(255,255,255,.38);
-  border:1px solid rgba(255,255,255,.1);
-  font-family:var(--font-b);font-size:12px;font-weight:400;
-  padding:10px 16px;cursor:pointer;transition:all .2s;
-}
-.btn-cookie-dec:hover{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.28);}
-@media(max-width:400px){#cookie-banner{bottom:0;right:0;max-width:100%;width:100%;border-left:none;border-right:none;border-bottom:none;}}
-</style>
 <div id="cookie-banner">
   <div>
     <div class="cookie-title">Cookies</div>
-    <p class="cookie-text">Wij gebruiken analytische cookies om het gebruik van deze website te meten. Lees onze <a href="#" onclick="openPriv();return false;">privacyverklaring</a> voor meer informatie.</p>
+    <p class="cookie-text">Wij gebruiken analytische cookies om het gebruik van deze website te meten. Lees onze <a href="/privacy">privacyverklaring</a> voor meer informatie.</p>
   </div>
   <div class="cookie-btns">
     <button class="btn-cookie-dec" onclick="applyConsent('denied')">Weigeren</button>
     <button class="btn-cookie-acc" onclick="applyConsent('granted')">Accepteren</button>
   </div>
 </div>
+
+<script>
+const STRIPE='https://buy.stripe.com/bJe7sM7Ug8w44tY2OA7g403';
+const GA_ID='G-XXXXXXXXXX';
+emailjs.init('M3enm1KLe2e_wPpEN');
+
+function loadGA(){if(document.getElementById('ga-script'))return;var s=document.createElement('script');s.id='ga-script';s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(s);gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true});}
+function applyConsent(val){localStorage.setItem('cookie_consent',val);gtag('consent','update',{analytics_storage:val==='granted'?'granted':'denied'});if(val==='granted')loadGA();document.getElementById('cookie-banner').style.display='none';}
+window.addEventListener('DOMContentLoaded',function(){var c=localStorage.getItem('cookie_consent');if(c==='granted')loadGA();if(!c)document.getElementById('cookie-banner').style.display='flex';});
+
+function payNow(e){e.preventDefault();window.location.href=STRIPE+'?prefilled_email='+encodeURIComponent(document.getElementById('em').value);}
+function openInv(){document.getElementById('inv-overlay').classList.add('open');}
+function closeInv(){document.getElementById('inv-overlay').classList.remove('open');}
+function closeInvOutside(e){if(e.target===document.getElementById('inv-overlay'))closeInv();}
+function sendInv(e){
+  e.preventDefault();
+  emailjs.send('service_4qb0r45','template_v9y8pyc',{type:'Factuur',training:'Claude for Executives — 6 oktober 2026',name:document.getElementById('iv-name').value,company:document.getElementById('iv-co').value,address:document.getElementById('iv-addr').value,email:document.getElementById('iv-em').value})
+  .then(()=>{document.getElementById('inv-form-wrap').style.display='none';document.getElementById('inv-ok').classList.add('show');})
+  .catch(()=>{document.getElementById('inv-form-wrap').style.display='none';document.getElementById('inv-ok').classList.add('show');});
+}
+function toggleFaq(btn){
+  var a=btn.nextElementSibling;
+  var isOpen=a.classList.contains('open');
+  document.querySelectorAll('.faq-a.open').forEach(function(el){el.classList.remove('open');});
+  document.querySelectorAll('.faq-q.open').forEach(function(el){el.classList.remove('open');});
+  if(!isOpen){a.classList.add('open');btn.classList.add('open');}
+}
+</script>
 </body>
 </html>
