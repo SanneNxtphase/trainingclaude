@@ -161,7 +161,10 @@ h2 em{font-style:italic;color:var(--mid);}
 .cta-inner h2{margin-bottom:12px;}
 .cta-sub{font-size:14px;color:rgba(255,255,255,.38);margin-bottom:36px;line-height:1.7;}
 .cta-form{display:flex;gap:8px;max-width:400px;margin:0 auto;}
+.cta-form--stack{flex-direction:column;}
 .cta-form input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--sans);font-size:14px;padding:12px 14px;outline:none;border-radius:0;-webkit-appearance:none;transition:border-color .2s;}
+.cta-form--stack input{width:100%;}
+.cta-form--stack button{width:100%;padding:14px;}
 .cta-form input::placeholder{color:rgba(255,255,255,.2);}
 .cta-form input:focus{border-color:var(--claude);}
 .cta-form button{background:var(--claude);color:#fff;border:none;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:12px 20px;cursor:pointer;transition:background .2s;white-space:nowrap;}
@@ -285,8 +288,11 @@ footer{background:var(--darker);border-top:1px solid rgba(255,255,255,.06);}
           <div class="hc-price">€299</div>
           <div class="hc-note">p.p. excl. btw · lunch inbegrepen</div>
           <div id="form-area">
-            <form onsubmit="payNow(event)">
-              <input class="f-em" type="email" id="em" placeholder="je@email.nl" required>
+            <form onsubmit="submitReg(event)">
+              <input class="f-em" type="text" id="reg-name" placeholder="Naam" required>
+              <input class="f-em" type="text" id="reg-co" placeholder="Bedrijfsnaam" required>
+              <input class="f-em" type="email" id="reg-em" placeholder="E-mailadres" required>
+              <input class="f-em" type="tel" id="reg-tel" placeholder="Telefoonnummer" required>
               <button type="submit" class="btn-main">Schrijf mij in</button>
             </form>
           </div>
@@ -452,8 +458,11 @@ footer{background:var(--darker);border-top:1px solid rgba(255,255,255,.06);}
     <h2 style="color:#fff;text-align:center;">Schrijf je in<br><em>voor 6 oktober.</em></h2>
     <p class="cta-sub">Vragen? Mail ons op <a href="mailto:info@nxtphase.ai" style="color:rgba(255,255,255,.5);">info@nxtphase.ai</a></p>
     <div id="cta-wrap">
-      <form class="cta-form" onsubmit="payNowCta(event)">
-        <input type="email" id="em2" placeholder="je@email.nl" required>
+      <form class="cta-form cta-form--stack" onsubmit="submitRegCta(event)">
+        <input type="text" id="cta-name" placeholder="Naam" required>
+        <input type="text" id="cta-co" placeholder="Bedrijfsnaam" required>
+        <input type="email" id="cta-em" placeholder="E-mailadres" required>
+        <input type="tel" id="cta-tel" placeholder="Telefoonnummer" required>
         <button type="submit">Schrijf je in</button>
       </form>
     </div>
@@ -525,8 +534,26 @@ function loadGA(){if(document.getElementById('ga-script'))return;var s=document.
 function applyConsent(v){localStorage.setItem('cc',v);gtag('consent','update',{analytics_storage:v==='granted'?'granted':'denied'});if(v==='granted')loadGA();document.getElementById('cb').style.display='none';}
 window.addEventListener('DOMContentLoaded',function(){var c=localStorage.getItem('cc');if(c==='granted')loadGA();if(!c)document.getElementById('cb').style.display='flex';});
 
-function payNow(e){e.preventDefault();window.location.href=STRIPE+'?prefilled_email='+encodeURIComponent(document.getElementById('em').value);}
-function payNowCta(e){e.preventDefault();window.location.href=STRIPE+'?prefilled_email='+encodeURIComponent(document.getElementById('em2').value);}
+function submitReg(e){
+  e.preventDefault();
+  var name=document.getElementById('reg-name').value;
+  var co=document.getElementById('reg-co').value;
+  var em=document.getElementById('reg-em').value;
+  var tel=document.getElementById('reg-tel').value;
+  emailjs.send('service_4qb0r45','template_v9y8pyc',{type:'Inschrijving',training:'Claude for Executives — 6 oktober 2026',name:name,company:co,address:tel,email:em})
+  .then(()=>{}).catch(()=>{});
+  window.location.href=STRIPE+'?prefilled_email='+encodeURIComponent(em)+'&prefilled_name='+encodeURIComponent(name);
+}
+function submitRegCta(e){
+  e.preventDefault();
+  var name=document.getElementById('cta-name').value;
+  var co=document.getElementById('cta-co').value;
+  var em=document.getElementById('cta-em').value;
+  var tel=document.getElementById('cta-tel').value;
+  emailjs.send('service_4qb0r45','template_v9y8pyc',{type:'Inschrijving',training:'Claude for Executives — 6 oktober 2026',name:name,company:co,address:tel,email:em})
+  .then(()=>{}).catch(()=>{});
+  window.location.href=STRIPE+'?prefilled_email='+encodeURIComponent(em)+'&prefilled_name='+encodeURIComponent(name);
+}
 function openPriv(){document.getElementById('priv-overlay').classList.add('open');}
 function closePriv(){document.getElementById('priv-overlay').classList.remove('open');}
 function openInv(){document.getElementById('inv-overlay').classList.add('open');}
